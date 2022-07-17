@@ -1,0 +1,19 @@
+<pre class='metadata'>
+Title: PACT Initiative Developer Documentation
+Shortname: pact-dev-docs
+Level: 1
+Status: LD
+URL: https://wbcsd.github.io/intro/
+Editor: 
+Mailing List: public-dev@pathfinder.sine.dev
+Repository: sine-fnd/intro
+Abstract: The PACT (Partnership for Carbon Transparency) Initative is a global network of carbon-neutral organizations that work together to create a common goal of reducing carbon dioxide and other greenhouse gases from the atmosphere.
+Markup Shorthands: markdown yes
+Boilerplate: omit conformance, omit copyright
+</pre>
+
+# Hello World
+
+This is some text.
+
+Note: Maybe you want to read this twice.

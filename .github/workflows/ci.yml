@@ -1,0 +1,17 @@
+on: [push]
+
+name: CI
+
+jobs:
+  build_and_test:
+    name: CI
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          python-version: "3.9"
+      - name: "Install Bikeshed"
+        run: "pip3 install bikeshed"
+      - name: "Build docs"
+        run: "make"
