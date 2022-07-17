@@ -13,8 +13,6 @@ jobs:
           python-version: "3.9"
       - name: "Install Bikeshed"
         run: "pip3 install bikeshed"
-      - name: "Purge docs"
-        run: "rm docs/*.html"
       - name: "Build docs"
         run: "make"
       - name: "Assert docs/ is up to date"
