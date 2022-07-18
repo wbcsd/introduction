@@ -1488,8 +1488,8 @@ Possible extra rowspan handling
 	}
 </style>
   <meta content="Bikeshed version e8a706a4b, updated Fri Jul 15 11:08:03 2022 -0700" name="generator">
-  <link href="https://wbcsd.github.io/intro/" rel="canonical">
-  <meta content="dc13a6c3088fb32a24c23b08a7382b6b6d84099c" name="document-revision">
+  <link href="https://wbcsd.github.io/introduction/" rel="canonical">
+  <meta content="a0a2388d0f0f50aa1a1c526b26131222ae129acc" name="document-revision">
 <style>/* style-autolinks */
 
 .css.css, .property.property, .descriptor.descriptor {
@@ -1762,6 +1762,65 @@ a.self-link::before            { content: "¶"; }
 .heading > a.self-link::before { content: "§"; }
 dfn > a.self-link::before      { content: "#"; }
 </style>
+<style>/* style-syntax-highlighting */
+
+code.highlight { padding: .1em; border-radius: .3em; }
+pre.highlight, pre > code.highlight { display: block; padding: 1em; margin: .5em 0; overflow: auto; border-radius: 0; }
+
+.highlight:not(.idl) { background: rgba(0, 0, 0, .03); }
+c-[a] { color: #990055 } /* Keyword.Declaration */
+c-[b] { color: #990055 } /* Keyword.Type */
+c-[c] { color: #708090 } /* Comment */
+c-[d] { color: #708090 } /* Comment.Multiline */
+c-[e] { color: #0077aa } /* Name.Attribute */
+c-[f] { color: #669900 } /* Name.Tag */
+c-[g] { color: #222222 } /* Name.Variable */
+c-[k] { color: #990055 } /* Keyword */
+c-[l] { color: #000000 } /* Literal */
+c-[m] { color: #000000 } /* Literal.Number */
+c-[n] { color: #0077aa } /* Name */
+c-[o] { color: #999999 } /* Operator */
+c-[p] { color: #999999 } /* Punctuation */
+c-[s] { color: #a67f59 } /* Literal.String */
+c-[t] { color: #a67f59 } /* Literal.String.Single */
+c-[u] { color: #a67f59 } /* Literal.String.Double */
+c-[cp] { color: #708090 } /* Comment.Preproc */
+c-[c1] { color: #708090 } /* Comment.Single */
+c-[cs] { color: #708090 } /* Comment.Special */
+c-[kc] { color: #990055 } /* Keyword.Constant */
+c-[kn] { color: #990055 } /* Keyword.Namespace */
+c-[kp] { color: #990055 } /* Keyword.Pseudo */
+c-[kr] { color: #990055 } /* Keyword.Reserved */
+c-[ld] { color: #000000 } /* Literal.Date */
+c-[nc] { color: #0077aa } /* Name.Class */
+c-[no] { color: #0077aa } /* Name.Constant */
+c-[nd] { color: #0077aa } /* Name.Decorator */
+c-[ni] { color: #0077aa } /* Name.Entity */
+c-[ne] { color: #0077aa } /* Name.Exception */
+c-[nf] { color: #0077aa } /* Name.Function */
+c-[nl] { color: #0077aa } /* Name.Label */
+c-[nn] { color: #0077aa } /* Name.Namespace */
+c-[py] { color: #0077aa } /* Name.Property */
+c-[ow] { color: #999999 } /* Operator.Word */
+c-[mb] { color: #000000 } /* Literal.Number.Bin */
+c-[mf] { color: #000000 } /* Literal.Number.Float */
+c-[mh] { color: #000000 } /* Literal.Number.Hex */
+c-[mi] { color: #000000 } /* Literal.Number.Integer */
+c-[mo] { color: #000000 } /* Literal.Number.Oct */
+c-[sb] { color: #a67f59 } /* Literal.String.Backtick */
+c-[sc] { color: #a67f59 } /* Literal.String.Char */
+c-[sd] { color: #a67f59 } /* Literal.String.Doc */
+c-[se] { color: #a67f59 } /* Literal.String.Escape */
+c-[sh] { color: #a67f59 } /* Literal.String.Heredoc */
+c-[si] { color: #a67f59 } /* Literal.String.Interpol */
+c-[sx] { color: #a67f59 } /* Literal.String.Other */
+c-[sr] { color: #a67f59 } /* Literal.String.Regex */
+c-[ss] { color: #a67f59 } /* Literal.String.Symbol */
+c-[vc] { color: #0077aa } /* Name.Variable.Class */
+c-[vg] { color: #0077aa } /* Name.Variable.Global */
+c-[vi] { color: #0077aa } /* Name.Variable.Instance */
+c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
+</style>
 <style>/* style-darkmode */
 
 @media (prefers-color-scheme: dark) {
@@ -1882,16 +1941,79 @@ dfn > a.self-link::before      { content: "#"; }
         --selflink-hover-text: white;
     }
 }
+
+@media (prefers-color-scheme: dark) {
+    .highlight:not(.idl) { background: rgba(255, 255, 255, .05); }
+
+    c-[a] { color: #d33682 } /* Keyword.Declaration */
+    c-[b] { color: #d33682 } /* Keyword.Type */
+    c-[c] { color: #2aa198 } /* Comment */
+    c-[d] { color: #2aa198 } /* Comment.Multiline */
+    c-[e] { color: #268bd2 } /* Name.Attribute */
+    c-[f] { color: #b58900 } /* Name.Tag */
+    c-[g] { color: #cb4b16 } /* Name.Variable */
+    c-[k] { color: #d33682 } /* Keyword */
+    c-[l] { color: #657b83 } /* Literal */
+    c-[m] { color: #657b83 } /* Literal.Number */
+    c-[n] { color: #268bd2 } /* Name */
+    c-[o] { color: #657b83 } /* Operator */
+    c-[p] { color: #657b83 } /* Punctuation */
+    c-[s] { color: #6c71c4 } /* Literal.String */
+    c-[t] { color: #6c71c4 } /* Literal.String.Single */
+    c-[u] { color: #6c71c4 } /* Literal.String.Double */
+    c-[ch] { color: #2aa198 } /* Comment.Hashbang */
+    c-[cp] { color: #2aa198 } /* Comment.Preproc */
+    c-[cpf] { color: #2aa198 } /* Comment.PreprocFile */
+    c-[c1] { color: #2aa198 } /* Comment.Single */
+    c-[cs] { color: #2aa198 } /* Comment.Special */
+    c-[kc] { color: #d33682 } /* Keyword.Constant */
+    c-[kn] { color: #d33682 } /* Keyword.Namespace */
+    c-[kp] { color: #d33682 } /* Keyword.Pseudo */
+    c-[kr] { color: #d33682 } /* Keyword.Reserved */
+    c-[ld] { color: #657b83 } /* Literal.Date */
+    c-[nc] { color: #268bd2 } /* Name.Class */
+    c-[no] { color: #268bd2 } /* Name.Constant */
+    c-[nd] { color: #268bd2 } /* Name.Decorator */
+    c-[ni] { color: #268bd2 } /* Name.Entity */
+    c-[ne] { color: #268bd2 } /* Name.Exception */
+    c-[nf] { color: #268bd2 } /* Name.Function */
+    c-[nl] { color: #268bd2 } /* Name.Label */
+    c-[nn] { color: #268bd2 } /* Name.Namespace */
+    c-[py] { color: #268bd2 } /* Name.Property */
+    c-[ow] { color: #657b83 } /* Operator.Word */
+    c-[mb] { color: #657b83 } /* Literal.Number.Bin */
+    c-[mf] { color: #657b83 } /* Literal.Number.Float */
+    c-[mh] { color: #657b83 } /* Literal.Number.Hex */
+    c-[mi] { color: #657b83 } /* Literal.Number.Integer */
+    c-[mo] { color: #657b83 } /* Literal.Number.Oct */
+    c-[sa] { color: #6c71c4 } /* Literal.String.Affix */
+    c-[sb] { color: #6c71c4 } /* Literal.String.Backtick */
+    c-[sc] { color: #6c71c4 } /* Literal.String.Char */
+    c-[dl] { color: #6c71c4 } /* Literal.String.Delimiter */
+    c-[sd] { color: #6c71c4 } /* Literal.String.Doc */
+    c-[se] { color: #6c71c4 } /* Literal.String.Escape */
+    c-[sh] { color: #6c71c4 } /* Literal.String.Heredoc */
+    c-[si] { color: #6c71c4 } /* Literal.String.Interpol */
+    c-[sx] { color: #6c71c4 } /* Literal.String.Other */
+    c-[sr] { color: #6c71c4 } /* Literal.String.Regex */
+    c-[ss] { color: #6c71c4 } /* Literal.String.Symbol */
+    c-[fm] { color: #268bd2 } /* Name.Function.Magic */
+    c-[vc] { color: #cb4b16 } /* Name.Variable.Class */
+    c-[vg] { color: #cb4b16 } /* Name.Variable.Global */
+    c-[vi] { color: #cb4b16 } /* Name.Variable.Instance */
+    c-[vm] { color: #cb4b16 } /* Name.Variable.Magic */
+    c-[il] { color: #657b83 } /* Literal.Number.Integer.Long */
+}
 </style>
  <body class="h-entry">
   <div class="head">
    <p data-fill-with="logo"></p>
    <h1 class="p-name no-ref" id="title">PACT Initiative Developer Documentation</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="profile-and-date"><span class="content">Living Document, <time class="dt-updated" datetime="2022-07-17">17 July 2022</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="profile-and-date"><span class="content">Living Document, <time class="dt-updated" datetime="2022-07-18">18 July 2022</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
-     <dd><a class="u-url" href="https://wbcsd.github.io/intro/">https://wbcsd.github.io/intro/</a>
+     <dd><a class="u-url" href="https://wbcsd.github.io/introduction/">https://wbcsd.github.io/introduction/</a>
      <dt>Feedback:
      <dd><span><a href="mailto:public-dev@pathfinder.sine.dev?subject=%5Bpact-dev-docs%5D%20YOUR%20TOPIC%20HERE">public-dev@pathfinder.sine.dev</a> with subject line “<kbd>[pact-dev-docs] <i data-lt>… message topic …</i></kbd>”</span>
      <dt>Issue Tracking:
@@ -1905,19 +2027,261 @@ dfn > a.self-link::before      { content: "#"; }
   </div>
   <div class="p-summary" data-fill-with="abstract">
    <h2 class="no-num no-toc no-ref heading settled" id="abstract"><span class="content">Abstract</span></h2>
-   <p>The PACT (Partnership for Carbon Transparency) Initative is a global network of carbon-neutral organizations that work together to create a common goal of reducing carbon dioxide and other greenhouse gases from the atmosphere.</p>
+   <p>To reach net zero emissions before 2050, we need all business to measure, account for and disclose carbon emissions as a first step to reducing them.
+
+ The PACT (Partnership for Carbon Transparency) Initative is cross-value chain initiative to define and accelerate credible, verified primary emission data exchange.</p>
   </div>
   <div data-fill-with="at-risk"></div>
   <nav data-fill-with="table-of-contents" id="toc">
    <h2 class="no-num no-toc no-ref" id="contents">Table of Contents</h2>
    <ol class="toc" role="directory">
-    <li><a href="#hello-world"><span class="secno">1</span> <span class="content">Hello World</span></a>
+    <li>
+     <a href="#introduction"><span class="secno">1</span> <span class="content">Introduction</span></a>
+     <ol class="toc">
+      <li><a href="#interoperability"><span class="secno">1.1</span> <span class="content">Interoperability</span></a>
+      <li><a href="#status"><span class="secno">1.2</span> <span class="content">Status</span></a>
+     </ol>
+    <li>
+     <a href="#uc1"><span class="secno">2</span> <span class="content">Use Case 001</span></a>
+     <ol class="toc">
+      <li><a href="#online-demo-version"><span class="secno">2.1</span> <span class="content">Online Demo Version</span></a>
+      <li>
+       <a href="#data-model"><span class="secno">2.2</span> <span class="content">Data Model</span></a>
+       <ol class="toc">
+        <li><a href="#example-productfootprint-value"><span class="secno">2.2.1</span> <span class="content">Example ProductFootprint value</span></a>
+       </ol>
+      <li>
+       <a href="#http-api"><span class="secno">2.3</span> <span class="content">HTTP API</span></a>
+       <ol class="toc">
+        <li>
+         <a href="#http-action-getfootprint"><span class="secno">2.3.1</span> <span class="content">HTTP Action <code>GetFootprint</code></span></a>
+         <ol class="toc">
+          <li><a href="#request-example"><span class="secno">2.3.1.1</span> <span class="content">Request Example</span></a>
+          <li><a href="#response-example"><span class="secno">2.3.1.2</span> <span class="content">Response Example</span></a>
+         </ol>
+        <li>
+         <a href="#http-action-listfootprints"><span class="secno">2.3.2</span> <span class="content">HTTP Action <code>ListFootprints</code></span></a>
+         <ol class="toc">
+          <li><a href="#request-example①"><span class="secno">2.3.2.1</span> <span class="content">Request Example</span></a>
+          <li><a href="#response-example①"><span class="secno">2.3.2.2</span> <span class="content">Response Example</span></a>
+         </ol>
+       </ol>
+     </ol>
+    <li>
+     <a href="#term"><span class="secno">3</span> <span class="content">Glossary</span></a>
+     <ol class="toc">
+      <li><a href="#data-recipient"><span class="secno">3.1</span> <span class="content">Data Recipient</span></a>
+      <li><a href="#data-owner"><span class="secno">3.2</span> <span class="content">Data Owner</span></a>
+      <li><a href="#pact-initiative"><span class="secno">3.3</span> <span class="content">PACT Initiative</span></a>
+      <li><a href="#pathfinder-framework"><span class="secno">3.4</span> <span class="content">Pathfinder Framework</span></a>
+      <li><a href="#uc001-spec"><span class="secno">3.5</span> <span class="content">Use Case 001 Specification</span></a>
+     </ol>
    </ol>
   </nav>
   <main>
-   <h2 class="heading settled" data-level="1" id="hello-world"><span class="secno">1. </span><span class="content">Hello World</span><a class="self-link" href="#hello-world"></a></h2>
-   <p>This is some text. WIth a change.</p>
-   <p class="note" role="note"><span>Note:</span> Maybe you want to read this twice.</p>
+   <h2 class="heading settled" data-level="1" id="introduction"><span class="secno">1. </span><span class="content">Introduction</span><a class="self-link" href="#introduction"></a></h2>
+   <p>The interoperable exchange of emission factors, especially carbon emissions, enables companies to make more informed decisions for targeted decarbonization of existing or new products.</p>
+   <p>For many industries, the emissions that occur within the supply chain represent 80% or more of a product’s total emissions footprint.</p>
+   <p>In order to enable the exchange of emission factors across companies and value chains, the WBCSD-lead PACT Initiative is publishing guidances and technical specifications for the interoperable exchange of emission data.</p>
+   <h3 class="heading settled" data-level="1.1" id="interoperability"><span class="secno">1.1. </span><span class="content">Interoperability</span><a class="self-link" href="#interoperability"></a></h3>
+   <p>Interoperable exchange of carbon emissions implies interoperability at the following levels:</p>
+   <dl>
+    <dt data-md>Data Interoperability
+    <dd data-md>
+     <p>a data model that is commonly used for the data exchange by companies across value chains</p>
+    <dt data-md>Action Interoperability
+    <dd data-md>
+     <p>the ability for 2 or more independent software implementations for meaningful exchange of emission data between each other</p>
+    <dt data-md>Methodological Interoperability
+    <dd data-md>
+     <p>a common guidance for the measurement and calculation of emissions factors which applied when exchanging emission information with each other</p>
+   </dl>
+   <h3 class="heading settled" data-level="1.2" id="status"><span class="secno">1.2. </span><span class="content">Status</span><a class="self-link" href="#status"></a></h3>
+   <p>Methodological Interoperability is enabled through the publication of the <a href="pathfinder-framework-v1.pdf">Pathfinder Framework version 1</a> in Nov 9, 2021.</p>
+   <p>Interoperability at the data-level and action-level is at an early stage after the publication of the <a href="use-case-001.pdf">Use Case 001 specification</a> in Jun 16, 2022.
+The Use Case 001 specification contains the product footprint data model and a first HTTP API. You can find more information in chapter <a href="#uc1">Use Case 001</a>.</p>
+   <p>Interoperability tests between independent software implementations has already happened and the feasibility of the specification and methodology confirmed.</p>
+   <p class="note" role="note"><span>Note:</span> the PACT Initiative scopes its specification work streams into independent "Use Cases". A Use Case is about solving 1 or more well-defined challenges for companies in the context of exchange of emission factors. <br> Use Cases specify the foundations for enabling interoperability between independent software implementations. Typically, this is specification of a data model and the transactions executed between 2 or more actors (companies).</p>
+   <h2 class="heading settled" data-level="2" id="uc1"><span class="secno">2. </span><span class="content">Use Case 001</span><a class="self-link" href="#uc1"></a></h2>
+   <p class="note" role="note"><span>Note:</span> you can find the technical specification of Use Case 001 <a href="use-case-001.pdf">here</a>.</p>
+   <p>Use Case 001 specifies a data model and an HTTP REST API for the interoperable exchange of product footprint information between independent solutions.</p>
+   <p>Further information can be found in the <a href="https://github.com/wbcsd/pathfinder-use-case-001">Use Case 001 repository</a>, including:</p>
+   <ul>
+    <li> a <a href="https://github.com/wbcsd/pathfinder-use-case-001/tree/main/spec/rest-api">swagger file for the HTTP API</a>
+    <li>a <a href="https://github.com/wbcsd/pathfinder-use-case-001/tree/main/endpoint">demo implementation of the HTTP REST API</a>
+   </ul>
+   <h3 class="heading settled" data-level="2.1" id="online-demo-version"><span class="secno">2.1. </span><span class="content">Online Demo Version</span><a class="self-link" href="#online-demo-version"></a></h3>
+   <p>The following endpoint implements the HTTP REST API: <a href="https://api.pathfinder.sine.dev/">https://api.pathfinder.sine.dev/</a>.</p>
+   <p>It includes a Swagger UI as well: <a href="https://api.pathfinder.sine.dev/swagger-ui/">https://api.pathfinder.sine.dev/swagger-ui/</a>.</p>
+   <p class="note" role="note"><span>Note:</span> the hard-coded login credentials are: username: <code>hello</code> // password: <code>pathfinder</code></p>
+   <h3 class="heading settled" data-level="2.2" id="data-model"><span class="secno">2.2. </span><span class="content">Data Model</span><a class="self-link" href="#data-model"></a></h3>
+   <p>Core entity of the Use Case 001 data model is <code>ProductFootprint</code>.</p>
+   <p>Right now, a <code>ProductFootprint</code> represents the carbon footprint of a product with values in accordance with the Pathfinder Framework.
+The definition of <code>ProductFootprint</code> is flexible and will allow further emission factors, such as water usage, to be added later on.</p>
+   <h4 class="heading settled" data-level="2.2.1" id="example-productfootprint-value"><span class="secno">2.2.1. </span><span class="content">Example ProductFootprint value</span><a class="self-link" href="#example-productfootprint-value"></a></h4>
+<pre class="example code highlight" id="example-9f98a87c"><a class="self-link" href="#example-9f98a87c"></a><c- p>{</c->
+  <c- f>"id"</c-><c- p>:</c-> <c- u>"3893bb5d-da16-4dc1-9185-11d97476c254"</c-><c- p>,</c->
+  <c- f>"specVersion"</c-><c- p>:</c-> <c- u>"1.0.0"</c-><c- p>,</c->
+  <c- f>"version"</c-><c- p>:</c-> <c- mi>42</c-><c- p>,</c->
+  <c- f>"created"</c-><c- p>:</c-> <c- u>"2022-05-22T21:47:32Z"</c-><c- p>,</c->
+  <c- f>"updated"</c-><c- p>:</c-> <c- u>"2022-05-22T21:47:35Z"</c-><c- p>,</c->
+  <c- f>"companyName"</c-><c- p>:</c-> <c- u>"My Corp"</c-><c- p>,</c->
+  <c- f>"companyIds"</c-><c- p>:</c-> <c- p>[</c->
+    <c- u>"urn:uuid:51131FB5-42A2-4267-A402-0ECFEFAD1619"</c-><c- p>,</c->
+    <c- u>"urn:epc:id:sgln:4063973.00000.8"</c->
+  <c- p>],</c->
+  <c- f>"productDescription"</c-><c- p>:</c-> <c- u>"Cote’d Or Ethanol"</c-><c- p>,</c->
+  <c- f>"productIds"</c-><c- p>:</c-> <c- p>[</c->
+    <c- u>"urn:gtin:4712345060507"</c->
+  <c- p>],</c->
+  <c- f>"productCategoryCpc"</c-><c- p>:</c-> <c- u>"3342"</c-><c- p>,</c->
+  <c- f>"productNameCompany"</c-><c- p>:</c-> <c- u>"Green Ethanol Volnay"</c-><c- p>,</c->
+  <c- f>"comment"</c-><c- p>:</c-> <c- u>""</c-><c- p>,</c->
+  <c- f>"pcf"</c-><c- p>:</c-> <c- p>{</c->
+    <c- f>"declaredUnit"</c-><c- p>:</c-> <c- u>"liter"</c-><c- p>,</c->
+    <c- f>"unitaryProductAmount"</c-><c- p>:</c-> <c- u>"12.0"</c-><c- p>,</c->
+    <c- f>"fossilGhgEmissions"</c-><c- p>:</c-> <c- u>"0.123"</c-><c- p>,</c->
+    <c- f>"biogenicEmissions"</c-><c- p>:</c-> <c- p>{</c->
+      <c- f>"landUseEmissions"</c-><c- p>:</c-> <c- u>"0.001"</c-><c- p>,</c->
+      <c- f>"otherEmissions"</c-><c- p>:</c-> <c- u>"0"</c->
+    <c- p>},</c->
+    <c- f>"biogenicCarbonContent"</c-><c- p>:</c-> <c- u>"0.0"</c-><c- p>,</c->
+    <c- f>"reportingPeriodStart"</c-><c- p>:</c-> <c- u>"2021-01-01T00:00:00Z"</c-><c- p>,</c->
+    <c- f>"reportingPeriodEnd"</c-><c- p>:</c-> <c- u>"2022-01-01T00:00:00Z"</c-><c- p>,</c->
+    <c- f>"primaryDataShare"</c-><c- p>:</c-> <c- mf>56.12</c-><c- p>,</c->
+    <c- f>"emissionFactorSources"</c-><c- p>:</c-> <c- p>[</c->
+      <c- p>{</c->
+        <c- f>"name"</c-><c- p>:</c-> <c- u>"Ecoinvent"</c-><c- p>,</c->
+        <c- f>"version"</c-><c- p>:</c-> <c- u>"1.2.3"</c->
+      <c- p>}</c->
+    <c- p>],</c->
+    <c- f>"boundaryProcessesDescription"</c-><c- p>:</c-> <c- u>"End-of-life included"</c-><c- p>,</c->
+    <c- f>"crossSectoralStandardsUsed"</c-><c- p>:</c-> <c- p>[</c->
+      <c- u>"GHG Protocol Product standard"</c->
+    <c- p>],</c->
+    <c- f>"productOrSectorSpecificRules"</c-><c- p>:</c-> <c- p>[</c->
+      <c- p>{</c->
+        <c- f>"operator"</c-><c- p>:</c-> <c- u>"EPD International"</c-><c- p>,</c->
+        <c- f>"ruleNames"</c-><c- p>:</c-> <c- p>[</c->
+          <c- u>"ABC 2021"</c->
+        <c- p>]</c->
+      <c- p>}</c->
+    <c- p>]</c->
+  <c- p>}</c->
+<c- p>}</c->
+</pre>
+   <h3 class="heading settled" data-level="2.3" id="http-api"><span class="secno">2.3. </span><span class="content">HTTP API</span><a class="self-link" href="#http-api"></a></h3>
+   <p>The current version of the Use Case 001 HTTP API was designed with the following assumptions:</p>
+   <ol>
+    <li data-md>
+     <p>data flows from a <a href="#data-owner">§ 3.2 Data Owner</a> to a <a href="#data-recipient">§ 3.1 Data Recipient</a></p>
+    <li data-md>
+     <p>a <a href="#data-recipient">§ 3.1 Data Recipient</a> is interested in specific data and requests it from the <a href="#data-owner">§ 3.2 Data Owner</a> in a pull-manner by making appropriate HTTP requests</p>
+    <li data-md>
+     <p>the <a href="#data-recipient">§ 3.1 Data Recipient</a> knows the HTTP REST API endpoint and has been assigned client credentials by the <a href="#data-owner">§ 3.2 Data Owner</a></p>
+   </ol>
+   <p>There are 2 actions defined with the Use Case 001 Specification which are explained below.</p>
+   <h4 class="heading settled" data-level="2.3.1" id="http-action-getfootprint"><span class="secno">2.3.1. </span><span class="content">HTTP Action <code>GetFootprint</code></span><a class="self-link" href="#http-action-getfootprint"></a></h4>
+   <p>A HTTP Call to retrieve a single <code>ProductFootprint</code> given its unique ID.
+Typically this is performed to selectively retrieve a <code>ProductFootprint</code> in order to get its latest version.</p>
+   <p>A successful call will have as response a JSON object with a single field <code>data</code> with value a <code>ProductFootprint</code> object.</p>
+   <h5 class="heading settled" data-level="2.3.1.1" id="request-example"><span class="secno">2.3.1.1. </span><span class="content">Request Example</span><a class="self-link" href="#request-example"></a></h5>
+<pre class="example code highlight" id="example-6ce95b38"><a class="self-link" href="#example-6ce95b38"></a>curl -X <c- t>'GET'</c-> <c- se>\</c->
+  <c- t>'https://api.pathfinder.sine.dev/0/footprints/3893bb5d-da16-4dc1-9185-11d97476c254'</c-> <c- se>\</c->
+  -H <c- t>'accept: application/json'</c-> <c- se>\</c->
+  -H <c- t>'Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImhlbGxvIn0.wZPjxQz1wI25fIe0Oz4w5Y2g8UD_dMz6Wd-Aegg8HMM'</c->
+</pre>
+   <h5 class="heading settled" data-level="2.3.1.2" id="response-example"><span class="secno">2.3.1.2. </span><span class="content">Response Example</span><a class="self-link" href="#response-example"></a></h5>
+<pre class="example code highlight" id="example-6ab2d6c8"><a class="self-link" href="#example-6ab2d6c8"></a><c- p>{</c->
+  <c- f>"data"</c-><c- p>:</c-> <c- p>{</c->
+    <c- f>"id"</c-><c- p>:</c-> <c- u>"3893bb5d-da16-4dc1-9185-11d97476c254"</c-><c- p>,</c->
+    <c- f>"specVersion"</c-><c- p>:</c-> <c- u>"1.0.0"</c-><c- p>,</c->
+    <c- f>"version"</c-><c- p>:</c-> <c- mi>42</c-><c- p>,</c->
+    <c- f>"created"</c-><c- p>:</c-> <c- u>"2022-05-22T21:47:32Z"</c-><c- p>,</c->
+    <c- f>"updated"</c-><c- p>:</c-> <c- u>"2022-05-22T21:47:35Z"</c-><c- p>,</c->
+    <c- f>"companyName"</c-><c- p>:</c-> <c- u>"My Corp"</c-><c- p>,</c->
+    <c- f>"companyIds"</c-><c- p>:</c-> <c- p>[</c->
+      <c- u>"urn:uuid:51131FB5-42A2-4267-A402-0ECFEFAD1619"</c-><c- p>,</c->
+      <c- u>"urn:epc:id:sgln:4063973.00000.8"</c->
+    <c- p>],</c->
+    <c- f>"productDescription"</c-><c- p>:</c-> <c- u>"Cote’d Or Ethanol"</c-><c- p>,</c->
+    <c- f>"productIds"</c-><c- p>:</c-> <c- p>[</c->
+      <c- u>"urn:gtin:4712345060507"</c->
+    <c- p>],</c->
+    <c- f>"productCategoryCpc"</c-><c- p>:</c-> <c- u>"3342"</c-><c- p>,</c->
+    <c- f>"productNameCompany"</c-><c- p>:</c-> <c- u>"Green Ethanol Volnay"</c-><c- p>,</c->
+    <c- f>"comment"</c-><c- p>:</c-> <c- u>""</c-><c- p>,</c->
+    <c- f>"pcf"</c-><c- p>:</c-> <c- p>{</c->
+      <c- f>"declaredUnit"</c-><c- p>:</c-> <c- u>"liter"</c-><c- p>,</c->
+      <c- f>"unitaryProductAmount"</c-><c- p>:</c-> <c- u>"12.0"</c-><c- p>,</c->
+      <c- f>"fossilGhgEmissions"</c-><c- p>:</c-> <c- u>"0.123"</c-><c- p>,</c->
+      <c- f>"biogenicEmissions"</c-><c- p>:</c-> <c- p>{</c->
+        <c- f>"landUseEmissions"</c-><c- p>:</c-> <c- u>"0.001"</c-><c- p>,</c->
+        <c- f>"otherEmissions"</c-><c- p>:</c-> <c- u>"0"</c->
+      <c- p>},</c->
+      <c- f>"biogenicCarbonContent"</c-><c- p>:</c-> <c- u>"0.0"</c-><c- p>,</c->
+      <c- f>"reportingPeriodStart"</c-><c- p>:</c-> <c- u>"2021-01-01T00:00:00Z"</c-><c- p>,</c->
+      <c- f>"reportingPeriodEnd"</c-><c- p>:</c-> <c- u>"2022-01-01T00:00:00Z"</c-><c- p>,</c->
+      <c- f>"primaryDataShare"</c-><c- p>:</c-> <c- mf>56.12</c-><c- p>,</c->
+      <c- f>"emissionFactorSources"</c-><c- p>:</c-> <c- p>[</c->
+        <c- p>{</c->
+          <c- f>"name"</c-><c- p>:</c-> <c- u>"Ecoinvent"</c-><c- p>,</c->
+          <c- f>"version"</c-><c- p>:</c-> <c- u>"1.2.3"</c->
+        <c- p>}</c->
+      <c- p>],</c->
+      <c- f>"boundaryProcessesDescription"</c-><c- p>:</c-> <c- u>"End-of-life included"</c-><c- p>,</c->
+      <c- f>"crossSectoralStandardsUsed"</c-><c- p>:</c-> <c- p>[</c->
+        <c- u>"GHG Protocol Product standard"</c->
+      <c- p>],</c->
+      <c- f>"productOrSectorSpecificRules"</c-><c- p>:</c-> <c- p>[</c->
+        <c- p>{</c->
+          <c- f>"operator"</c-><c- p>:</c-> <c- u>"EPD International"</c-><c- p>,</c->
+          <c- f>"ruleNames"</c-><c- p>:</c-> <c- p>[</c->
+            <c- u>"ABC 2021"</c->
+          <c- p>]</c->
+        <c- p>}</c->
+      <c- p>]</c->
+    <c- p>}</c->
+  <c- p>}</c->
+<c- p>}</c->
+</pre>
+   <h4 class="heading settled" data-level="2.3.2" id="http-action-listfootprints"><span class="secno">2.3.2. </span><span class="content">HTTP Action <code>ListFootprints</code></span><a class="self-link" href="#http-action-listfootprints"></a></h4>
+   <p>The HTTP Call to enumerate the <code>ProductFootprint</code>s available to the authenticated user.</p>
+   <p>A successful call will have as response a JSON object with a single field <code>data</code> with value an array of <code>ProductFootprint</code> objects.</p>
+   <h5 class="heading settled" data-level="2.3.2.1" id="request-example①"><span class="secno">2.3.2.1. </span><span class="content">Request Example</span><a class="self-link" href="#request-example①"></a></h5>
+<pre class="example code highlight" id="example-43d9a846"><a class="self-link" href="#example-43d9a846"></a>curl -X <c- t>'GET'</c-> <c- se>\</c->
+  <c- t>'https://api.pathfinder.sine.dev/0/footprints'</c-> <c- se>\</c->
+  -H <c- t>'accept: application/json'</c-> <c- se>\</c->
+  -H <c- t>'Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImhlbGxvIn0.wZPjxQz1wI25fIe0Oz4w5Y2g8UD_dMz6Wd-Aegg8HMM'</c->
+</pre>
+   <h5 class="heading settled" data-level="2.3.2.2" id="response-example①"><span class="secno">2.3.2.2. </span><span class="content">Response Example</span><a class="self-link" href="#response-example①"></a></h5>
+<pre class="example code highlight" id="example-1dbf7d86"><a class="self-link" href="#example-1dbf7d86"></a><c- p>{</c->
+  <c- f>"data"</c-><c- p>:</c-> <c- p>[</c->    
+    ...
+  <c- p>]</c->
+<c- p>}</c->
+</pre>
+   <p class="note" role="note"><span>Note:</span> The actual response contains an array of <code>ProductFootprint</code>s which are omitted for brevity here.</p>
+   <h2 class="heading settled" data-level="3" id="term"><span class="secno">3. </span><span class="content">Glossary</span><a class="self-link" href="#term"></a></h2>
+   <h3 class="heading settled" data-level="3.1" id="data-recipient"><span class="secno">3.1. </span><span class="content">Data Recipient</span><a class="self-link" href="#data-recipient"></a></h3>
+   <p>An entity receiving <code>ProductFootprint</code> from a <a href="#data-owner">§ 3.2 Data Owner</a>. The term is specified within the <a href="#uc001-spec">§ 3.5 Use Case 001 Specification</a>.</p>
+   <h3 class="heading settled" data-level="3.2" id="data-owner"><span class="secno">3.2. </span><span class="content">Data Owner</span><a class="self-link" href="#data-owner"></a></h3>
+   <p>An entity providing <code>ProductFootprint</code> to a <a href="#data-recipient">§ 3.1 Data Recipient</a>. Typically, a data owner is the producer of a good. The term is specified within the <a href="#uc001-spec">§ 3.5 Use Case 001 Specification</a>.</p>
+   <h3 class="heading settled" data-level="3.3" id="pact-initiative"><span class="secno">3.3. </span><span class="content">PACT Initiative</span><a class="self-link" href="#pact-initiative"></a></h3>
+   <p>The Partnership for Carbon Transparency (PACT) is a <a href="https://www.wbcsd.org/">WBCSD</a>-lead initiative of
+50+ global companies to cooperate towards greater Scope 3 emissions transparency by exchanging verified primary data.</p>
+   <p>To achieve carbon emissions transparency at product level, WBCSD is organizing for the PACT initiative 2 related workstreams:</p>
+   <ol>
+    <li data-md>
+     <p><strong>Pathfinder Methodology</strong>: necessary guidance for harmonized measurement of carbon emissions. See <a href="#pathfinder-framework">§ 3.4 Pathfinder Framework</a>.</p>
+    <li data-md>
+     <p><strong>Pathfinder Network</strong>: to enable interoperable data exchange of emission factors based on the Pathfinder Methodology. See <a href="#uc001-spec">§ 3.5 Use Case 001 Specification</a>.</p>
+   </ol>
+   <p>The vision for the PACT Network can be found <a href="https://www.carbon-transparency.com/media/luhii1or/pathfinder-network-vision-paper.pdf">here</a></p>
+   <h3 class="heading settled" data-level="3.4" id="pathfinder-framework"><span class="secno">3.4. </span><span class="content">Pathfinder Framework</span><a class="self-link" href="#pathfinder-framework"></a></h3>
+   <p>Pathfinder Framework delivers guidance for harmonized measurement of carbon emissions at product-level. Version 1 of methodology was <a href="https://www.carbon-transparency.com/media/oymlyn4n/pathfinder-framework-version-1_final.pdf">published</a> Nov 9, 2021</p>
+   <h3 class="heading settled" data-level="3.5" id="uc001-spec"><span class="secno">3.5. </span><span class="content">Use Case 001 Specification</span><a class="self-link" href="#uc001-spec"></a></h3>
+   <p>The technical specification of Use Case 001 published as a <a href="/use-case-001.pdf">PDF</a> in June 16, 2022.</p>
   </main>
 <script>
 (function() {
