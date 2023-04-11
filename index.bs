@@ -4,274 +4,117 @@ Shortname: pact-dev-docs
 Level: 1
 Status: LD
 URL: https://wbcsd.github.io/introduction/
-Editor: 
+Editor:
 Mailing List: public-dev@pathfinder.sine.dev
 Repository: sine-fnd/intro
-Abstract: To reach net zero emissions before 2050, we need all business to measure, account for and disclose carbon emissions as a first step to reducing them. 
+Abstract: To reach net zero emissions before 2050, we need all business to measure, account for and disclose carbon emissions as a first step to reducing them.
  The PACT (Partnership for Carbon Transparency) Initative is cross-value chain initiative to define and accelerate credible, verified primary emission data exchange.
 Markup Shorthands: markdown yes
 Boilerplate: omit conformance, omit copyright
 </pre>
 
-
 # Introduction
 
-The interoperable exchange of emission factors, especially carbon emissions, enables companies to make more informed decisions for targeted decarbonization of existing or new products.
+## Our goal
 
-For many industries, the emissions that occur within the supply chain represent 80% or more of a product's total emissions footprint.
+TEMP:
+Net zero emissions before 2050.
+Scope 3 emissions' primary data, rather than estimates, etc.
+Need interoperability.
 
-In order to enable the exchange of emission factors across companies and value chains, the WBCSD-lead PACT Initiative is publishing guidances and technical specifications for the interoperable exchange of emission data.
+## Pathfinder Framework
 
-## Interoperability
+TEMP:
+The Pathfinder Framework provides industry-agnostic methodological guidance for the calculation of product-level emissions data. It also defines which data elements are exchanged within value chains
 
-Interoperable exchange of carbon emissions implies interoperability at the following levels:
+Guidance for the Accounting and Exchange of Product Life Cycle Emissions, building on existing standards and protocols, such as the GHG Protocol Product standard). See the Pathfinder Framework Version 1 for details.
 
-: Data Interoperability
-:: a data model that is commonly used for the data exchange by companies across value chains
-: Action Interoperability
-:: the ability for 2 or more independent software implementations for meaningful exchange of emission data between each other
-: Methodological Interoperability
-:: a common guidance for the measurement and calculation of emissions factors which applied when exchanging emission information with each other
+## Product Carbon Footprint (PCF)
 
-## Status
+The carbon (equivalent) emissions relating to a product. Products can be any kind of item exchanged between entities, including “pieces”, metric or volumetric quantities of a product, etc.
 
-Methodological Interoperability is enabled through the publication of the <a href="pathfinder-framework-v1.pdf">Pathfinder Framework version 1</a> in Nov 9, 2021.
+## Pathfinder Network
 
-Interoperability at the data-level and action-level is at an early stage after the publication of the <a href="use-case-001.pdf">Use Case 001 specification</a> in Jun 16, 2022.
-The Use Case 001 specification contains the product footprint data model and a first HTTP API. You can find more information in chapter <a href='#uc1'>Use Case 001</a>.
+TEMP:
+The Pathfinder Network is a data exchange infrastructure that enables organizations to connect across value chains and industries to share product carbon footprint data. The Network creates interoperability between technology solutions and industry-focused data exchange platforms, meaning organizations are flexible in their choice of provider. It can be seen as a sort of convener or facilitator. In the simplest of terms, we aim is to create the “internet for emissions data” – the common nexus for all organizations to connect seamlessly, exchange and derive insights from emissions data.
 
-Interoperability tests between independent software implementations has already happened and the feasibility of the specification and methodology confirmed. 
+The Pathfinder Network is a concept developed by PACT and powered by the World Business Council for Sustainable Development (WBCSD). PACT is working toward the vision of an open and global network of interoperable solutions for the secure peer-to-peer exchange of accurate, primary and verified product emissions data – across all industries and value chains.
+For further information, please refer to the PACT website www.carbon-transparency.com and the Pathfinder vision paper “Pathfinder Network: Enabling standardized emissions data exchange”.
 
-Note: the PACT Initiative scopes its specification work streams into independent "Use Cases". A Use Case is about solving 1 or more well-defined challenges for companies in the context of exchange of emission factors. <br>
-Use Cases specify the foundations for enabling interoperability between independent software implementations. Typically, this is specification of a data model and the transactions executed between 2 or more actors (companies).
+An information network of and for supply chain actors to securely exchange environmental data with each other, with an initial focus on PCF data.
 
-# Use Case 001 # {#uc1}
+## What do I need to implement to exchange PCFs through the Pathfinder Network?
 
-Note: you can find the technical specification of Use Case 001 [here](use-case-001.pdf).
+In order to exchange PCF data through the Pathfinder Network, you ought to provide a solution that abides to the Pathfinder technical specifications.
+You can either refer to the technical sepcifications, or follow the instructions below.
 
-Use Case 001 specifies a data model and an HTTP REST API for the interoperable exchange of product footprint information between independent solutions.
+# Example API
 
-Further information can be found in the [Use Case 001 repository](https://github.com/wbcsd/pathfinder-use-case-001), including:
+The following is an example implementation of an HTTP REST API that conforms to the Pathfinder Technical Specifications.
 
-<ul>
-    <li> a [swagger file for the HTTP API](https://github.com/wbcsd/pathfinder-use-case-001/tree/main/spec/rest-api)</li>
-    <li>a [demo implementation of the HTTP REST API](https://github.com/wbcsd/pathfinder-use-case-001/tree/main/endpoint)</li>
-</ul>
+You can either run it locally (instructions can be found HERE) or use the online demo version at https://api.pathfinder.sine.dev/.
 
-## Online Demo Version
+This document will always use the online demo version, but everything will apply locally if `https//api.pathfinder.sine.dev` is replaced by your local domain (e.g. `http://127.0.0.1:8000`).
 
-The following endpoint implements the HTTP REST API: [https://api.pathfinder.sine.dev/](https://api.pathfinder.sine.dev/).
+A Swagger UI visualization is available at the `swagger-ui` endpoint (hence, at https://api.pathfinder.sine.dev/swagger-ui).
 
-It includes a Swagger UI as well: [https://api.pathfinder.sine.dev/swagger-ui/](https://api.pathfinder.sine.dev/swagger-ui/).
+## Authentication
 
-Note: the hard-coded login credentials are: username: `hello` // password: `pathfinder`
+Authentication to the example API is made in accordance with the OAuth2 Client Credentials Grant ([RFC6749 4.4](https://datatracker.ietf.org/doc/html/rfc6749#section-4.4)).
 
-## Data Model ## {#data-model}
+The API exposes the `/2/auth/token` endpoint, to which a `POST` call must be made, with the following credentials:
 
-Core entity of the Use Case 001 data model is `ProductFootprint`. 
+<pre highlight='markdown'>
+id: hello
+secret: pathfinder
+</pre>
 
-Right now, a `ProductFootprint` represents the carbon footprint of a product with values in accordance with the Pathfinder Framework. 
-The definition of `ProductFootprint` is flexible and will allow further emission factors, such as water usage, to be added later on.
+If using Swagger, click the `Authorize` button on the top-right and then, in the modal, use `hello` as the `client_id` and `pathfinder` as the `client_secret`.
+If using Postman, use `hello` as the username and `pathfinder` as the password.
 
-### Example ProductFootprint value
+This call can also be made with `curl`, running the following command:
+<pre highlight='sh'>
+curl -v -X POST --user hello:pathfinder \
+-H "Content-Type: application/x-www-form-urlencoded" \
+-d "grant_type=client_credentials" \
+https://api.pathfinder.sine.dev/2/auth/token
+</pre>
 
-<pre class='example code' highlight='json'>
+Which will return
+
+<pre class='code' highlight='json'>
 {
-  "id": "3893bb5d-da16-4dc1-9185-11d97476c254",
-  "specVersion": "1.0.0",
-  "version": 42,
-  "created": "2022-05-22T21:47:32Z",
-  "updated": "2022-05-22T21:47:35Z",
-  "companyName": "My Corp",
-  "companyIds": [
-    "urn:uuid:51131FB5-42A2-4267-A402-0ECFEFAD1619",
-    "urn:epc:id:sgln:4063973.00000.8"
-  ],
-  "productDescription": "Cote'd Or Ethanol",
-  "productIds": [
-    "urn:gtin:4712345060507"
-  ],
-  "productCategoryCpc": "3342",
-  "productNameCompany": "Green Ethanol Volnay",
-  "comment": "",
-  "pcf": {
-    "declaredUnit": "liter",
-    "unitaryProductAmount": "12.0",
-    "fossilGhgEmissions": "0.123",
-    "biogenicEmissions": {
-      "landUseEmissions": "0.001",
-      "otherEmissions": "0"
-    },
-    "biogenicCarbonContent": "0.0",
-    "reportingPeriodStart": "2021-01-01T00:00:00Z",
-    "reportingPeriodEnd": "2022-01-01T00:00:00Z",
-    "primaryDataShare": 56.12,
-    "emissionFactorSources": [
-      {
-        "name": "Ecoinvent",
-        "version": "1.2.3"
-      }
-    ],
-    "boundaryProcessesDescription": "End-of-life included",
-    "crossSectoralStandardsUsed": [
-      "GHG Protocol Product standard"
-    ],
-    "productOrSectorSpecificRules": [
-      {
-        "operator": "EPD International",
-        "ruleNames": [
-          "ABC 2021"
-        ]
-      }
-    ]
-  }
+    "access_token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImhlbGxvIn0.wZPjxQz1wI25fIe0Oz4w5Y2g8UD_dMz6Wd-Aegg8HMM",
+    "token_type":"bearer",
+    "scope":null
 }
 </pre>
 
+This access token must be used in other calls to the API.
 
-## HTTP API
+## Fetching Data
 
-The current version of the Use Case 001 HTTP API was designed with the following assumptions:
+## Sending an event (”a Product Carbon Footprint was updated”)
 
-1. data flows from a [[#data-owner]] to a [[#data-recipient]]
-2. a [[#data-recipient]] is interested in specific data and requests it from the [[#data-owner]] in a pull-manner by making appropriate HTTP requests
-3. the [[#data-recipient]] knows the HTTP REST API endpoint and has been assigned client credentials by the [[#data-owner]]
+<aside>
+❗ this is optional functionality
 
-There are 2 actions defined with the Use Case 001 Specification which are explained below.
+</aside>
 
-### HTTP Action `GetFootprint`
+# Overview of the Technical Specification
 
-A HTTP Call to retrieve a single `ProductFootprint` given its unique ID. 
-Typically this is performed to selectively retrieve a `ProductFootprint` in order to get its latest version.
+## Overview
 
-A successful call will have as response a JSON object with a single field `data` with value a `ProductFootprint` object.
+## Required (”must haves”) functionality for conformance
 
-#### Request Example
-<pre class='example code' highlight='sh'>
-curl -X 'GET' \
-  'https://api.pathfinder.sine.dev/0/footprints/3893bb5d-da16-4dc1-9185-11d97476c254' \
-  -H 'accept: application/json' \
-  -H 'Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImhlbGxvIn0.wZPjxQz1wI25fIe0Oz4w5Y2g8UD_dMz6Wd-Aegg8HMM'
-</pre>
+## Optional (”nice to haves”) functionality
 
-#### Response Example
+#
 
-<pre class='example code' highlight='json'>
-{
-  "data": {
-    "id": "3893bb5d-da16-4dc1-9185-11d97476c254",
-    "specVersion": "1.0.0",
-    "version": 42,
-    "created": "2022-05-22T21:47:32Z",
-    "updated": "2022-05-22T21:47:35Z",
-    "companyName": "My Corp",
-    "companyIds": [
-      "urn:uuid:51131FB5-42A2-4267-A402-0ECFEFAD1619",
-      "urn:epc:id:sgln:4063973.00000.8"
-    ],
-    "productDescription": "Cote'd Or Ethanol",
-    "productIds": [
-      "urn:gtin:4712345060507"
-    ],
-    "productCategoryCpc": "3342",
-    "productNameCompany": "Green Ethanol Volnay",
-    "comment": "",
-    "pcf": {
-      "declaredUnit": "liter",
-      "unitaryProductAmount": "12.0",
-      "fossilGhgEmissions": "0.123",
-      "biogenicEmissions": {
-        "landUseEmissions": "0.001",
-        "otherEmissions": "0"
-      },
-      "biogenicCarbonContent": "0.0",
-      "reportingPeriodStart": "2021-01-01T00:00:00Z",
-      "reportingPeriodEnd": "2022-01-01T00:00:00Z",
-      "primaryDataShare": 56.12,
-      "emissionFactorSources": [
-        {
-          "name": "Ecoinvent",
-          "version": "1.2.3"
-        }
-      ],
-      "boundaryProcessesDescription": "End-of-life included",
-      "crossSectoralStandardsUsed": [
-        "GHG Protocol Product standard"
-      ],
-      "productOrSectorSpecificRules": [
-        {
-          "operator": "EPD International",
-          "ruleNames": [
-            "ABC 2021"
-          ]
-        }
-      ]
-    }
-  }
-}
-</pre>
+# Appendix
 
-</div>
+## Example Payload
 
+## Implementation Checklist (Mandatory Functionality)
 
-### HTTP Action `ListFootprints`
-
-The HTTP Call to enumerate the `ProductFootprint`s available to the authenticated user.
-
-A successful call will have as response a JSON object with a single field `data` with value an array of `ProductFootprint` objects.
-
-
-#### Request Example
-
-<pre class="example code" highlight="sh">
-curl -X 'GET' \
-  'https://api.pathfinder.sine.dev/0/footprints' \
-  -H 'accept: application/json' \
-  -H 'Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImhlbGxvIn0.wZPjxQz1wI25fIe0Oz4w5Y2g8UD_dMz6Wd-Aegg8HMM'
-</pre>
-
-
-#### Response Example
-
-<pre class="example code" highlight="json">
-{
-  "data": [    
-    ...
-  ]
-}
-</pre>
-
-Note: The actual response contains an array of `ProductFootprint`s which are omitted for brevity here.
-
-
-# Glossary # {#term}
-
-## Data Recipient ## {#data-recipient}
-
-An entity receiving `ProductFootprint` from a [[#data-owner]]. The term is specified within the [[#uc001-spec]].
-
-## Data Owner ## {#data-owner}
-
-An entity providing `ProductFootprint` to a [[#data-recipient]]. Typically, a data owner is the producer of a good. The term is specified within the [[#uc001-spec]].
-
-
-## PACT Initiative ## {#pact-initiative}
-
-The Partnership for Carbon Transparency (PACT) is a <a href='https://www.wbcsd.org/'>WBCSD</a>-lead initiative of 
-50+ global companies to cooperate towards greater Scope 3 emissions transparency by exchanging verified primary data. 
-
-To achieve carbon emissions transparency at product level, WBCSD is organizing for the PACT initiative 2 related workstreams:
-
-1. **Pathfinder Methodology**: necessary guidance for harmonized measurement of carbon emissions. See [[#pathfinder-framework]].
-2. **Pathfinder Network**: to enable interoperable data exchange of emission factors based on the Pathfinder Methodology. See [[#uc001-spec]].
-
-The vision for the PACT Network can be found <a href='https://www.carbon-transparency.com/media/luhii1or/pathfinder-network-vision-paper.pdf'>here</a>
-
-## Pathfinder Framework ## {#pathfinder-framework}
-
-Pathfinder Framework delivers guidance for harmonized measurement of carbon emissions at product-level. Version 1 of methodology was <a href="https://www.carbon-transparency.com/media/oymlyn4n/pathfinder-framework-version-1_final.pdf">published</a> Nov 9, 2021
-
-
-## Use Case 001 Specification ## {#uc001-spec}
-
-The technical specification of Use Case 001 published as a <a href="/use-case-001.pdf">PDF</a> in June 16, 2022.
+## Implementation Checklist (Optional Functionality)

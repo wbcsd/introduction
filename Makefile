@@ -1,4 +1,5 @@
 all: docs/index.html
 
 docs/index.html: index.bs
-	bikeshed spec $< $@
+# Revert back to spec instead of watch
+	bikeshed watch $< $@
