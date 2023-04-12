@@ -1489,7 +1489,7 @@ Possible extra rowspan handling
 </style>
   <meta content="Bikeshed version d9bd89757, updated Thu Mar 23 10:06:53 2023 -0700" name="generator">
   <link href="https://wbcsd.github.io/introduction/" rel="canonical">
-  <meta content="95e63fd8c8ea2f6a6cd00f5c8399ab0b361b50c8" name="document-revision">
+  <meta content="a985dfa2132ceb570880f5ef5608a90bb784809c" name="document-revision">
 <style>/* style-autolinks */
 .css.css, .property.property, .descriptor.descriptor {
     color: var(--a-normal-text);
@@ -2054,23 +2054,36 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
       <li><a href="#what-do-i-need-to-implement-to-exchange-pcfs-through-the-pathfinder-network"><span class="secno">1.5</span> <span class="content">What do I need to implement to exchange PCFs through the Pathfinder Network?</span></a>
      </ol>
     <li>
-     <a href="#example-api"><span class="secno">2</span> <span class="content">Example API</span></a>
+     <a href="#example-api---plug-and-play"><span class="secno">2</span> <span class="content">Example API - Plug and Play</span></a>
      <ol class="toc">
-      <li><a href="#authentication"><span class="secno">2.1</span> <span class="content">Authentication</span></a>
+      <li><a href="#authenticate"><span class="secno">2.1</span> <span class="content">Authentication</span></a>
       <li>
        <a href="#fetching-data"><span class="secno">2.2</span> <span class="content">Fetching Data</span></a>
        <ol class="toc">
         <li><a href="#listFootprints"><span class="secno">2.2.1</span> <span class="content"><code>ListFootprints</code> Action</span></a>
         <li><a href="#getFootprint"><span class="secno">2.2.2</span> <span class="content"><code>GetFootprint</code> Action</span></a>
        </ol>
-      <li><a href="#sending-an-event-a-product-carbon-footprint-was-updated"><span class="secno">2.3</span> <span class="content">Sending an event (”a Product Carbon Footprint was updated”)</span></a>
+      <li><a href="#events"><span class="secno">2.3</span> <span class="content">Sending an event (”a Product Carbon Footprint was updated”)</span></a>
      </ol>
     <li>
      <a href="#overview-of-the-technical-specification"><span class="secno">3</span> <span class="content">Overview of the Technical Specification</span></a>
      <ol class="toc">
-      <li><a href="#overview"><span class="secno">3.1</span> <span class="content">Overview</span></a>
-      <li><a href="#required-must-haves-functionality-for-conformance"><span class="secno">3.2</span> <span class="content">Required (”must haves”) functionality for conformance</span></a>
-      <li><a href="#optional-nice-to-haves-functionality"><span class="secno">3.3</span> <span class="content">Optional (”nice to haves”) functionality</span></a>
+      <li>
+       <a href="#required-must-haves-functionality-for-conformance"><span class="secno">3.1</span> <span class="content">Required (”must haves”) functionality for conformance</span></a>
+       <ol class="toc">
+        <li>
+         <a href="#authenticate①"><span class="secno">3.1.1</span> <span class="content"><code>Authenticate</code></span></a>
+         <ol class="toc">
+          <li><a href="#request-syntax"><span class="secno">3.1.1.1</span> <span class="content">Request syntax</span></a>
+         </ol>
+        <li><a href="#listfootprints"><span class="secno">3.1.2</span> <span class="content"><code>ListFootprints</code></span></a>
+        <li><a href="#getfootprint"><span class="secno">3.1.3</span> <span class="content"><code>GetFootprint</code></span></a>
+       </ol>
+      <li>
+       <a href="#optional"><span class="secno">3.2</span> <span class="content">Optional (”nice to haves”) functionality</span></a>
+       <ol class="toc">
+        <li><a href="#events①"><span class="secno">3.2.1</span> <span class="content"><code>Events</code></span></a>
+       </ol>
      </ol>
     <li>
      <a href="#appendix"><span class="secno">4</span> <span class="content">Appendix</span></a>
@@ -2103,12 +2116,29 @@ For further information, please refer to the PACT website www.carbon-transparenc
    <h3 class="heading settled" data-level="1.5" id="what-do-i-need-to-implement-to-exchange-pcfs-through-the-pathfinder-network"><span class="secno">1.5. </span><span class="content">What do I need to implement to exchange PCFs through the Pathfinder Network?</span><a class="self-link" href="#what-do-i-need-to-implement-to-exchange-pcfs-through-the-pathfinder-network"></a></h3>
    <p>In order to exchange PCF data through the Pathfinder Network, you ought to provide a solution that abides to the Pathfinder technical specifications.
 You can either refer to the technical sepcifications, or follow the instructions below.</p>
-   <h2 class="heading settled" data-level="2" id="example-api"><span class="secno">2. </span><span class="content">Example API</span><a class="self-link" href="#example-api"></a></h2>
-   <p>The following is an example implementation of an HTTP REST API that conforms to the Pathfinder Technical Specifications.</p>
-   <p>You can either run it locally (instructions can be found HERE) or use the online demo version at https://api.pathfinder.sine.dev/.</p>
-   <p>This document will always use the online demo version, but everything will apply locally if <code>https//api.pathfinder.sine.dev</code> is replaced by your local domain (e.g. <code>http://127.0.0.1:8000</code>).</p>
-   <p>A Swagger UI visualization is available at the <code>swagger-ui</code> endpoint (hence, at https://api.pathfinder.sine.dev/swagger-ui).</p>
-   <h3 class="heading settled" data-level="2.1" id="authentication"><span class="secno">2.1. </span><span class="content">Authentication</span><a class="self-link" href="#authentication"></a></h3>
+   <h2 class="heading settled" data-level="2" id="example-api---plug-and-play"><span class="secno">2. </span><span class="content">Example API - Plug and Play</span><a class="self-link" href="#example-api---plug-and-play"></a></h2>
+   <p>The following is an example implementation of an HTTP REST API conforming to the Pathfinder <a href="https://wbcsd.github.io/data-exchange-protocol/v2/#action-authenticate">Technical Specifications</a>.</p>
+   <p>A demo online version of this API is available at <a href="https://api.pathfinder.sine.dev">https://api.pathfinder.sine.dev</a> and will be used in all examples below.
+If you want to run the example API locally, you can also do so, by cloning <a href="https://github.com/wbcsd/pathfinder-use-case-001">this repository</a> and following the instructiong <a href="https://github.com/wbcsd/pathfinder-use-case-001/tree/main/endpoint">provided here</a></p>
+   <p>A Swager UI visualization is available <a href="https://api.pathfinder.sine.dev/swagger-ui">here</a>.</p>
+   <p>Bellow is a list of all endpoints provided by this example:</p>
+   <ul>
+    <li><code class="highlight">/2/auth/token</code> — implements <a href="#authenticate">§ 2.1 Authentication</a> 
+    <li><code class="highlight">/2/footprints</code> — implements <a href="#listFootprints">§ 2.2.1 ListFootprints Action</a> 
+    <li><code class="highlight">/2/footprints/<c- o>{</c->footprint-id<c- o>}</c-></code> — implements <a href="#getFootprint">§ 2.2.2 GetFootprint Action</a> 
+    <li><code class="highlight">/2//events</code> — implements <a href="#events">§ 2.3 Sending an event (”a Product Carbon Footprint was updated”)</a> 
+    <li><code class="highlight">/openapi.json/</code> — OpenAPI description file 
+    <li><code class="highlight">/swagger-ui/</code> — Swagger UI visualization 
+   </ul>
+   <p>Endpoints from Use Case 001 Specification Version 1
+/2/footprints implementing the ListFootprints action
+/2/footprints/<footprint-id> implementing the GetFootprint action
+/2/events implementing the Events action
+/2/auth/token implementing Authenticate action
+Additional endpoints are:
+/openapi.json: OpenAPI description file which is automatically generated from the types defined in api_types.rs and endpoints defined in main.rs
+Swagger UI: /swagger-ui/ if you fancy a visualization</footprint-id></p>
+   <h3 class="heading settled" data-level="2.1" id="authenticate"><span class="secno">2.1. </span><span class="content">Authentication</span><a class="self-link" href="#authenticate"></a></h3>
    <p>Authentication is made through the <code>Authenticate</code> action, in accordance with the OAuth2 Client Credentials Grant (<a href="https://datatracker.ietf.org/doc/html/rfc6749#section-4.4">RFC6749 4.4</a>).</p>
    <p>The API exposes the <code>/2/auth/token</code> endpoint, to which a <code>POST</code> call must be made, with the following credentials:</p>
    <p>The response to a successful call will be a <code>JSON</code> object with three fields: <code>access_token</code>, <code>token_type</code>, and <code>scope</code>.</p>
@@ -2290,12 +2320,66 @@ A <code>GET</code> call has to be made to the <code>/2/footprints/&lt;footprint-
 </pre>
     </dl>
    </div>
-   <h3 class="heading settled" data-level="2.3" id="sending-an-event-a-product-carbon-footprint-was-updated"><span class="secno">2.3. </span><span class="content">Sending an event (”a Product Carbon Footprint was updated”)</span><a class="self-link" href="#sending-an-event-a-product-carbon-footprint-was-updated"></a></h3>
-   <aside> ❗ this is optional functionality </aside>
+   <h3 class="heading settled" data-level="2.3" id="events"><span class="secno">2.3. </span><span class="content">Sending an event (”a Product Carbon Footprint was updated”)</span><a class="self-link" href="#events"></a></h3>
+   <p>While through the <code>ListFootprints</code> and <code>GetFootprint</code> actions the authenticated user requests data from the example API,
+through the <code>Events</code> action the authenticated user notifies the example API about some update in data they (i.e., the user)
+own. Hence, in what concerns this specific action, the example API plays the role of <code>Data Recipient</code> rather than that of <code>Data Owner</code>.</p>
+   <p>To notify the example API of an update in a certain PCF, the authenticated user must make a <code>POST</code> call to the <code>/2/events</code> endpoint,
+sending a <code>PF Update Event</code> (https://wbcsd.github.io/data-exchange-protocol/v2/#pf-update-event) as its body.</p>
+   <p>The syntax of <code>PF Update Event</code> and its fields can be found <a href="https://wbcsd.github.io/data-exchange-protocol/v2/#api-action-events-case-1">here</a></p>
+   <p>The response to a successfull call to the <code>/2/events</code> endpoint will have the HTTP Status Code 200 and <strong>an empty body</strong>.</p>
+   <p class="note" role="note"><span class="marker">Note:</span> This functionality is optional. See <a href="#optional">§ 3.2 Optional (”nice to haves”) functionality</a> for more details.</p>
+   <div class="def">
+    <dl>
+     <dt data-md>Action
+     <dd data-md>
+      <p><code>ListFootprints</code></p>
+     <dt data-md>Endpoint
+     <dd data-md>
+      <p><code>/2/footprints</code></p>
+     <dt data-md>Options
+     <dd data-md>
+      <p><code>limit=&lt;integer></code>, <code>filter=&lt;string></code></p>
+     <dt data-md>HTTP request
+     <dd data-md>
+      <p><code>GET</code></p>
+     <dt data-md>Authorization
+     <dd data-md>
+      <p><code>Bearer</code></p>
+     <dt data-md>Example request (cURL)
+     <dd data-md>
+<pre class="highlight">curl -X <c- t>'POST'</c-> <c- se>\</c->
+  <c- t>'https://api.pathfinder.sine.dev/2/events'</c-> <c- se>\</c->
+  -H <c- t>'accept: */*'</c-> <c- se>\</c->
+  -H <c- t>'Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImhlbGxvIn0.wZPjxQz1wI25fIe0Oz4w5Y2g8UD_dMz6Wd-Aegg8HMM'</c-> <c- se>\</c->
+  -H <c- t>'Content-Type: application/json'</c-> <c- se>\</c->
+  -d <c- t>'{</c->
+<c- t>        "specversion": "1.0.0",</c->
+<c- t>        "id": "1234",</c->
+<c- t>        "source":"http://localhost:3000",</c->
+<c- t>        "time": "2023-04-12T14:27:58.535Z",</c->
+<c- t>        "type": "org.wbcsd.pathfinder.ProductFootprint.Published.v1",</c->
+<c- t>        "data": {</c->
+<c- t>            "pfIds": [</c->
+<c- t>                "f4b1225a-bd44-4c8e-861d-079e4e1dfd69"</c->
+<c- t>            ]</c->
+<c- t>        }</c->
+<c- t>    }'</c->
+</pre>
+    </dl>
+   </div>
    <h2 class="heading settled" data-level="3" id="overview-of-the-technical-specification"><span class="secno">3. </span><span class="content">Overview of the Technical Specification</span><a class="self-link" href="#overview-of-the-technical-specification"></a></h2>
-   <h3 class="heading settled" data-level="3.1" id="overview"><span class="secno">3.1. </span><span class="content">Overview</span><a class="self-link" href="#overview"></a></h3>
-   <h3 class="heading settled" data-level="3.2" id="required-must-haves-functionality-for-conformance"><span class="secno">3.2. </span><span class="content">Required (”must haves”) functionality for conformance</span><a class="self-link" href="#required-must-haves-functionality-for-conformance"></a></h3>
-   <h3 class="heading settled" data-level="3.3" id="optional-nice-to-haves-functionality"><span class="secno">3.3. </span><span class="content">Optional (”nice to haves”) functionality</span><a class="self-link" href="#optional-nice-to-haves-functionality"></a></h3>
+   <p>The <a href="https://wbcsd.github.io/data-exchange-protocol/v2/#pf-properties">Technical Specification</a> specifies a data model for GHG emission data at product level based on the Pathfinder Framework Version 2, and a protocol for interoperable exchange of GHG emission data at product level.</p>
+   <h3 class="heading settled" data-level="3.1" id="required-must-haves-functionality-for-conformance"><span class="secno">3.1. </span><span class="content">Required (”must haves”) functionality for conformance</span><a class="self-link" href="#required-must-haves-functionality-for-conformance"></a></h3>
+   <h4 class="heading settled" data-level="3.1.1" id="authenticate①"><span class="secno">3.1.1. </span><span class="content"><code>Authenticate</code></span><a class="self-link" href="#authenticate①"></a></h4>
+   <h5 class="heading settled" data-level="3.1.1.1" id="request-syntax"><span class="secno">3.1.1.1. </span><span class="content">Request syntax</span><a class="self-link" href="#request-syntax"></a></h5>
+   <h4 class="heading settled" data-level="3.1.2" id="listfootprints"><span class="secno">3.1.2. </span><span class="content"><code>ListFootprints</code></span><a class="self-link" href="#listfootprints"></a></h4>
+   <h4 class="heading settled" data-level="3.1.3" id="getfootprint"><span class="secno">3.1.3. </span><span class="content"><code>GetFootprint</code></span><a class="self-link" href="#getfootprint"></a></h4>
+   <h3 class="heading settled" data-level="3.2" id="optional"><span class="secno">3.2. </span><span class="content">Optional (”nice to haves”) functionality</span><a class="self-link" href="#optional"></a></h3>
+   <h4 class="heading settled" data-level="3.2.1" id="events①"><span class="secno">3.2.1. </span><span class="content"><code>Events</code></span><a class="self-link" href="#events①"></a></h4>
+   <p>A data owner CAN notify a data recipient about changes to 1 or more product footprints by sending a PF Update Event to the data recipient’s Action Events endpoint.</p>
+   <p>A data recipient upon receiving such an PF Update Event CAN retrieve the product footprints through the Action GetFootprint.</p>
+   <p>https://wbcsd.github.io/data-exchange-protocol/v2/#pf-update-event</p>
    <p>#</p>
    <h2 class="heading settled" data-level="4" id="appendix"><span class="secno">4. </span><span class="content">Appendix</span><a class="self-link" href="#appendix"></a></h2>
    <h3 class="heading settled" data-level="4.1" id="example-payload"><span class="secno">4.1. </span><span class="content">Example Payload</span><a class="self-link" href="#example-payload"></a></h3>
