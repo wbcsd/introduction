@@ -60,39 +60,181 @@ A Swagger UI visualization is available at the `swagger-ui` endpoint (hence, at 
 
 ## Authentication
 
-Authentication to the example API is made in accordance with the OAuth2 Client Credentials Grant ([RFC6749 4.4](https://datatracker.ietf.org/doc/html/rfc6749#section-4.4)).
+Authentication is made through the `Authenticate` action, in accordance with the OAuth2 Client Credentials Grant ([RFC6749 4.4](https://datatracker.ietf.org/doc/html/rfc6749#section-4.4)).
 
 The API exposes the `/2/auth/token` endpoint, to which a `POST` call must be made, with the following credentials:
 
-<pre highlight='markdown'>
-id: hello
-secret: pathfinder
+The response to a successful call will be a `JSON` object with three fields: `access_token`, `token_type`, and `scope`.
+
+<div class='def'>
+: Action
+:: `Authenticate`
+: Endpoint
+:: `/2/auth/token`
+: HTTP request
+:: `POST`
+: Credentials
+:: id: `hello`, secret: `pathfinder`
+: Example request (cURL)
+:: <pre highlight='sh'>
+curl -X POST --user hello:pathfinder \
+-H "Content-Type: application/x-www-form-urlencoded" \
+-d "grant_type=client_credentials"  https://api.pathfinder.sine.dev/2/auth/token
 </pre>
+: Example response
+:: <pre highlight='json'>{
+        "access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImhlbGxvIn0.wZPjxQz1wI25fIe0Oz4w5Y2g8UD_dMz6Wd-Aegg8HMM",
+        "token_type": "bearer",
+        "scope": null
+    }
+    </pre>
+</div>
 
 If using Swagger, click the `Authorize` button on the top-right and then, in the modal, use `hello` as the `client_id` and `pathfinder` as the `client_secret`.
 If using Postman, use `hello` as the username and `pathfinder` as the password.
 
-This call can also be made with `curl`, running the following command:
-<pre highlight='sh'>
-curl -v -X POST --user hello:pathfinder \
--H "Content-Type: application/x-www-form-urlencoded" \
--d "grant_type=client_credentials" \
-https://api.pathfinder.sine.dev/2/auth/token
-</pre>
-
-Which will return
-
-<pre class='code' highlight='json'>
-{
-    "access_token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImhlbGxvIn0.wZPjxQz1wI25fIe0Oz4w5Y2g8UD_dMz6Wd-Aegg8HMM",
-    "token_type":"bearer",
-    "scope":null
-}
-</pre>
-
 This access token must be used in other calls to the API.
 
 ## Fetching Data
+
+
+Fetching data from the example API can be made through two actions:
+
+: [[#listFootprints]]
+:: enumerates the `ProductFootprints` available to the authenticated user;
+: [[#getFootprint]]
+:: retrieves a single ProductFootprint given its unique ID.
+
+### `ListFootprints` Action ### {#listFootprints}
+
+The `ListFootprints` action provides the authenticated a list of the `ProductFootprints` available to them, throught the `/2/footprints` endpoint.
+
+A `GET` request to this endpoint can be made wih two optional parameters: `limit`, which takes an integer, and `filter`, which takes a string.
+If left blank, the response will display all `ProductFootprints` available to the user.
+
+The response to a successful call will be a `JSON` object with one field: an array of `ProductFootprint` objects.
+
+<div class='def'>
+: Action
+:: `ListFootprints`
+: Endpoint
+:: `/2/footprints`
+: Options
+:: `limit=<integer>`, `filter=<string>`
+: HTTP request
+:: `GET`
+: Authorization
+:: `Bearer`
+: Example request (cURL)
+:: <pre highlight="sh">
+curl -X 'GET' \
+  'https://api.pathfinder.sine.dev/2/footprints?limit=2&filter=carbon' \
+  -H 'accept: application/json' \
+  -H 'Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImhlbGxvIn0.wZPjxQz1wI25fIe0Oz4w5Y2g8UD_dMz6Wd-Aegg8HMM'
+</pre>
+: Example response
+:: <pre highlight='json'>{
+        "data":
+            [
+                {"id":"d9be4477-e351-45b3-acd9-e1da05e6f633",
+                "specVersion":"1.0.0","version":0,
+                "created":"2022-05-22T21:47:32Z",
+                ...
+                },
+                {"id":"c3028ee9-d595-4779-a73a-290bfa7505d6",
+                "specVersion":"1.0.0","version":0,
+                "created":"2022-05-22T21:47:32Z",
+                ...
+                }
+            ]
+    }
+    </pre>
+    <p class='note'>Note: The actual response contains an array of `ProductFootprint`s which are omitted for brevity here.
+    See [[#getFootprint]] for a complete `ProductFootprint`.
+</p>
+</div>
+
+### `GetFootprint` Action ### {#getFootprint}
+
+The `GetFootprint` action provides the authenticated user a specific `ProductFootprint`, identified by its unique `id`.
+Typically this is performed to get the latest version of that `ProductFootprint`.
+A `GET` call has to be made to the `/2/footprints/<footprint-id>` endpoint.
+
+The response to a successful call will be a `JSON` object with one field: an array with one `ProductFootprint` object.
+
+<div class='def'>
+: Action
+:: `GetFootprint`
+: Endpoint
+:: `/2/footprints/<footprint-id>`
+: HTTP request
+:: `GET`
+: Authorization
+:: `Bearer`
+: Example request (cURL)
+:: <pre highlight="sh">
+curl -X 'GET' \
+  'https://api.pathfinder.sine.dev/2/footprints/d9be4477-e351-45b3-acd9-e1da05e6f633' \
+  -H 'accept: application/json' \
+  -H 'Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImhlbGxvIn0.wZPjxQz1wI25fIe0Oz4w5Y2g8UD_dMz6Wd-Aegg8HMM'
+</pre>
+: Example response
+:: <pre highlight='json'>{
+        "data": {
+            "id": "d9be4477-e351-45b3-acd9-e1da05e6f633",
+            "specVersion": "1.0.0",
+            "version": 0,
+            "created": "2022-05-22T21:47:32Z",
+            "companyName": "My Corp",
+            "companyIds": [
+                "urn:uuid:51131FB5-42A2-4267-A402-0ECFEFAD1619",
+                "urn:epc:id:sgln:4063973.00000.8"
+            ],
+            "productDescription": "Cote'd Or Ethanol",
+            "productIds": [
+                "urn:gtin:4712345060507"
+            ],
+            "productCategoryCpc": "3342",
+            "productNameCompany": "Green Ethanol",
+            "comment": "",
+            "pcf": {
+                "declaredUnit": "liter",
+                "unitaryProductAmount": "12.0",
+                "fossilGhgEmissions": "0.123",
+                "biogenicEmissions": {
+                    "landUseEmissions": "0.001",
+                    "otherEmissions": "0"
+                },
+                "biogenicCarbonContent": "0.0",
+                "reportingPeriodStart": "2021-01-01T00:00:00Z",
+                "reportingPeriodEnd": "2022-01-01T00:00:00Z",
+                "geographyCountry": "FR",
+                "primaryDataShare": 56.12,
+                "emissionFactorSources": [
+                    {
+                        "name": "Ecoinvent",
+                        "version":
+                        "1.2.3"
+                    }
+                ],
+                "boundaryProcessesDescription": "End-of-life included",
+                "crossSectoralStandardsUsed": [
+                    "GHG Protocol Product standard"
+                ],
+                "productOrSectorSpecificRules": [
+                    {
+                        "operator": "EPD International",
+                        "ruleNames": [
+                            "ABC 2021"
+                        ]
+                    }
+                ]
+            }
+        }
+    }
+    </pre>
+</div>
+
 
 ## Sending an event (”a Product Carbon Footprint was updated”)
 

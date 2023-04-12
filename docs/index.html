@@ -1489,7 +1489,7 @@ Possible extra rowspan handling
 </style>
   <meta content="Bikeshed version d9bd89757, updated Thu Mar 23 10:06:53 2023 -0700" name="generator">
   <link href="https://wbcsd.github.io/introduction/" rel="canonical">
-  <meta content="94c7d41154fea188d29d5c97e543acc5e07a5b7d" name="document-revision">
+  <meta content="95e63fd8c8ea2f6a6cd00f5c8399ab0b361b50c8" name="document-revision">
 <style>/* style-autolinks */
 .css.css, .property.property, .descriptor.descriptor {
     color: var(--a-normal-text);
@@ -2018,7 +2018,7 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
   <div class="head">
    <p data-fill-with="logo"></p>
    <h1 class="p-name no-ref" id="title">PACT Initiative Developer Documentation</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="profile-and-date"><span class="content">Living Document, <time class="dt-updated" datetime="2023-04-11">11 April 2023</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="profile-and-date"><span class="content">Living Document, <time class="dt-updated" datetime="2023-04-12">12 April 2023</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
@@ -2057,7 +2057,12 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
      <a href="#example-api"><span class="secno">2</span> <span class="content">Example API</span></a>
      <ol class="toc">
       <li><a href="#authentication"><span class="secno">2.1</span> <span class="content">Authentication</span></a>
-      <li><a href="#fetching-data"><span class="secno">2.2</span> <span class="content">Fetching Data</span></a>
+      <li>
+       <a href="#fetching-data"><span class="secno">2.2</span> <span class="content">Fetching Data</span></a>
+       <ol class="toc">
+        <li><a href="#listFootprints"><span class="secno">2.2.1</span> <span class="content"><code>ListFootprints</code> Action</span></a>
+        <li><a href="#getFootprint"><span class="secno">2.2.2</span> <span class="content"><code>GetFootprint</code> Action</span></a>
+       </ol>
       <li><a href="#sending-an-event-a-product-carbon-footprint-was-updated"><span class="secno">2.3</span> <span class="content">Sending an event (”a Product Carbon Footprint was updated”)</span></a>
      </ol>
     <li>
@@ -2104,28 +2109,187 @@ You can either refer to the technical sepcifications, or follow the instructions
    <p>This document will always use the online demo version, but everything will apply locally if <code>https//api.pathfinder.sine.dev</code> is replaced by your local domain (e.g. <code>http://127.0.0.1:8000</code>).</p>
    <p>A Swagger UI visualization is available at the <code>swagger-ui</code> endpoint (hence, at https://api.pathfinder.sine.dev/swagger-ui).</p>
    <h3 class="heading settled" data-level="2.1" id="authentication"><span class="secno">2.1. </span><span class="content">Authentication</span><a class="self-link" href="#authentication"></a></h3>
-   <p>Authentication to the example API is made in accordance with the OAuth2 Client Credentials Grant (<a href="https://datatracker.ietf.org/doc/html/rfc6749#section-4.4">RFC6749 4.4</a>).</p>
+   <p>Authentication is made through the <code>Authenticate</code> action, in accordance with the OAuth2 Client Credentials Grant (<a href="https://datatracker.ietf.org/doc/html/rfc6749#section-4.4">RFC6749 4.4</a>).</p>
    <p>The API exposes the <code>/2/auth/token</code> endpoint, to which a <code>POST</code> call must be made, with the following credentials:</p>
-<pre class="highlight">id: hello
-secret: pathfinder
-</pre>
-   <p>If using Swagger, click the <code>Authorize</code> button on the top-right and then, in the modal, use <code>hello</code> as the <code>client_id</code> and <code>pathfinder</code> as the <code>client_secret</code>.
-If using Postman, use <code>hello</code> as the username and <code>pathfinder</code> as the password.</p>
-   <p>This call can also be made with <code>curl</code>, running the following command:</p>
-<pre class="highlight">curl -v -X POST --user hello:pathfinder <c- se>\</c->
+   <p>The response to a successful call will be a <code>JSON</code> object with three fields: <code>access_token</code>, <code>token_type</code>, and <code>scope</code>.</p>
+   <div class="def">
+    <dl>
+     <dt data-md>Action
+     <dd data-md>
+      <p><code>Authenticate</code></p>
+     <dt data-md>Endpoint
+     <dd data-md>
+      <p><code>/2/auth/token</code></p>
+     <dt data-md>HTTP request
+     <dd data-md>
+      <p><code>POST</code></p>
+     <dt data-md>Credentials
+     <dd data-md>
+      <p>id: <code>hello</code>, secret: <code>pathfinder</code></p>
+     <dt data-md>Example request (cURL)
+     <dd data-md>
+<pre class="highlight">curl -X POST --user hello:pathfinder <c- se>\</c->
 -H <c- u>"Content-Type: application/x-www-form-urlencoded"</c-> <c- se>\</c->
--d <c- u>"grant_type=client_credentials"</c-> <c- se>\</c->
-https://api.pathfinder.sine.dev/2/auth/token
+-d <c- u>"grant_type=client_credentials"</c->  https://api.pathfinder.sine.dev/2/auth/token
 </pre>
-   <p>Which will return</p>
-<pre class="code highlight"><c- p>{</c->
-    <c- f>"access_token"</c-><c- p>:</c-><c- u>"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImhlbGxvIn0.wZPjxQz1wI25fIe0Oz4w5Y2g8UD_dMz6Wd-Aegg8HMM"</c-><c- p>,</c->
-    <c- f>"token_type"</c-><c- p>:</c-><c- u>"bearer"</c-><c- p>,</c->
-    <c- f>"scope"</c-><c- p>:</c-><c- kc>null</c->
+     <dt data-md>Example response
+     <dd data-md>
+<pre class="highlight"><c- p>{</c->
+    <c- f>"access_token"</c-><c- p>:</c-> <c- u>"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImhlbGxvIn0.wZPjxQz1wI25fIe0Oz4w5Y2g8UD_dMz6Wd-Aegg8HMM"</c-><c- p>,</c->
+    <c- f>"token_type"</c-><c- p>:</c-> <c- u>"bearer"</c-><c- p>,</c->
+    <c- f>"scope"</c-><c- p>:</c-> <c- kc>null</c->
 <c- p>}</c->
 </pre>
+    </dl>
+   </div>
+   <p>If using Swagger, click the <code>Authorize</code> button on the top-right and then, in the modal, use <code>hello</code> as the <code>client_id</code> and <code>pathfinder</code> as the <code>client_secret</code>.
+If using Postman, use <code>hello</code> as the username and <code>pathfinder</code> as the password.</p>
    <p>This access token must be used in other calls to the API.</p>
    <h3 class="heading settled" data-level="2.2" id="fetching-data"><span class="secno">2.2. </span><span class="content">Fetching Data</span><a class="self-link" href="#fetching-data"></a></h3>
+   <p>Fetching data from the example API can be made through two actions:</p>
+   <dl>
+    <dt data-md><a href="#listFootprints">§ 2.2.1 ListFootprints Action</a>
+    <dd data-md>
+     <p>enumerates the <code>ProductFootprints</code> available to the authenticated user;</p>
+    <dt data-md><a href="#getFootprint">§ 2.2.2 GetFootprint Action</a>
+    <dd data-md>
+     <p>retrieves a single ProductFootprint given its unique ID.</p>
+   </dl>
+   <h4 class="heading settled" data-level="2.2.1" id="listFootprints"><span class="secno">2.2.1. </span><span class="content"><code>ListFootprints</code> Action</span><a class="self-link" href="#listFootprints"></a></h4>
+   <p>The <code>ListFootprints</code> action provides the authenticated a list of the <code>ProductFootprints</code> available to them, throught the <code>/2/footprints</code> endpoint.</p>
+   <p>A <code>GET</code> request to this endpoint can be made wih two optional parameters: <code>limit</code>, which takes an integer, and <code>filter</code>, which takes a string.
+If left blank, the response will display all <code>ProductFootprints</code> available to the user.</p>
+   <p>The response to a successful call will be a <code>JSON</code> object with one field: an array of <code>ProductFootprint</code> objects.</p>
+   <div class="def">
+    <dl>
+     <dt data-md>Action
+     <dd data-md>
+      <p><code>ListFootprints</code></p>
+     <dt data-md>Endpoint
+     <dd data-md>
+      <p><code>/2/footprints</code></p>
+     <dt data-md>Options
+     <dd data-md>
+      <p><code>limit=&lt;integer></code>, <code>filter=&lt;string></code></p>
+     <dt data-md>HTTP request
+     <dd data-md>
+      <p><code>GET</code></p>
+     <dt data-md>Authorization
+     <dd data-md>
+      <p><code>Bearer</code></p>
+     <dt data-md>Example request (cURL)
+     <dd data-md>
+<pre class="highlight">curl -X <c- t>'GET'</c-> <c- se>\</c->
+  <c- t>'https://api.pathfinder.sine.dev/2/footprints?limit=2&amp;filter=carbon'</c-> <c- se>\</c->
+  -H <c- t>'accept: application/json'</c-> <c- se>\</c->
+  -H <c- t>'Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImhlbGxvIn0.wZPjxQz1wI25fIe0Oz4w5Y2g8UD_dMz6Wd-Aegg8HMM'</c->
+</pre>
+     <dt data-md>Example response
+     <dd data-md>
+<pre class="highlight"><c- p>{</c->
+    <c- f>"data"</c-><c- p>:</c->
+        <c- p>[</c->
+            <c- p>{</c-><c- f>"id"</c-><c- p>:</c-><c- u>"d9be4477-e351-45b3-acd9-e1da05e6f633"</c-><c- p>,</c->
+            <c- f>"specVersion"</c-><c- p>:</c-><c- u>"1.0.0"</c-><c- p>,</c-><c- f>"version"</c-><c- p>:</c-><c- mi>0</c-><c- p>,</c->
+            <c- f>"created"</c-><c- p>:</c-><c- u>"2022-05-22T21:47:32Z"</c-><c- p>,</c->
+            ...
+            <c- p>},</c->
+            <c- p>{</c-><c- f>"id"</c-><c- p>:</c-><c- u>"c3028ee9-d595-4779-a73a-290bfa7505d6"</c-><c- p>,</c->
+            <c- f>"specVersion"</c-><c- p>:</c-><c- u>"1.0.0"</c-><c- p>,</c-><c- f>"version"</c-><c- p>:</c-><c- mi>0</c-><c- p>,</c->
+            <c- f>"created"</c-><c- p>:</c-><c- u>"2022-05-22T21:47:32Z"</c-><c- p>,</c->
+            ...
+            <c- p>}</c->
+        <c- p>]</c->
+<c- p>}</c->
+</pre>
+      <p class="note" role="note">Note: The actual response contains an array of <code>ProductFootprint</code>s which are omitted for brevity here.
+See <a href="#getFootprint">§ 2.2.2 GetFootprint Action</a> for a complete <code>ProductFootprint</code>. </p>
+    </dl>
+   </div>
+   <h4 class="heading settled" data-level="2.2.2" id="getFootprint"><span class="secno">2.2.2. </span><span class="content"><code>GetFootprint</code> Action</span><a class="self-link" href="#getFootprint"></a></h4>
+   <p>The <code>GetFootprint</code> action provides the authenticated user a specific <code>ProductFootprint</code>, identified by its unique <code>id</code>.
+Typically this is performed to get the latest version of that <code>ProductFootprint</code>.
+A <code>GET</code> call has to be made to the <code>/2/footprints/&lt;footprint-id></code> endpoint.</p>
+   <p>The response to a successful call will be a <code>JSON</code> object with one field: an array with one <code>ProductFootprint</code> object.</p>
+   <div class="def">
+    <dl>
+     <dt data-md>Action
+     <dd data-md>
+      <p><code>GetFootprint</code></p>
+     <dt data-md>Endpoint
+     <dd data-md>
+      <p><code>/2/footprints/&lt;footprint-id></code></p>
+     <dt data-md>HTTP request
+     <dd data-md>
+      <p><code>GET</code></p>
+     <dt data-md>Authorization
+     <dd data-md>
+      <p><code>Bearer</code></p>
+     <dt data-md>Example request (cURL)
+     <dd data-md>
+<pre class="highlight">curl -X <c- t>'GET'</c-> <c- se>\</c->
+  <c- t>'https://api.pathfinder.sine.dev/2/footprints/d9be4477-e351-45b3-acd9-e1da05e6f633'</c-> <c- se>\</c->
+  -H <c- t>'accept: application/json'</c-> <c- se>\</c->
+  -H <c- t>'Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImhlbGxvIn0.wZPjxQz1wI25fIe0Oz4w5Y2g8UD_dMz6Wd-Aegg8HMM'</c->
+</pre>
+     <dt data-md>Example response
+     <dd data-md>
+<pre class="highlight"><c- p>{</c->
+    <c- f>"data"</c-><c- p>:</c-> <c- p>{</c->
+        <c- f>"id"</c-><c- p>:</c-> <c- u>"d9be4477-e351-45b3-acd9-e1da05e6f633"</c-><c- p>,</c->
+        <c- f>"specVersion"</c-><c- p>:</c-> <c- u>"1.0.0"</c-><c- p>,</c->
+        <c- f>"version"</c-><c- p>:</c-> <c- mi>0</c-><c- p>,</c->
+        <c- f>"created"</c-><c- p>:</c-> <c- u>"2022-05-22T21:47:32Z"</c-><c- p>,</c->
+        <c- f>"companyName"</c-><c- p>:</c-> <c- u>"My Corp"</c-><c- p>,</c->
+        <c- f>"companyIds"</c-><c- p>:</c-> <c- p>[</c->
+            <c- u>"urn:uuid:51131FB5-42A2-4267-A402-0ECFEFAD1619"</c-><c- p>,</c->
+            <c- u>"urn:epc:id:sgln:4063973.00000.8"</c->
+        <c- p>],</c->
+        <c- f>"productDescription"</c-><c- p>:</c-> <c- u>"Cote’d Or Ethanol"</c-><c- p>,</c->
+        <c- f>"productIds"</c-><c- p>:</c-> <c- p>[</c->
+            <c- u>"urn:gtin:4712345060507"</c->
+        <c- p>],</c->
+        <c- f>"productCategoryCpc"</c-><c- p>:</c-> <c- u>"3342"</c-><c- p>,</c->
+        <c- f>"productNameCompany"</c-><c- p>:</c-> <c- u>"Green Ethanol"</c-><c- p>,</c->
+        <c- f>"comment"</c-><c- p>:</c-> <c- u>""</c-><c- p>,</c->
+        <c- f>"pcf"</c-><c- p>:</c-> <c- p>{</c->
+            <c- f>"declaredUnit"</c-><c- p>:</c-> <c- u>"liter"</c-><c- p>,</c->
+            <c- f>"unitaryProductAmount"</c-><c- p>:</c-> <c- u>"12.0"</c-><c- p>,</c->
+            <c- f>"fossilGhgEmissions"</c-><c- p>:</c-> <c- u>"0.123"</c-><c- p>,</c->
+            <c- f>"biogenicEmissions"</c-><c- p>:</c-> <c- p>{</c->
+                <c- f>"landUseEmissions"</c-><c- p>:</c-> <c- u>"0.001"</c-><c- p>,</c->
+                <c- f>"otherEmissions"</c-><c- p>:</c-> <c- u>"0"</c->
+            <c- p>},</c->
+            <c- f>"biogenicCarbonContent"</c-><c- p>:</c-> <c- u>"0.0"</c-><c- p>,</c->
+            <c- f>"reportingPeriodStart"</c-><c- p>:</c-> <c- u>"2021-01-01T00:00:00Z"</c-><c- p>,</c->
+            <c- f>"reportingPeriodEnd"</c-><c- p>:</c-> <c- u>"2022-01-01T00:00:00Z"</c-><c- p>,</c->
+            <c- f>"geographyCountry"</c-><c- p>:</c-> <c- u>"FR"</c-><c- p>,</c->
+            <c- f>"primaryDataShare"</c-><c- p>:</c-> <c- mf>56.12</c-><c- p>,</c->
+            <c- f>"emissionFactorSources"</c-><c- p>:</c-> <c- p>[</c->
+                <c- p>{</c->
+                    <c- f>"name"</c-><c- p>:</c-> <c- u>"Ecoinvent"</c-><c- p>,</c->
+                    <c- f>"version"</c-><c- p>:</c->
+                    <c- u>"1.2.3"</c->
+                <c- p>}</c->
+            <c- p>],</c->
+            <c- f>"boundaryProcessesDescription"</c-><c- p>:</c-> <c- u>"End-of-life included"</c-><c- p>,</c->
+            <c- f>"crossSectoralStandardsUsed"</c-><c- p>:</c-> <c- p>[</c->
+                <c- u>"GHG Protocol Product standard"</c->
+            <c- p>],</c->
+            <c- f>"productOrSectorSpecificRules"</c-><c- p>:</c-> <c- p>[</c->
+                <c- p>{</c->
+                    <c- f>"operator"</c-><c- p>:</c-> <c- u>"EPD International"</c-><c- p>,</c->
+                    <c- f>"ruleNames"</c-><c- p>:</c-> <c- p>[</c->
+                        <c- u>"ABC 2021"</c->
+                    <c- p>]</c->
+                <c- p>}</c->
+            <c- p>]</c->
+        <c- p>}</c->
+    <c- p>}</c->
+<c- p>}</c->
+</pre>
+    </dl>
+   </div>
    <h3 class="heading settled" data-level="2.3" id="sending-an-event-a-product-carbon-footprint-was-updated"><span class="secno">2.3. </span><span class="content">Sending an event (”a Product Carbon Footprint was updated”)</span><a class="self-link" href="#sending-an-event-a-product-carbon-footprint-was-updated"></a></h3>
    <aside> ❗ this is optional functionality </aside>
    <h2 class="heading settled" data-level="3" id="overview-of-the-technical-specification"><span class="secno">3. </span><span class="content">Overview of the Technical Specification</span><a class="self-link" href="#overview-of-the-technical-specification"></a></h2>
