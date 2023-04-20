@@ -1489,7 +1489,7 @@ Possible extra rowspan handling
 </style>
   <meta content="Bikeshed version d9bd89757, updated Thu Mar 23 10:06:53 2023 -0700" name="generator">
   <link href="https://wbcsd.github.io/introduction/" rel="canonical">
-  <meta content="a985dfa2132ceb570880f5ef5608a90bb784809c" name="document-revision">
+  <meta content="004fbef8a07f5a3fc12c924b5230333011578752" name="document-revision">
 <style>/* style-autolinks */
 .css.css, .property.property, .descriptor.descriptor {
     color: var(--a-normal-text);
@@ -1690,6 +1690,47 @@ figcaption {
 figcaption:not(.no-marker)::before {
     content: "Figure " counter(figure) " ";
 }
+</style>
+<style>/* style-dfn-panel */
+:root {
+    --dfnpanel-bg: #ddd;
+    --dfnpanel-text: var(--text);
+}
+.dfn-panel {
+    position: absolute;
+    z-index: 35;
+    width: 20em;
+    min-width: min-content;
+    max-width: 300px;
+    height: auto;
+    max-height: 500px;
+    overflow: auto;
+    padding: 0.5em 0.75em;
+    font: small Helvetica Neue, sans-serif, Droid Sans Fallback;
+    background: var(--dfnpanel-bg);
+    color: var(--dfnpanel-text);
+    border: outset 0.2em;
+    white-space: normal; /* in case it's moved into a pre */
+}
+.dfn-panel:not(.on) { display: none; }
+.dfn-panel * { margin: 0; padding: 0; text-indent: 0; }
+.dfn-panel > b { display: block; }
+.dfn-panel a { color: var(--dfnpanel-text); }
+.dfn-panel a:not(:hover) { text-decoration: none !important; border-bottom: none !important; }
+.dfn-panel > b + b { margin-top: 0.25em; }
+.dfn-panel ul { padding: 0; }
+.dfn-panel li { list-style: inside; }
+.dfn-panel.activated {
+    display: inline-block;
+    position: fixed;
+    left: .5em;
+    bottom: 2em;
+    margin: 0 auto;
+    max-width: calc(100vw - 1.5em - .4em - .5em);
+    max-height: 30vh;
+}
+
+.dfn-paneled { cursor: pointer; }
 </style>
 <style>/* style-issues */
 a[href].issue-return {
@@ -2018,7 +2059,7 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
   <div class="head">
    <p data-fill-with="logo"></p>
    <h1 class="p-name no-ref" id="title">PACT Initiative Developer Documentation</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="profile-and-date"><span class="content">Living Document, <time class="dt-updated" datetime="2023-04-12">12 April 2023</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="profile-and-date"><span class="content">Living Document, <time class="dt-updated" datetime="2023-04-20">20 April 2023</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
@@ -2056,41 +2097,72 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
     <li>
      <a href="#example-api---plug-and-play"><span class="secno">2</span> <span class="content">Example API - Plug and Play</span></a>
      <ol class="toc">
-      <li><a href="#authenticate"><span class="secno">2.1</span> <span class="content">Authentication</span></a>
+      <li><a href="#authenticate-example"><span class="secno">2.1</span> <span class="content">Authentication</span></a>
       <li>
        <a href="#fetching-data"><span class="secno">2.2</span> <span class="content">Fetching Data</span></a>
        <ol class="toc">
-        <li><a href="#listFootprints"><span class="secno">2.2.1</span> <span class="content"><code>ListFootprints</code> Action</span></a>
-        <li><a href="#getFootprint"><span class="secno">2.2.2</span> <span class="content"><code>GetFootprint</code> Action</span></a>
+        <li><a href="#listFootprints-example"><span class="secno">2.2.1</span> <span class="content"><code>ListFootprints</code> Action</span></a>
+        <li><a href="#getFootprint-example"><span class="secno">2.2.2</span> <span class="content"><code>GetFootprint</code> Action</span></a>
        </ol>
-      <li><a href="#events"><span class="secno">2.3</span> <span class="content">Sending an event (”a Product Carbon Footprint was updated”)</span></a>
+      <li><a href="#events-example"><span class="secno">2.3</span> <span class="content">Sending an event</span></a>
      </ol>
     <li>
      <a href="#overview-of-the-technical-specification"><span class="secno">3</span> <span class="content">Overview of the Technical Specification</span></a>
      <ol class="toc">
       <li>
-       <a href="#required-must-haves-functionality-for-conformance"><span class="secno">3.1</span> <span class="content">Required (”must haves”) functionality for conformance</span></a>
+       <a href="#mandatory-functionality"><span class="secno">3.1</span> <span class="content">Mandatory Functionality</span></a>
        <ol class="toc">
         <li>
-         <a href="#authenticate①"><span class="secno">3.1.1</span> <span class="content"><code>Authenticate</code></span></a>
+         <a href="#authenticate"><span class="secno">3.1.1</span> <span class="content"><code>Authenticate</code></span></a>
          <ol class="toc">
-          <li><a href="#request-syntax"><span class="secno">3.1.1.1</span> <span class="content">Request syntax</span></a>
+          <li><a href="#request-syntax-http-11"><span class="secno">3.1.1.1</span> <span class="content">Request Syntax (HTTP/1.1)</span></a>
+          <li><a href="#response-syntax"><span class="secno">3.1.1.2</span> <span class="content">Response Syntax</span></a>
          </ol>
-        <li><a href="#listfootprints"><span class="secno">3.1.2</span> <span class="content"><code>ListFootprints</code></span></a>
-        <li><a href="#getfootprint"><span class="secno">3.1.3</span> <span class="content"><code>GetFootprint</code></span></a>
+        <li>
+         <a href="#listFootprints"><span class="secno">3.1.2</span> <span class="content"><code>ListFootprints</code></span></a>
+         <ol class="toc">
+          <li><a href="#request-syntax-http-11①"><span class="secno">3.1.2.1</span> <span class="content">Request Syntax (HTTP/1.1)</span></a>
+          <li><a href="#response-syntax①"><span class="secno">3.1.2.2</span> <span class="content">Response Syntax</span></a>
+         </ol>
+        <li>
+         <a href="#getFootprint"><span class="secno">3.1.3</span> <span class="content"><code>GetFootprint</code></span></a>
+         <ol class="toc">
+          <li><a href="#request-syntax-http-11②"><span class="secno">3.1.3.1</span> <span class="content">Request Syntax (HTTP/1.1)</span></a>
+          <li><a href="#response-syntax②"><span class="secno">3.1.3.2</span> <span class="content">Response Syntax</span></a>
+         </ol>
        </ol>
       <li>
-       <a href="#optional"><span class="secno">3.2</span> <span class="content">Optional (”nice to haves”) functionality</span></a>
+       <a href="#optional-functionality"><span class="secno">3.2</span> <span class="content">Optional functionality</span></a>
        <ol class="toc">
-        <li><a href="#events①"><span class="secno">3.2.1</span> <span class="content"><code>Events</code></span></a>
+        <li>
+         <a href="#events"><span class="secno">3.2.1</span> <span class="content"><code>Events</code></span></a>
+         <ol class="toc">
+          <li><a href="#request-syntax-http-11③"><span class="secno">3.2.1.1</span> <span class="content">Request Syntax (HTTP/1.1)</span></a>
+          <li><a href="#response-syntax③"><span class="secno">3.2.1.2</span> <span class="content">Response Syntax</span></a>
+         </ol>
        </ol>
+      <li><a href="#error-responses"><span class="secno">3.3</span> <span class="content">Error Responses</span></a>
      </ol>
     <li>
      <a href="#appendix"><span class="secno">4</span> <span class="content">Appendix</span></a>
      <ol class="toc">
-      <li><a href="#example-payload"><span class="secno">4.1</span> <span class="content">Example Payload</span></a>
-      <li><a href="#implementation-checklist-mandatory-functionality"><span class="secno">4.2</span> <span class="content">Implementation Checklist (Mandatory Functionality)</span></a>
-      <li><a href="#implementation-checklist-optional-functionality"><span class="secno">4.3</span> <span class="content">Implementation Checklist (Optional Functionality)</span></a>
+      <li><a href="#terminology"><span class="secno">4.1</span> <span class="content">Terminology</span></a>
+      <li>
+       <a href="#payload-examples"><span class="secno">4.2</span> <span class="content">Payload Examples</span></a>
+       <ol class="toc">
+        <li><a href="#productfootprint-example"><span class="secno">4.2.1</span> <span class="content"><code>ProductFootprint</code> Example</span></a>
+       </ol>
+      <li>
+       <a href="#implementation-checklist"><span class="secno">4.3</span> <span class="content">Implementation Checklist</span></a>
+       <ol class="toc">
+        <li><a href="#mandatory"><span class="secno">4.3.1</span> <span class="content">Mandatory</span></a>
+        <li><a href="#optional"><span class="secno">4.3.2</span> <span class="content">Optional</span></a>
+       </ol>
+     </ol>
+    <li>
+     <a href="#index"><span class="secno"></span> <span class="content">Index</span></a>
+     <ol class="toc">
+      <li><a href="#index-defined-here"><span class="secno"></span> <span class="content">Terms defined by this specification</span></a>
      </ol>
    </ol>
   </nav>
@@ -2107,6 +2179,9 @@ The Pathfinder Framework provides industry-agnostic methodological guidance for 
    <p>Guidance for the Accounting and Exchange of Product Life Cycle Emissions, building on existing standards and protocols, such as the GHG Protocol Product standard). See the Pathfinder Framework Version 1 for details.</p>
    <h3 class="heading settled" data-level="1.3" id="product-carbon-footprint-pcf"><span class="secno">1.3. </span><span class="content">Product Carbon Footprint (PCF)</span><a class="self-link" href="#product-carbon-footprint-pcf"></a></h3>
    <p>The carbon (equivalent) emissions relating to a product. Products can be any kind of item exchanged between entities, including “pieces”, metric or volumetric quantities of a product, etc.</p>
+   <p>Within the context of the Pathfinder Framework Data Model, a PCF is represented as a <code>ProductFootprint</code> object.
+Details about <code>ProductFootprint</code>, including a description of all its fields, can be found <a href="https://wbcsd.github.io/data-exchange-protocol/v2/#dt-pf">here</a>.
+An example of <code>ProductFootprint</code> as it occurs in an OK Response payload of an API implementing the technical specifications can be found in the <a href="#example-payload"></a> section.</p>
    <h3 class="heading settled" data-level="1.4" id="pathfinder-network"><span class="secno">1.4. </span><span class="content">Pathfinder Network</span><a class="self-link" href="#pathfinder-network"></a></h3>
    <p>TEMP:
 The Pathfinder Network is a data exchange infrastructure that enables organizations to connect across value chains and industries to share product carbon footprint data. The Network creates interoperability between technology solutions and industry-focused data exchange platforms, meaning organizations are flexible in their choice of provider. It can be seen as a sort of convener or facilitator. In the simplest of terms, we aim is to create the “internet for emissions data” – the common nexus for all organizations to connect seamlessly, exchange and derive insights from emissions data.</p>
@@ -2119,30 +2194,23 @@ You can either refer to the technical sepcifications, or follow the instructions
    <h2 class="heading settled" data-level="2" id="example-api---plug-and-play"><span class="secno">2. </span><span class="content">Example API - Plug and Play</span><a class="self-link" href="#example-api---plug-and-play"></a></h2>
    <p>The following is an example implementation of an HTTP REST API conforming to the Pathfinder <a href="https://wbcsd.github.io/data-exchange-protocol/v2/#action-authenticate">Technical Specifications</a>.</p>
    <p>A demo online version of this API is available at <a href="https://api.pathfinder.sine.dev">https://api.pathfinder.sine.dev</a> and will be used in all examples below.
-If you want to run the example API locally, you can also do so, by cloning <a href="https://github.com/wbcsd/pathfinder-use-case-001">this repository</a> and following the instructiong <a href="https://github.com/wbcsd/pathfinder-use-case-001/tree/main/endpoint">provided here</a></p>
+If you want to run the example API locally, you can also do so, by cloning <a href="https://github.com/wbcsd/pathfinder-use-case-001">this repository</a> and following the instructions <a href="https://github.com/wbcsd/pathfinder-use-case-001/tree/main/endpoint">provided here</a></p>
    <p>A Swager UI visualization is available <a href="https://api.pathfinder.sine.dev/swagger-ui">here</a>.</p>
    <p>Bellow is a list of all endpoints provided by this example:</p>
    <ul>
-    <li><code class="highlight">/2/auth/token</code> — implements <a href="#authenticate">§ 2.1 Authentication</a> 
-    <li><code class="highlight">/2/footprints</code> — implements <a href="#listFootprints">§ 2.2.1 ListFootprints Action</a> 
-    <li><code class="highlight">/2/footprints/<c- o>{</c->footprint-id<c- o>}</c-></code> — implements <a href="#getFootprint">§ 2.2.2 GetFootprint Action</a> 
-    <li><code class="highlight">/2//events</code> — implements <a href="#events">§ 2.3 Sending an event (”a Product Carbon Footprint was updated”)</a> 
-    <li><code class="highlight">/openapi.json/</code> — OpenAPI description file 
-    <li><code class="highlight">/swagger-ui/</code> — Swagger UI visualization 
+    <li><code class="highlight">/2/auth/token</code> — implements <a href="#authenticate-example">§ 2.1 Authentication</a> 
+    <li><code class="highlight">/2/footprints</code> — implements <a href="#listFootprints-example">§ 2.2.1 ListFootprints Action</a> 
+    <li><code class="highlight">/2/footprints/&lt;footprint-id></code> — implements <a href="#getFootprint-example">§ 2.2.2 GetFootprint Action</a> 
+    <li><code class="highlight">/2/events</code> — implements <a href="#events-example">§ 2.3 Sending an event</a> 
+    <li><code class="highlight">/openapi.json</code> — OpenAPI description file 
+    <li><code class="highlight">/swagger-ui</code> — Swagger UI visualization 
    </ul>
-   <p>Endpoints from Use Case 001 Specification Version 1
-/2/footprints implementing the ListFootprints action
-/2/footprints/<footprint-id> implementing the GetFootprint action
-/2/events implementing the Events action
-/2/auth/token implementing Authenticate action
-Additional endpoints are:
-/openapi.json: OpenAPI description file which is automatically generated from the types defined in api_types.rs and endpoints defined in main.rs
-Swagger UI: /swagger-ui/ if you fancy a visualization</footprint-id></p>
-   <h3 class="heading settled" data-level="2.1" id="authenticate"><span class="secno">2.1. </span><span class="content">Authentication</span><a class="self-link" href="#authenticate"></a></h3>
+   <h3 class="heading settled" data-level="2.1" id="authenticate-example"><span class="secno">2.1. </span><span class="content">Authentication</span><a class="self-link" href="#authenticate-example"></a></h3>
    <p>Authentication is made through the <code>Authenticate</code> action, in accordance with the OAuth2 Client Credentials Grant (<a href="https://datatracker.ietf.org/doc/html/rfc6749#section-4.4">RFC6749 4.4</a>).</p>
    <p>The API exposes the <code>/2/auth/token</code> endpoint, to which a <code>POST</code> call must be made, with the following credentials:</p>
    <p>The response to a successful call will be a <code>JSON</code> object with three fields: <code>access_token</code>, <code>token_type</code>, and <code>scope</code>.</p>
-   <div class="def">
+   <div class="example" id="example-4cab9963">
+    <a class="self-link" href="#example-4cab9963"></a> 
     <dl>
      <dt data-md>Action
      <dd data-md>
@@ -2155,7 +2223,7 @@ Swagger UI: /swagger-ui/ if you fancy a visualization</footprint-id></p>
       <p><code>POST</code></p>
      <dt data-md>Credentials
      <dd data-md>
-      <p>id: <code>hello</code>, secret: <code>pathfinder</code></p>
+      <p>id: <code>hello</code><br>secret: <code>pathfinder</code></p>
      <dt data-md>Example request (cURL)
      <dd data-md>
 <pre class="highlight">curl -X POST --user hello:pathfinder <c- se>\</c->
@@ -2178,19 +2246,21 @@ If using Postman, use <code>hello</code> as the username and <code>pathfinder</c
    <h3 class="heading settled" data-level="2.2" id="fetching-data"><span class="secno">2.2. </span><span class="content">Fetching Data</span><a class="self-link" href="#fetching-data"></a></h3>
    <p>Fetching data from the example API can be made through two actions:</p>
    <dl>
-    <dt data-md><a href="#listFootprints">§ 2.2.1 ListFootprints Action</a>
+    <dt data-md><a href="#listFootprints-example">§ 2.2.1 ListFootprints Action</a>
     <dd data-md>
      <p>enumerates the <code>ProductFootprints</code> available to the authenticated user;</p>
-    <dt data-md><a href="#getFootprint">§ 2.2.2 GetFootprint Action</a>
+    <dt data-md><a href="#getFootprint-example">§ 2.2.2 GetFootprint Action</a>
     <dd data-md>
      <p>retrieves a single ProductFootprint given its unique ID.</p>
    </dl>
-   <h4 class="heading settled" data-level="2.2.1" id="listFootprints"><span class="secno">2.2.1. </span><span class="content"><code>ListFootprints</code> Action</span><a class="self-link" href="#listFootprints"></a></h4>
-   <p>The <code>ListFootprints</code> action provides the authenticated a list of the <code>ProductFootprints</code> available to them, throught the <code>/2/footprints</code> endpoint.</p>
+   <h4 class="heading settled" data-level="2.2.1" id="listFootprints-example"><span class="secno">2.2.1. </span><span class="content"><code>ListFootprints</code> Action</span><a class="self-link" href="#listFootprints-example"></a></h4>
+   <p>FILTER DOESN’T SEEM TO BE WORKING IN OUR EXAMPLE</p>
+   <p>The <code>ListFootprints</code> action provides the authenticated user a list of the <code>ProductFootprints</code> available to them, throught the <code>/2/footprints</code> endpoint.</p>
    <p>A <code>GET</code> request to this endpoint can be made wih two optional parameters: <code>limit</code>, which takes an integer, and <code>filter</code>, which takes a string.
 If left blank, the response will display all <code>ProductFootprints</code> available to the user.</p>
    <p>The response to a successful call will be a <code>JSON</code> object with one field: an array of <code>ProductFootprint</code> objects.</p>
-   <div class="def">
+   <div class="example" id="example-4669c019">
+    <a class="self-link" href="#example-4669c019"></a> 
     <dl>
      <dt data-md>Action
      <dd data-md>
@@ -2200,7 +2270,7 @@ If left blank, the response will display all <code>ProductFootprints</code> avai
       <p><code>/2/footprints</code></p>
      <dt data-md>Options
      <dd data-md>
-      <p><code>limit=&lt;integer></code>, <code>filter=&lt;string></code></p>
+      <p><code>limit=&lt;integer></code><br><code>filter=&lt;string></code> // not implemented</p>
      <dt data-md>HTTP request
      <dd data-md>
       <p><code>GET</code></p>
@@ -2210,38 +2280,40 @@ If left blank, the response will display all <code>ProductFootprints</code> avai
      <dt data-md>Example request (cURL)
      <dd data-md>
 <pre class="highlight">curl -X <c- t>'GET'</c-> <c- se>\</c->
-  <c- t>'https://api.pathfinder.sine.dev/2/footprints?limit=2&amp;filter=carbon'</c-> <c- se>\</c->
-  -H <c- t>'accept: application/json'</c-> <c- se>\</c->
-  -H <c- t>'Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImhlbGxvIn0.wZPjxQz1wI25fIe0Oz4w5Y2g8UD_dMz6Wd-Aegg8HMM'</c->
+<c- t>'https://api.pathfinder.sine.dev/2/footprints?limit=2'</c-> <c- se>\</c->
+-H <c- t>'accept: application/json'</c-> <c- se>\</c->
+-H <c- t>'Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImhlbGxvIn0.wZPjxQz1wI25fIe0Oz4w5Y2g8UD_dMz6Wd-Aegg8HMM'</c->
 </pre>
      <dt data-md>Example response
      <dd data-md>
 <pre class="highlight"><c- p>{</c->
-    <c- f>"data"</c-><c- p>:</c->
-        <c- p>[</c->
-            <c- p>{</c-><c- f>"id"</c-><c- p>:</c-><c- u>"d9be4477-e351-45b3-acd9-e1da05e6f633"</c-><c- p>,</c->
-            <c- f>"specVersion"</c-><c- p>:</c-><c- u>"1.0.0"</c-><c- p>,</c-><c- f>"version"</c-><c- p>:</c-><c- mi>0</c-><c- p>,</c->
-            <c- f>"created"</c-><c- p>:</c-><c- u>"2022-05-22T21:47:32Z"</c-><c- p>,</c->
+    <c- f>"data"</c-><c- p>:</c-> <c- p>[</c->
+        <c- p>{</c->
+            <c- f>"id"</c-><c- p>:</c-> <c- u>"d9be4477-e351-45b3-acd9-e1da05e6f633"</c-><c- p>,</c->
+            <c- f>"specVersion"</c-><c- p>:</c-> <c- u>"1.0.0"</c-><c- p>,</c-><c- f>"version"</c-><c- p>:</c-><c- mi>0</c-><c- p>,</c->
+            <c- f>"created"</c-><c- p>:</c-> <c- u>"2022-05-22T21:47:32Z"</c-><c- p>,</c->
             ...
-            <c- p>},</c->
-            <c- p>{</c-><c- f>"id"</c-><c- p>:</c-><c- u>"c3028ee9-d595-4779-a73a-290bfa7505d6"</c-><c- p>,</c->
-            <c- f>"specVersion"</c-><c- p>:</c-><c- u>"1.0.0"</c-><c- p>,</c-><c- f>"version"</c-><c- p>:</c-><c- mi>0</c-><c- p>,</c->
-            <c- f>"created"</c-><c- p>:</c-><c- u>"2022-05-22T21:47:32Z"</c-><c- p>,</c->
+        <c- p>},</c->
+        <c- p>{</c->
+            <c- f>"id"</c-><c- p>:</c-> <c- u>"c3028ee9-d595-4779-a73a-290bfa7505d6"</c-><c- p>,</c->
+            <c- f>"specVersion"</c-><c- p>:</c-> <c- u>"1.0.0"</c-><c- p>,</c-><c- f>"version"</c-><c- p>:</c-><c- mi>0</c-><c- p>,</c->
+            <c- f>"created"</c-><c- p>:</c-> <c- u>"2022-05-22T21:47:32Z"</c-><c- p>,</c->
             ...
-            <c- p>}</c->
-        <c- p>]</c->
+        <c- p>}</c->
+    <c- p>]</c->
 <c- p>}</c->
 </pre>
       <p class="note" role="note">Note: The actual response contains an array of <code>ProductFootprint</code>s which are omitted for brevity here.
-See <a href="#getFootprint">§ 2.2.2 GetFootprint Action</a> for a complete <code>ProductFootprint</code>. </p>
+See <a href="#productfootprint-example">§ 4.2.1 ProductFootprint Example</a> for an example of a complete <code>ProductFootprint</code>. </p>
     </dl>
    </div>
-   <h4 class="heading settled" data-level="2.2.2" id="getFootprint"><span class="secno">2.2.2. </span><span class="content"><code>GetFootprint</code> Action</span><a class="self-link" href="#getFootprint"></a></h4>
+   <h4 class="heading settled" data-level="2.2.2" id="getFootprint-example"><span class="secno">2.2.2. </span><span class="content"><code>GetFootprint</code> Action</span><a class="self-link" href="#getFootprint-example"></a></h4>
    <p>The <code>GetFootprint</code> action provides the authenticated user a specific <code>ProductFootprint</code>, identified by its unique <code>id</code>.
 Typically this is performed to get the latest version of that <code>ProductFootprint</code>.
 A <code>GET</code> call has to be made to the <code>/2/footprints/&lt;footprint-id></code> endpoint.</p>
-   <p>The response to a successful call will be a <code>JSON</code> object with one field: an array with one <code>ProductFootprint</code> object.</p>
-   <div class="def">
+   <p>The response to a successful call will be a <code>JSON</code> object with one field: a data object with one <code>ProductFootprint</code> object.</p>
+   <div class="example" id="example-6d1755c5">
+    <a class="self-link" href="#example-6d1755c5"></a> 
     <dl>
      <dt data-md>Action
      <dd data-md>
@@ -2258,9 +2330,9 @@ A <code>GET</code> call has to be made to the <code>/2/footprints/&lt;footprint-
      <dt data-md>Example request (cURL)
      <dd data-md>
 <pre class="highlight">curl -X <c- t>'GET'</c-> <c- se>\</c->
-  <c- t>'https://api.pathfinder.sine.dev/2/footprints/d9be4477-e351-45b3-acd9-e1da05e6f633'</c-> <c- se>\</c->
-  -H <c- t>'accept: application/json'</c-> <c- se>\</c->
-  -H <c- t>'Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImhlbGxvIn0.wZPjxQz1wI25fIe0Oz4w5Y2g8UD_dMz6Wd-Aegg8HMM'</c->
+<c- t>'https://api.pathfinder.sine.dev/2/footprints/d9be4477-e351-45b3-acd9-e1da05e6f633'</c-> <c- se>\</c->
+-H <c- t>'accept: application/json'</c-> <c- se>\</c->
+-H <c- t>'Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImhlbGxvIn0.wZPjxQz1wI25fIe0Oz4w5Y2g8UD_dMz6Wd-Aegg8HMM'</c->
 </pre>
      <dt data-md>Example response
      <dd data-md>
@@ -2269,91 +2341,45 @@ A <code>GET</code> call has to be made to the <code>/2/footprints/&lt;footprint-
         <c- f>"id"</c-><c- p>:</c-> <c- u>"d9be4477-e351-45b3-acd9-e1da05e6f633"</c-><c- p>,</c->
         <c- f>"specVersion"</c-><c- p>:</c-> <c- u>"1.0.0"</c-><c- p>,</c->
         <c- f>"version"</c-><c- p>:</c-> <c- mi>0</c-><c- p>,</c->
-        <c- f>"created"</c-><c- p>:</c-> <c- u>"2022-05-22T21:47:32Z"</c-><c- p>,</c->
-        <c- f>"companyName"</c-><c- p>:</c-> <c- u>"My Corp"</c-><c- p>,</c->
-        <c- f>"companyIds"</c-><c- p>:</c-> <c- p>[</c->
-            <c- u>"urn:uuid:51131FB5-42A2-4267-A402-0ECFEFAD1619"</c-><c- p>,</c->
-            <c- u>"urn:epc:id:sgln:4063973.00000.8"</c->
-        <c- p>],</c->
-        <c- f>"productDescription"</c-><c- p>:</c-> <c- u>"Cote’d Or Ethanol"</c-><c- p>,</c->
-        <c- f>"productIds"</c-><c- p>:</c-> <c- p>[</c->
-            <c- u>"urn:gtin:4712345060507"</c->
-        <c- p>],</c->
-        <c- f>"productCategoryCpc"</c-><c- p>:</c-> <c- u>"3342"</c-><c- p>,</c->
-        <c- f>"productNameCompany"</c-><c- p>:</c-> <c- u>"Green Ethanol"</c-><c- p>,</c->
-        <c- f>"comment"</c-><c- p>:</c-> <c- u>""</c-><c- p>,</c->
-        <c- f>"pcf"</c-><c- p>:</c-> <c- p>{</c->
-            <c- f>"declaredUnit"</c-><c- p>:</c-> <c- u>"liter"</c-><c- p>,</c->
-            <c- f>"unitaryProductAmount"</c-><c- p>:</c-> <c- u>"12.0"</c-><c- p>,</c->
-            <c- f>"fossilGhgEmissions"</c-><c- p>:</c-> <c- u>"0.123"</c-><c- p>,</c->
-            <c- f>"biogenicEmissions"</c-><c- p>:</c-> <c- p>{</c->
-                <c- f>"landUseEmissions"</c-><c- p>:</c-> <c- u>"0.001"</c-><c- p>,</c->
-                <c- f>"otherEmissions"</c-><c- p>:</c-> <c- u>"0"</c->
-            <c- p>},</c->
-            <c- f>"biogenicCarbonContent"</c-><c- p>:</c-> <c- u>"0.0"</c-><c- p>,</c->
-            <c- f>"reportingPeriodStart"</c-><c- p>:</c-> <c- u>"2021-01-01T00:00:00Z"</c-><c- p>,</c->
-            <c- f>"reportingPeriodEnd"</c-><c- p>:</c-> <c- u>"2022-01-01T00:00:00Z"</c-><c- p>,</c->
-            <c- f>"geographyCountry"</c-><c- p>:</c-> <c- u>"FR"</c-><c- p>,</c->
-            <c- f>"primaryDataShare"</c-><c- p>:</c-> <c- mf>56.12</c-><c- p>,</c->
-            <c- f>"emissionFactorSources"</c-><c- p>:</c-> <c- p>[</c->
-                <c- p>{</c->
-                    <c- f>"name"</c-><c- p>:</c-> <c- u>"Ecoinvent"</c-><c- p>,</c->
-                    <c- f>"version"</c-><c- p>:</c->
-                    <c- u>"1.2.3"</c->
-                <c- p>}</c->
-            <c- p>],</c->
-            <c- f>"boundaryProcessesDescription"</c-><c- p>:</c-> <c- u>"End-of-life included"</c-><c- p>,</c->
-            <c- f>"crossSectoralStandardsUsed"</c-><c- p>:</c-> <c- p>[</c->
-                <c- u>"GHG Protocol Product standard"</c->
-            <c- p>],</c->
-            <c- f>"productOrSectorSpecificRules"</c-><c- p>:</c-> <c- p>[</c->
-                <c- p>{</c->
-                    <c- f>"operator"</c-><c- p>:</c-> <c- u>"EPD International"</c-><c- p>,</c->
-                    <c- f>"ruleNames"</c-><c- p>:</c-> <c- p>[</c->
-                        <c- u>"ABC 2021"</c->
-                    <c- p>]</c->
-                <c- p>}</c->
-            <c- p>]</c->
-        <c- p>}</c->
+        ...
     <c- p>}</c->
 <c- p>}</c->
 </pre>
+      <p class="note" role="note">Note: The actual response contains a complete <code>ProductFootprint</code>, many fields of which are omitted here for brevity’s sake.
+See <a href="#productfootprint-example">§ 4.2.1 ProductFootprint Example</a> for an example of a complete <code>ProductFootprint</code>. </p>
     </dl>
    </div>
-   <h3 class="heading settled" data-level="2.3" id="events"><span class="secno">2.3. </span><span class="content">Sending an event (”a Product Carbon Footprint was updated”)</span><a class="self-link" href="#events"></a></h3>
-   <p>While through the <code>ListFootprints</code> and <code>GetFootprint</code> actions the authenticated user requests data from the example API,
-through the <code>Events</code> action the authenticated user notifies the example API about some update in data they (i.e., the user)
-own. Hence, in what concerns this specific action, the example API plays the role of <code>Data Recipient</code> rather than that of <code>Data Owner</code>.</p>
-   <p>To notify the example API of an update in a certain PCF, the authenticated user must make a <code>POST</code> call to the <code>/2/events</code> endpoint,
-sending a <code>PF Update Event</code> (https://wbcsd.github.io/data-exchange-protocol/v2/#pf-update-event) as its body.</p>
+   <h3 class="heading settled" data-level="2.3" id="events-example"><span class="secno">2.3. </span><span class="content">Sending an event</span><a class="self-link" href="#events-example"></a></h3>
+   <p>In the <code>Events</code> action, the example API plays the role of <code>Data Recipient</code> rather than <code>Data Owner</code>.
+It is, therefore, fundamentally different from the previous actions.
+Through the <code>Events</code> action, the authenticated user (the <code>Data Owner</code> in this case) notifies the example API that some PCF has been updated.</p>
+   <p>To execute this action, the authenticated user must make a <code>POST</code> call to the <code>/2/events</code> endpoint, sendig a [<code>PF Update Event</code>](https://wbcsd.github.io/data-exchange-protocol/v2/#pf-update-event) in its body.</p>
    <p>The syntax of <code>PF Update Event</code> and its fields can be found <a href="https://wbcsd.github.io/data-exchange-protocol/v2/#api-action-events-case-1">here</a></p>
    <p>The response to a successfull call to the <code>/2/events</code> endpoint will have the HTTP Status Code 200 and <strong>an empty body</strong>.</p>
-   <p class="note" role="note"><span class="marker">Note:</span> This functionality is optional. See <a href="#optional">§ 3.2 Optional (”nice to haves”) functionality</a> for more details.</p>
-   <div class="def">
+   <p class="note" role="note"><span class="marker">Note:</span> This functionality is optional. See <a href="#optional-functionality">§ 3.2 Optional functionality</a> for more details.</p>
+   <div class="example" id="example-9b062a89">
+    <a class="self-link" href="#example-9b062a89"></a> 
     <dl>
      <dt data-md>Action
      <dd data-md>
-      <p><code>ListFootprints</code></p>
+      <p><code>Events</code></p>
      <dt data-md>Endpoint
      <dd data-md>
-      <p><code>/2/footprints</code></p>
-     <dt data-md>Options
-     <dd data-md>
-      <p><code>limit=&lt;integer></code>, <code>filter=&lt;string></code></p>
+      <p><code>/2/events</code></p>
      <dt data-md>HTTP request
      <dd data-md>
-      <p><code>GET</code></p>
+      <p><code>POST</code></p>
      <dt data-md>Authorization
      <dd data-md>
       <p><code>Bearer</code></p>
      <dt data-md>Example request (cURL)
      <dd data-md>
 <pre class="highlight">curl -X <c- t>'POST'</c-> <c- se>\</c->
-  <c- t>'https://api.pathfinder.sine.dev/2/events'</c-> <c- se>\</c->
-  -H <c- t>'accept: */*'</c-> <c- se>\</c->
-  -H <c- t>'Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImhlbGxvIn0.wZPjxQz1wI25fIe0Oz4w5Y2g8UD_dMz6Wd-Aegg8HMM'</c-> <c- se>\</c->
-  -H <c- t>'Content-Type: application/json'</c-> <c- se>\</c->
-  -d <c- t>'{</c->
+<c- t>'https://api.pathfinder.sine.dev/2/events'</c-> <c- se>\</c->
+-H <c- t>'accept: */*'</c-> <c- se>\</c->
+-H <c- t>'Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImhlbGxvIn0.wZPjxQz1wI25fIe0Oz4w5Y2g8UD_dMz6Wd-Aegg8HMM'</c-> <c- se>\</c->
+-H <c- t>'Content-Type: application/json'</c-> <c- se>\</c->
+-d <c- t>'{</c->
 <c- t>        "specversion": "1.0.0",</c->
 <c- t>        "id": "1234",</c->
 <c- t>        "source":"http://localhost:3000",</c->
@@ -2366,25 +2392,349 @@ sending a <code>PF Update Event</code> (https://wbcsd.github.io/data-exchange-pr
 <c- t>        }</c->
 <c- t>    }'</c->
 </pre>
+     <dt data-md>Example response
+     <dd data-md>
+      <p>HTTP status code 200 with empty body</p>
     </dl>
    </div>
    <h2 class="heading settled" data-level="3" id="overview-of-the-technical-specification"><span class="secno">3. </span><span class="content">Overview of the Technical Specification</span><a class="self-link" href="#overview-of-the-technical-specification"></a></h2>
    <p>The <a href="https://wbcsd.github.io/data-exchange-protocol/v2/#pf-properties">Technical Specification</a> specifies a data model for GHG emission data at product level based on the Pathfinder Framework Version 2, and a protocol for interoperable exchange of GHG emission data at product level.</p>
-   <h3 class="heading settled" data-level="3.1" id="required-must-haves-functionality-for-conformance"><span class="secno">3.1. </span><span class="content">Required (”must haves”) functionality for conformance</span><a class="self-link" href="#required-must-haves-functionality-for-conformance"></a></h3>
-   <h4 class="heading settled" data-level="3.1.1" id="authenticate①"><span class="secno">3.1.1. </span><span class="content"><code>Authenticate</code></span><a class="self-link" href="#authenticate①"></a></h4>
-   <h5 class="heading settled" data-level="3.1.1.1" id="request-syntax"><span class="secno">3.1.1.1. </span><span class="content">Request syntax</span><a class="self-link" href="#request-syntax"></a></h5>
-   <h4 class="heading settled" data-level="3.1.2" id="listfootprints"><span class="secno">3.1.2. </span><span class="content"><code>ListFootprints</code></span><a class="self-link" href="#listfootprints"></a></h4>
-   <h4 class="heading settled" data-level="3.1.3" id="getfootprint"><span class="secno">3.1.3. </span><span class="content"><code>GetFootprint</code></span><a class="self-link" href="#getfootprint"></a></h4>
-   <h3 class="heading settled" data-level="3.2" id="optional"><span class="secno">3.2. </span><span class="content">Optional (”nice to haves”) functionality</span><a class="self-link" href="#optional"></a></h3>
-   <h4 class="heading settled" data-level="3.2.1" id="events①"><span class="secno">3.2.1. </span><span class="content"><code>Events</code></span><a class="self-link" href="#events①"></a></h4>
-   <p>A data owner CAN notify a data recipient about changes to 1 or more product footprints by sending a PF Update Event to the data recipient’s Action Events endpoint.</p>
-   <p>A data recipient upon receiving such an PF Update Event CAN retrieve the product footprints through the Action GetFootprint.</p>
-   <p>https://wbcsd.github.io/data-exchange-protocol/v2/#pf-update-event</p>
-   <p>#</p>
+   <p>To allow for interoperable PCF data exchange, solutions must expose an HTTP REST API, also defined in the technical specification.</p>
+   <p>The scope of the HTTP API is minimal by design and new features will be added in future versions of the specification.</p>
+   <p>In order to be conformant with the Pathfinder Framework, a solution’s HTTP REST API <strong>must</strong> include the following <a href="#mandatory-functionality">mandatory features</a>:</p>
+   <ul>
+    <li> <a href="#authenticate">§ 3.1.1 Authenticate</a> 
+    <li> <a href="#listFootprints">§ 3.1.2 ListFootprints</a> 
+    <li> <a href="#getFootprint">§ 3.1.3 GetFootprint</a> 
+   </ul>
+   <p>There is also a recommended but <a href="#optional-functionality">optional feature</a>:</p>
+   <ul>
+    <li> <a href="#events">§ 3.2.1 Events</a> 
+   </ul>
+   <p>Further details about the HTTP REST API can be found in <a href="https://wbcsd.github.io/data-exchange-protocol/v2/#api">Section 6 (HTTP REST API) of the Technical Specification</a>.</p>
+   <h3 class="heading settled" data-level="3.1" id="mandatory-functionality"><span class="secno">3.1. </span><span class="content">Mandatory Functionality</span><a class="self-link" href="#mandatory-functionality"></a></h3>
+   <h4 class="heading settled" data-level="3.1.1" id="authenticate"><span class="secno">3.1.1. </span><span class="content"><code>Authenticate</code></span><a class="self-link" href="#authenticate"></a></h4>
+   <p>The HTTP REST API must allow users to authenticate before they are able to either fetch data (see <a href="#listFootprints">§ 3.1.2 ListFootprints</a> and <a href="#getFootprint">§ 3.1.3 GetFootprint</a>) or submit a events (see <a href="#events">§ 3.2.1 Events</a>). (See the <a href="https://wbcsd.github.io/data-exchange-protocol/v2/#api-auth">authentication flow described in the Technical Specifications</a>.)</p>
+   <p>The <code>Authenticate</code> action is <strong>mandatory</strong> and must be implemented in accordance with <a href="https://www.rfc-editor.org/rfc/rfc6749#section-4.4">RFC6749, Section 4.4 (OAuth2 Client Credentials)</a>.</p>
+   <p>In a nutshell, the user must send their credentials and, in case of a 200 (OK) response, get back back an object which includes the <code>access_token</code>. (see <a href="https://www.rfc-editor.org/rfc/rfc6749#section-4.4.3">RFC6749, Section 4.4.3</a> and <a href="https://www.rfc-editor.org/rfc/rfc6749#section-5.1">RFC6749, Section 5.1</a> for further details.)</p>
+   <h5 class="heading settled" data-level="3.1.1.1" id="request-syntax-http-11"><span class="secno">3.1.1.1. </span><span class="content">Request Syntax (HTTP/1.1)</span><a class="self-link" href="#request-syntax-http-11"></a></h5>
+<pre class="highlight"><c- nf>POST</c-> <a href="https://wbcsd.github.io/data-exchange-protocol/v2/#authsubpath"><c- nn>AuthSubpath</c-></a><c- nn>/auth/token</c-> <c- kr>HTTP</c-><c- o>/</c-><c- m>1.1</c->
+<c- e>host</c-><c- o>:</c-> <a href="https://wbcsd.github.io/data-exchange-protocol/v2/#authhostname"><c- l>AuthHostname</c-></a>
+<c- e>accept</c-><c- o>:</c-> <c- l>application/json</c->
+<c- e>content-type</c-><c- o>:</c-> <c- l>application/x-www-form-urlencoded</c->
+<c- e>authorization</c-><c- o>:</c-> <c- l>Basic </c-><a href="https://wbcsd.github.io/data-exchange-protocol/v2/#basicauth"><c- l>BasicAuth</c-></a>
+<c- e>content-length</c-><c- o>:</c-> <a href="https://wbcsd.github.io/data-exchange-protocol/v2/#contentlength"><c- l>ContentLength</c-></a>
+
+<a href="https://wbcsd.github.io/data-exchange-protocol/v2/#authbody">AuthBody</a>
+</pre>
+   <h5 class="heading settled" data-level="3.1.1.2" id="response-syntax"><span class="secno">3.1.1.2. </span><span class="content">Response Syntax</span><a class="self-link" href="#response-syntax"></a></h5>
+<pre class="highlight">HTTP/1.1 <a href="https://wbcsd.github.io/data-exchange-protocol/v2/#authstatuscode">AuthStatusCode</a> OK
+content-type: application/json
+content-length: <a href="https://wbcsd.github.io/data-exchange-protocol/v2/#contentlength">ContentLength</a>
+
+<a href="https://wbcsd.github.io/data-exchange-protocol/v2/#authresponsebody">AuthResponseBody</a>
+</pre>
+   <h4 class="heading settled" data-level="3.1.2" id="listFootprints"><span class="secno">3.1.2. </span><span class="content"><code>ListFootprints</code></span><a class="self-link" href="#listFootprints"></a></h4>
+   <p>The <code>ListFootprints</code> action is <strong>mandatory</strong> and provides the authenticated user a list of <code>ProductFootprint</code>s available to them.</p>
+   <p>This action must allow for two optional parameters:</p>
+   <dl>
+    <dt data-md><code>limit</code>
+    <dd data-md>
+     <p>A positive integer limiting the number of results displayed</p>
+    <dt data-md><code>filter</code>
+    <dd data-md>
+     <p>A string to filter the results (details can be found <a href="https://wbcsd.github.io/data-exchange-protocol/v2/#filter">here</a>)</p>
+   </dl>
+   <p>Pagination of the results should follow the <a href="https://wbcsd.github.io/data-exchange-protocol/v2/#api-action-list-pagination">Section 6.6.1 of the Technical Specification</a></p>
+   <h5 class="heading settled" data-level="3.1.2.1" id="request-syntax-http-11①"><span class="secno">3.1.2.1. </span><span class="content">Request Syntax (HTTP/1.1)</span><a class="self-link" href="#request-syntax-http-11①"></a></h5>
+<pre class="highlight"><c- nf>GET</c-> <a href="https://wbcsd.github.io/data-exchange-protocol/v2/#subpath"><c- nn>Subpath</c-></a><c- nn>/2/footprints?</c-><a href="https://wbcsd.github.io/data-exchange-protocol/v2/#filter"><c- nn>Filter</c-></a><c- nn>&amp;</c-><a href="https://wbcsd.github.io/data-exchange-protocol/v2/#limit"><c- nn>Limit</c-></a> <c- kr>HTTP</c-><c- o>/</c-><c- m>1.1</c->
+<c- e>host</c-><c- o>:</c-> <a href="https://wbcsd.github.io/data-exchange-protocol/v2/#hostname"><c- l>Hostname</c-></a>
+<c- e>authorization</c-><c- o>:</c-> <c- l>Bearer </c-><a href="https://wbcsd.github.io/data-exchange-protocol/v2/#bearertoken"><c- l>BearerToken</c-></a>
+</pre>
+   <h5 class="heading settled" data-level="3.1.2.2" id="response-syntax①"><span class="secno">3.1.2.2. </span><span class="content">Response Syntax</span><a class="self-link" href="#response-syntax①"></a></h5>
+<pre class="highlight">HTTP/1.1 <a href="https://wbcsd.github.io/data-exchange-protocol/v2/#liststatuscode">ListStatusCode</a> <a href="https://wbcsd.github.io/data-exchange-protocol/v2/#liststatustext">ListStatusText</a>
+content-type: application/json
+content-length: <a href="https://wbcsd.github.io/data-exchange-protocol/v2/#contentlength">ContentLength</a>
+
+<a href="https://wbcsd.github.io/data-exchange-protocol/v2/#listresponsebody">ListResponseBody</a>
+</pre>
+   <h4 class="heading settled" data-level="3.1.3" id="getFootprint"><span class="secno">3.1.3. </span><span class="content"><code>GetFootprint</code></span><a class="self-link" href="#getFootprint"></a></h4>
+   <p>The <code>GetFootprint</code> action is <strong>mandatory</strong> and returns to the authenticated user a specific <code>ProductFootprint</code>, identified by its unique id.
+Typically this is performed to get the latest version of that <code>ProductFootprint</code>.</p>
+   <h5 class="heading settled" data-level="3.1.3.1" id="request-syntax-http-11②"><span class="secno">3.1.3.1. </span><span class="content">Request Syntax (HTTP/1.1)</span><a class="self-link" href="#request-syntax-http-11②"></a></h5>
+<pre class="highlight"><c- nf>GET</c-> <a href="https://wbcsd.github.io/data-exchange-protocol/v2/#subpath"><c- nn>Subpath</c-></a><c- nn>/2/footprints/</c-><a href="https://wbcsd.github.io/data-exchange-protocol/v2/#getpfid"><c- nn>GetPfId</c-></a> <c- kr>HTTP</c-><c- o>/</c-><c- m>1.1</c->
+<c- e>host</c-><c- o>:</c-> <a href="https://wbcsd.github.io/data-exchange-protocol/v2/#hostname"><c- l>Hostname</c-></a>
+<c- e>authorization</c-><c- o>:</c-> <c- l>Bearer </c-><a href="https://wbcsd.github.io/data-exchange-protocol/v2/#bearertoken"><c- l>BearerToken</c-></a>
+</pre>
+   <h5 class="heading settled" data-level="3.1.3.2" id="response-syntax②"><span class="secno">3.1.3.2. </span><span class="content">Response Syntax</span><a class="self-link" href="#response-syntax②"></a></h5>
+<pre class="highlight">HTTP/1.1 <a href="https://wbcsd.github.io/data-exchange-protocol/v2/#getstatuscode">GetStatusCode</a> <a href="https://wbcsd.github.io/data-exchange-protocol/v2/#getstatustext">GetStatusText</a>
+content-type: application/json
+content-length: <a href="https://wbcsd.github.io/data-exchange-protocol/v2/#contentlength">ContentLength</a>
+
+<a href="https://wbcsd.github.io/data-exchange-protocol/v2/#getresponsebody">GetResponseBody</a>
+</pre>
+   <h3 class="heading settled" data-level="3.2" id="optional-functionality"><span class="secno">3.2. </span><span class="content">Optional functionality</span><a class="self-link" href="#optional-functionality"></a></h3>
+   <p class="note" role="note"><span class="marker">Note:</span> Although the <code>Events</code> action is optional, if it is not yet implemented, the HTTP REST API must return an error response with the <code>NotImplemented</code> code. See <a href="#error-responses">§ 3.3 Error Responses</a>.</p>
+   <h4 class="heading settled" data-level="3.2.1" id="events"><span class="secno">3.2.1. </span><span class="content"><code>Events</code></span><a class="self-link" href="#events"></a></h4>
+   <p>The <code>Events</code> action is <strong>optional</strong> and subdivides into two, depending on whether the solution implementing it is playing the role of <a data-link-type="dfn" href="#data-owner" id="ref-for-data-owner">data owner</a> or <a data-link-type="dfn" href="#data-recipient" id="ref-for-data-recipient">data recipient</a>.
+These are differentiated by the body of the HTTP request:</p>
+   <ul>
+    <li> As <a data-link-type="dfn" href="#data-recipient" id="ref-for-data-recipient①">data recipient</a>, the <code>Events</code> action allows the solution to be notified of an update to one or more <code>ProductFootprint</code> (see <a href="https://wbcsd.github.io/data-exchange-protocol/v2/#lifecycle">here</a> when and why a <code>ProductFootprint</code> might be updated).
+    The body of the HTTP request is a <a data-link-type="dfn" href="#pf-update-event" id="ref-for-pf-update-event">PF Update Event</a> in this case 
+    <li> As <a data-link-type="dfn" href="#data-owner" id="ref-for-data-owner①">data owner</a>, the <code>Events</code> action allows the solution to receive a request to send <code>ProductFootprint</code> data to that <a data-link-type="dfn" href="#data-recipient" id="ref-for-data-recipient②">data recipient</a>'s <code>Events</code> action endpoint.
+    In this case, there are two HTTP requests. One (from the <a data-link-type="dfn" href="#data-recipient" id="ref-for-data-recipient③">data recipient</a> to the <a data-link-type="dfn" href="#data-owner" id="ref-for-data-owner②">data owner</a>) with a <a data-link-type="dfn" href="#pf-request-event" id="ref-for-pf-request-event">PF Request Event</a> as its body;
+    The other (from the <a data-link-type="dfn" href="#data-owner" id="ref-for-data-owner③">data owner</a> to the <a data-link-type="dfn" href="#data-recipient" id="ref-for-data-recipient④">data recipient</a>) with either a <a data-link-type="dfn" href="#pf-response-event" id="ref-for-pf-response-event">PF Response Event</a> or a <a data-link-type="dfn" href="#pf-response-error-event" id="ref-for-pf-response-error-event">PF Response Error Event</a> as its body 
+   </ul>
+   <p>Requests to one or the other are distinguished by the request body.</p>
+   <h5 class="heading settled" data-level="3.2.1.1" id="request-syntax-http-11③"><span class="secno">3.2.1.1. </span><span class="content">Request Syntax (HTTP/1.1)</span><a class="self-link" href="#request-syntax-http-11③"></a></h5>
+<pre class="highlight"><c- nf>POST</c-> <a href="https://wbcsd.github.io/data-exchange-protocol/v2/#subpath"><c- nn>Subpath</c-></a><c- nn>/2/events</c-> <c- kr>HTTP</c-><c- o>/</c-><c- m>1.1</c->
+<c- e>host</c-><c- o>:</c-> <a href="https://wbcsd.github.io/data-exchange-protocol/v2/#hostname"><c- l>Hostname</c-></a>
+<c- e>authorization</c-><c- o>:</c-> <c- l>Bearer </c-><a href="https://wbcsd.github.io/data-exchange-protocol/v2/#bearertoken"><c- l>BearerToken</c-></a>
+<c- e>content-type</c-><c- o>:</c-> <c- l>application/cloudevents+json; charset=UTF-8</c->
+
+<a href="https://wbcsd.github.io/data-exchange-protocol/v2/#eventbody">Eve<c- kc>nt</c->Body</a>
+</pre>
+   <p>An <code>EventBody</code> must be (i) a CloudEvents event, (ii) encoded as a JSON object, (iii) using "Structured Content Mode".
+In the context of this HTTP REST API, it can be a <a data-link-type="dfn" href="#pf-update-event" id="ref-for-pf-update-event①">PF Update Event</a>, a <a data-link-type="dfn" href="#pf-request-event" id="ref-for-pf-request-event①">PF Request Event</a>, a <a data-link-type="dfn" href="#pf-response-event" id="ref-for-pf-response-event①">PF Response Event</a>, or a <a data-link-type="dfn" href="#pf-response-error-event" id="ref-for-pf-response-error-event①">PF Response Error Event</a></p>
+   <dl>
+    <dd data-md>
+     <p><dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="pf-update-event">PF Update Event</dfn></p>
+    <dd data-md>
+     <p>Through a <code>PF Update Event</code>, the <a data-link-type="dfn" href="#data-owner" id="ref-for-data-owner④">data owner</a> notifies the <a data-link-type="dfn" href="#data-recipient" id="ref-for-data-recipient⑤">data recipient</a> know that a certain <code>ProductFootprint</code> was updated.
+A <code>PF Update Event</code> has the following syntax (see the <a href="https://wbcsd.github.io/data-exchange-protocol/v2/#pf-update-event">Technical Specifications</a> for further details):</p>
+<pre class="highlight"><c- p>{</c->
+  <c- f>"type"</c-><c- p>:</c-> <c- u>"org.wbcsd.pathfinder.ProductFootprint.Published.v1"</c-><c- p>,</c->
+  <c- f>"specversion"</c-><c- p>:</c-> <c- u>"1.0"</c-><c- p>,</c->
+  <c- f>"id"</c-><c- p>:</c-> <c- u>"</c-><a href="https://wbcsd.github.io/data-exchange-protocol/v2/#pf-update-event"><c- u>EventId</c-></a><c- u>"</c-><c- p>,</c->
+  <c- f>"source"</c-><c- p>:</c-> <c- u>"//</c-><a href="https://wbcsd.github.io/data-exchange-protocol/v2/#pf-update-event"><c- u>EventHostname</c-></a><c- u>/</c-><a href="https://wbcsd.github.io/data-exchange-protocol/v2/#pf-update-event"><c- u>EventSubpath</c-></a><c- u>"</c-><c- p>,</c->
+  <c- f>"time"</c-><c- p>:</c-> <c- u>"2022-05-31T17:31:00Z"</c-><c- p>,</c->
+  <c- f>"data"</c-><c- p>:</c-> <c- p>{</c->
+    <c- f>"pfIds"</c-><c- p>:</c-> <a href="https://wbcsd.github.io/data-exchange-protocol/v2/#pf-update-event">P<c- kc>f</c->Ids</a>
+  <c- p>}</c->
+<c- p>}</c->
+</pre>
+    <dd data-md>
+     <p><dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="pf-request-event">PF Request Event</dfn></p>
+    <dd data-md>
+     <p>Through a <code>PF Request Event</code>, the <a data-link-type="dfn" href="#data-recipient" id="ref-for-data-recipient⑥">data recipient</a> asks the <a data-link-type="dfn" href="#data-owner" id="ref-for-data-owner⑤">data owner</a> to be sent a fragment of a <code>ProductFootprint</code>.
+A <code>PF Request Event</code> has the following syntax (see the <a href="https://wbcsd.github.io/data-exchange-protocol/v2/#api-action-events-case-2-request">Technical Specifications</a> for further details):</p>
+<pre class="highlight"><c- p>{</c->
+  <c- f>"type"</c-><c- p>:</c-> <c- u>"org.wbcsd.pathfinder.ProductFootprintRequest.Created.v1"</c-><c- p>,</c->
+  <c- f>"specversion"</c-><c- p>:</c-> <c- u>"1.0"</c-><c- p>,</c->
+  <c- f>"id"</c-><c- p>:</c-> <c- u>"</c-><a href="https://wbcsd.github.io/data-exchange-protocol/v2/#api-action-events-case-2-request"><c- u>EventId</c-></a><c- u>"</c-><c- p>,</c->
+  <c- f>"source"</c-><c- p>:</c-> <c- u>"//</c-><a href="https://wbcsd.github.io/data-exchange-protocol/v2/#pf-update-event"><c- u>EventHostname</c-></a><c- u>/</c-><a href="https://wbcsd.github.io/data-exchange-protocol/v2/#pf-update-event"><c- u>EventSubpath</c-></a><c- u>"</c-><c- p>,</c->
+  <c- f>"time"</c-><c- p>:</c-> <c- u>"2022-05-31T17:31:00Z"</c-><c- p>,</c->
+  <c- f>"data"</c-><c- p>:</c-> <c- p>{</c->
+    <c- f>"pf"</c-><c- p>:</c-> <a href="https://wbcsd.github.io/data-exchange-protocol/v2/#productfootprintfragment">Produc<c- kc>t</c->Foo<c- kc>t</c->pri<c- kc>nt</c->Fragme<c- kc>nt</c-></a><c- p>,</c->
+    <c- f>"comment"</c-><c- p>:</c-> <a href="https://wbcsd.github.io/data-exchange-protocol/v2/#pfrequestcomment">PFReques<c- kc>t</c->Comme<c- kc>nt</c-></a>
+  <c- p>}</c->
+<c- p>}</c->
+</pre>
+    <dd data-md>
+     <p><dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="pf-response-event">PF Response Event</dfn></p>
+    <dd data-md>
+     <p>After having received a <code>PF Request Event</code>, if the request is fulfilled, the <a data-link-type="dfn" href="#data-owner" id="ref-for-data-owner⑥">data owner</a> should send a <code>PF Response Event</code> as an answer.
+A <code>PF Response Event</code> has the following syntax (see the <a href="https://wbcsd.github.io/data-exchange-protocol/v2/#api-action-events-case-2-response">Technical Specifications</a> for further details):</p>
+<pre class="highlight"><c- p>{</c->
+  <c- f>"type"</c-><c- p>:</c-> <c- u>"org.wbcsd.pathfinder.ProductFootprintRequest.Fulfilled.v1"</c-><c- p>,</c->
+  <c- f>"specversion"</c-><c- p>:</c-> <c- u>"1.0"</c-><c- p>,</c->
+  <c- f>"id"</c-><c- p>:</c-> <c- u>"</c-><a href="https://wbcsd.github.io/data-exchange-protocol/v2/#api-action-events-case-2-request"><c- u>EventId</c-></a><c- u>"</c-><c- p>,</c->
+  <c- f>"source"</c-><c- p>:</c-> <c- u>"//</c-><a href="https://wbcsd.github.io/data-exchange-protocol/v2/#pf-update-event"><c- u>EventHostname</c-></a><c- u>/</c-><a href="https://wbcsd.github.io/data-exchange-protocol/v2/#pf-update-event"><c- u>EventSubpath</c-></a><c- u>"</c-><c- p>,</c->
+  <c- f>"data"</c-><c- p>:</c-> <c- p>{</c->
+    <c- f>"requestEventId"</c-><c- p>:</c-> <c- u>"</c-><a href="https://wbcsd.github.io/data-exchange-protocol/v2/#reqeventid"><c- u>ReqEventId</c-></a><c- u>"</c-><c- p>,</c->
+    <c- f>"pfs"</c-><c- p>:</c-> <a href="https://wbcsd.github.io/data-exchange-protocol/v2/#pfs">P<c- kc>fs</c-></a>
+  <c- p>}</c->
+<c- p>}</c->
+</pre>
+    <dd data-md>
+     <p><dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="pf-response-error-event">PF Response Error Event</dfn></p>
+    <dd data-md>
+     <p>After having received a <code>PF Request Event</code>, if the request is <strong>not</strong> fulfilled, the <a data-link-type="dfn" href="#data-owner" id="ref-for-data-owner⑦">data owner</a> should send a <code>PF Response Error Event</code> as an answer.
+A <code>PF Response Error Event</code> has the following syntax (see the <a href="https://wbcsd.github.io/data-exchange-protocol/v2/#api-action-events-case-2-response-error">Technical Specifications</a> for further details):</p>
+<pre class="highlight"><c- p>{</c->
+  <c- f>"type"</c-><c- p>:</c-> <c- u>"org.wbcsd.pathfinder.ProductFootprintRequest.Rejected.v1"</c-><c- p>,</c->
+  <c- f>"specversion"</c-><c- p>:</c-> <c- u>"1.0"</c-><c- p>,</c->
+  <c- f>"id"</c-><c- p>:</c-> <c- u>"</c-><a href="https://wbcsd.github.io/data-exchange-protocol/v2/#api-action-events-case-2-request"><c- u>EventId</c-></a><c- u>"</c-><c- p>,</c->
+  <c- f>"source"</c-><c- p>:</c-> <c- u>"..."</c-><c- p>,</c->
+  <c- f>"data"</c-><c- p>:</c-> <c- p>{</c->
+    <c- f>"requestEventId"</c-><c- p>:</c-> <c- u>"</c-><a href="https://wbcsd.github.io/data-exchange-protocol/v2/#reqeventid"><c- u>ReqEventId</c-></a><c- u>"</c-><c- p>,</c->
+    <c- f>"error"</c-><c- p>:</c-> <a href="https://wbcsd.github.io/data-exchange-protocol/v2/#reqerrorresponse">ReqErrorRespo<c- kc>nse</c-></a>
+  <c- p>}</c->
+<c- p>}</c->
+</pre>
+   </dl>
+   <h5 class="heading settled" data-level="3.2.1.2" id="response-syntax③"><span class="secno">3.2.1.2. </span><span class="content">Response Syntax</span><a class="self-link" href="#response-syntax③"></a></h5>
+<pre class="highlight"><c- kr>HTTP</c-><c- o>/</c-><c- m>1.1</c-> <c- m>200</c-> <c- ne>OK</c->
+<c- e>content-length</c-><c- o>:</c-> <c- l>0</c->
+</pre>
+   <h3 class="heading settled" data-level="3.3" id="error-responses"><span class="secno">3.3. </span><span class="content">Error Responses</span><a class="self-link" href="#error-responses"></a></h3>
+   <p>In case a call to the HTTP REST API is not successful, the response should be an error of one of the following types
+(for further details see <a href="https://wbcsd.github.io/data-exchange-protocol/v2/#api-error-responses">Section 6.9 of the Technical Specification</a>):</p>
+   <figure id="api-errors-table">
+    <table class="data">
+     <thead>
+      <tr>
+       <th><code>Error Response Code</code> 
+       <th><code>Example Message</code> 
+       <th><code>HTTP Status Code</code> 
+     <tbody>
+      <tr>
+       <td><dfn data-dfn-type="dfn" data-noexport id="accessdenied">AccessDenied<a class="self-link" href="#accessdenied"></a></dfn> 
+       <td>Access denied 
+       <td>403 
+      <tr>
+       <td><dfn data-dfn-type="dfn" data-noexport id="badrequest">BadRequest<a class="self-link" href="#badrequest"></a></dfn> 
+       <td>Bad Request 
+       <td>400 
+      <tr>
+       <td><dfn data-dfn-type="dfn" data-noexport id="nosuchfootprint">NoSuchFootprint<a class="self-link" href="#nosuchfootprint"></a></dfn> 
+       <td>The specified footprint does not exist. 
+       <td>404 
+      <tr>
+       <td><dfn class="dfn-paneled" data-dfn-type="dfn" data-export id="notimplemented">NotImplemented</dfn> 
+       <td>The specified Action or header you provided implies functionality that is not implemented 
+       <td>400 
+      <tr>
+       <td><dfn data-dfn-type="dfn" data-noexport id="tokenexpired">TokenExpired<a class="self-link" href="#tokenexpired"></a></dfn> 
+       <td>The specified access token has expired 
+       <td>401 
+      <tr>
+       <td><dfn data-dfn-type="dfn" data-noexport id="internalerror">InternalError<a class="self-link" href="#internalerror"></a></dfn> 
+       <td>An internal or unexpected error has occurred 
+       <td>500 
+    </table>
+    <figcaption>Listing of error codes and their related error response codes.</figcaption>
+   </figure>
    <h2 class="heading settled" data-level="4" id="appendix"><span class="secno">4. </span><span class="content">Appendix</span><a class="self-link" href="#appendix"></a></h2>
-   <h3 class="heading settled" data-level="4.1" id="example-payload"><span class="secno">4.1. </span><span class="content">Example Payload</span><a class="self-link" href="#example-payload"></a></h3>
-   <h3 class="heading settled" data-level="4.2" id="implementation-checklist-mandatory-functionality"><span class="secno">4.2. </span><span class="content">Implementation Checklist (Mandatory Functionality)</span><a class="self-link" href="#implementation-checklist-mandatory-functionality"></a></h3>
-   <h3 class="heading settled" data-level="4.3" id="implementation-checklist-optional-functionality"><span class="secno">4.3. </span><span class="content">Implementation Checklist (Optional Functionality)</span><a class="self-link" href="#implementation-checklist-optional-functionality"></a></h3>
+   <h3 class="heading settled" data-level="4.1" id="terminology"><span class="secno">4.1. </span><span class="content">Terminology</span><a class="self-link" href="#terminology"></a></h3>
+   <dl>
+    <dt data-md><dfn data-dfn-type="dfn" data-noexport id="data-model-extension">Data Model Extension<a class="self-link" href="#data-model-extension"></a></dfn>
+    <dd data-md>
+     <p>A data model extension is a set of definitions that extends the data model of this document.</p>
+     <p>The encoding of a data model extension in the data model is specified in <a href="#dt-datamodelextension"></a>.</p>
+     <p>See <span>[DATA-MODEL-EXTENSIONS]</span> and <span>[EXTENSIONS-GUIDANCE]</span> for further details.</p>
+    <dt data-md><dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="data-recipient">Data recipient</dfn>
+    <dd data-md>
+     <p>The <a data-link-type="dfn" href="#sca" id="ref-for-sca">Supply Chain Actor</a> requesting and/or receiving <a data-link-type="dfn" href="#pcf" id="ref-for-pcf">PCF</a> data from another <a data-link-type="dfn" href="#sca" id="ref-for-sca①">SCA</a>.</p>
+    <dt data-md><dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="data-owner">Data owner</dfn>
+    <dd data-md>
+     <p>The Supply Chain Actor (SCA) exchanging PCF data with another SCA.</p>
+    <dt data-md><dfn data-dfn-type="dfn" data-noexport id="interoperable">interoperable<a class="self-link" href="#interoperable"></a></dfn>
+    <dd data-md>
+     <p>The quality of being able to exchange data between <a data-link-type="dfn">host systems</a> irrespective of the vendors of the host systems, without the need for translation or transformation of the data.</p>
+    <dt data-md>Greenhouse Gas (emissions) (<dfn data-dfn-type="dfn" data-noexport id="ghg">GHG<a class="self-link" href="#ghg"></a></dfn>)
+    <dd data-md>
+     <p>Gaseous constituents of the atmosphere, both natural and anthropogenic, that absorb and emit radiation at specific wavelengths within the spectrum of infrared radiation emitted by the Earth’s surface, its atmosphere and clouds. GHGs include CDCO₂, Methane (CH4), Nitrous Oxide(N₂O), Hydrofluoro-Carbons (HFCs), Perfluorocarbons (PFCs) and Sulfur Hexafluoride (SF6).</p>
+    <dt data-md>Partnership for Carbon Transparency (<dfn data-dfn-type="dfn" data-noexport id="pact">PACT<a class="self-link" href="#pact"></a></dfn>)
+    <dd data-md>
+     <p>A WBCSD-led group of companies and organizations working together to develop a global and open network for the secure peer-to-peer exchange of accurate, primary and verified product emissions data. See <a href="www.carbon-transparency.com">www.carbon-transparency.com</a> for more information.</p>
+    <dt data-md>Pathfinder Framework Version 2.0 (<dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="pathfinder-framework①">Pathfinder Framework</dfn>)
+    <dd data-md>
+     <p>Guidance for the Accounting and Exchange of Product Life Cycle Emissions,
+building on existing standards and protocols, such as the GHG Protocol
+Product standard. See <span>[PATHFINDER-FRAMEWORK]</span> for further details.</p>
+    <dt data-md><dfn data-dfn-type="dfn" data-noexport id="pathfinder-network①">Pathfinder Network<a class="self-link" href="#pathfinder-network①"></a></dfn>
+    <dd data-md>
+     <p>An information network of and for supply chain actors to securely exchange environmental data with each other, with an initial focus on PCF data.</p>
+    <dt data-md>Product Carbon Footprint (<dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="pcf">PCF</dfn>)
+    <dd data-md>
+     <p>The carbon (equivalent) emissions relating to a product. Products can be any kind of item exchanged between entities, including “pieces”, metric or volumetric quantities of a product, etc. The <code><a data-link-type="element">ProductFootprint</a></code> data model is a digital representation of a PCF in accordance with the <a data-link-type="dfn" href="#pathfinder-framework①" id="ref-for-pathfinder-framework①">Pathfinder Framework</a>.</p>
+    <dt data-md>Supply Chain Actor (<dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="sca">SCA</dfn>)
+    <dd data-md>
+     <p>An entity intending on exchanging PCF data with another entity using the technical means specified in this document.</p>
+    <dt data-md><dfn data-dfn-type="dfn" data-noexport id="solution-provider">Solution Provider<a class="self-link" href="#solution-provider"></a></dfn>
+    <dd data-md>
+     <p>An entity providing technical solutions to SCAs by implementing and offering <a data-link-type="dfn">host systems</a>.</p>
+    <dt data-md><dfn data-dfn-type="dfn" data-noexport id="un-geographic-region">UN geographic region<a class="self-link" href="#un-geographic-region"></a></dfn>, <dfn data-dfn-type="dfn" data-noexport id="un-geographic-subregion">UN geographic subregion<a class="self-link" href="#un-geographic-subregion"></a></dfn>
+    <dd data-md>
+     <p>See <a href="https://unstats.un.org/unsd/methodology/m49/">https://unstats.un.org/unsd/methodology/m49/</a> for details.</p>
+   </dl>
+   <h3 class="heading settled" data-level="4.2" id="payload-examples"><span class="secno">4.2. </span><span class="content">Payload Examples</span><a class="self-link" href="#payload-examples"></a></h3>
+   <h4 class="heading settled" data-level="4.2.1" id="productfootprint-example"><span class="secno">4.2.1. </span><span class="content"><code>ProductFootprint</code> Example</span><a class="self-link" href="#productfootprint-example"></a></h4>
+<pre class="highlight"><c- p>{</c->
+    <c- f>"id"</c-><c- p>:</c-> <c- u>"d9be4477-e351-45b3-acd9-e1da05e6f633"</c-><c- p>,</c->
+    <c- f>"specVersion"</c-><c- p>:</c-> <c- u>"1.0.0"</c-><c- p>,</c->
+    <c- f>"version"</c-><c- p>:</c-> <c- mi>0</c-><c- p>,</c->
+    <c- f>"created"</c-><c- p>:</c-> <c- u>"2022-05-22T21:47:32Z"</c-><c- p>,</c->
+    <c- f>"companyName"</c-><c- p>:</c-> <c- u>"My Corp"</c-><c- p>,</c->
+    <c- f>"companyIds"</c-><c- p>:</c-> <c- p>[</c->
+        <c- u>"urn:uuid:51131FB5-42A2-4267-A402-0ECFEFAD1619"</c-><c- p>,</c->
+        <c- u>"urn:epc:id:sgln:4063973.00000.8"</c->
+    <c- p>],</c->
+    <c- f>"productDescription"</c-><c- p>:</c-> <c- u>"Cote’d Or Ethanol"</c-><c- p>,</c->
+    <c- f>"productIds"</c-><c- p>:</c-> <c- p>[</c->
+        <c- u>"urn:gtin:4712345060507"</c->
+    <c- p>],</c->
+    <c- f>"productCategoryCpc"</c-><c- p>:</c-> <c- u>"3342"</c-><c- p>,</c->
+    <c- f>"productNameCompany"</c-><c- p>:</c-> <c- u>"Green Ethanol"</c-><c- p>,</c->
+    <c- f>"comment"</c-><c- p>:</c-> <c- u>""</c-><c- p>,</c->
+    <c- f>"pcf"</c-><c- p>:</c-> <c- p>{</c->
+        <c- f>"declaredUnit"</c-><c- p>:</c-> <c- u>"liter"</c-><c- p>,</c->
+        <c- f>"unitaryProductAmount"</c-><c- p>:</c-> <c- u>"12.0"</c-><c- p>,</c->
+        <c- f>"fossilGhgEmissions"</c-><c- p>:</c-> <c- u>"0.123"</c-><c- p>,</c->
+        <c- f>"biogenicEmissions"</c-><c- p>:</c-> <c- p>{</c->
+            <c- f>"landUseEmissions"</c-><c- p>:</c-> <c- u>"0.001"</c-><c- p>,</c->
+            <c- f>"otherEmissions"</c-><c- p>:</c-> <c- u>"0"</c->
+        <c- p>},</c->
+        <c- f>"biogenicCarbonContent"</c-><c- p>:</c-> <c- u>"0.0"</c-><c- p>,</c->
+        <c- f>"reportingPeriodStart"</c-><c- p>:</c-> <c- u>"2021-01-01T00:00:00Z"</c-><c- p>,</c->
+        <c- f>"reportingPeriodEnd"</c-><c- p>:</c-> <c- u>"2022-01-01T00:00:00Z"</c-><c- p>,</c->
+        <c- f>"geographyCountry"</c-><c- p>:</c-> <c- u>"FR"</c-><c- p>,</c->
+        <c- f>"primaryDataShare"</c-><c- p>:</c-> <c- mf>56.12</c-><c- p>,</c->
+        <c- f>"emissionFactorSources"</c-><c- p>:</c-> <c- p>[</c->
+            <c- p>{</c->
+                <c- f>"name"</c-><c- p>:</c-> <c- u>"Ecoinvent"</c-><c- p>,</c->
+                <c- f>"version"</c-><c- p>:</c->
+                <c- u>"1.2.3"</c->
+            <c- p>}</c->
+        <c- p>],</c->
+        <c- f>"boundaryProcessesDescription"</c-><c- p>:</c-> <c- u>"End-of-life included"</c-><c- p>,</c->
+        <c- f>"crossSectoralStandardsUsed"</c-><c- p>:</c-> <c- p>[</c->
+            <c- u>"GHG Protocol Product standard"</c->
+        <c- p>],</c->
+        <c- f>"productOrSectorSpecificRules"</c-><c- p>:</c-> <c- p>[</c->
+            <c- p>{</c->
+                <c- f>"operator"</c-><c- p>:</c-> <c- u>"EPD International"</c-><c- p>,</c->
+                <c- f>"ruleNames"</c-><c- p>:</c-> <c- p>[</c->
+                    <c- u>"ABC 2021"</c->
+                <c- p>]</c->
+            <c- p>}</c->
+        <c- p>]</c->
+    <c- p>}</c->
+<c- p>}</c->
+</pre>
+   <h3 class="heading settled" data-level="4.3" id="implementation-checklist"><span class="secno">4.3. </span><span class="content">Implementation Checklist</span><a class="self-link" href="#implementation-checklist"></a></h3>
+   <p>This checklist is a recommendation from WBCSD to be used as a reference for the Bilateral Conformance Testing criteria.</p>
+   <h4 class="heading settled" data-level="4.3.1" id="mandatory"><span class="secno">4.3.1. </span><span class="content">Mandatory</span><a class="self-link" href="#mandatory"></a></h4>
+   <input type="checkbox">
+   The solution implements the <a href="#authenticate">§ 3.1.1 Authenticate</a> action <br> 
+   <input type="checkbox">
+   The solution implements the <a href="#listFootprints">§ 3.1.2 ListFootprints</a> action <br> 
+   <input type="checkbox">
+   The solution implements the <a href="#getFootprint">§ 3.1.3 GetFootprint</a> action <br> 
+   <input type="checkbox">
+   The <code>ListFootprints</code> action implements mandatory server-side pagination, in accordance with the <a href="https://wbcsd.github.io/data-exchange-protocol/v2/#api-action-list-pagination">Technical Specification</a> <br> 
+   <input type="checkbox">
+   All actions are offered under HTTPS method <br> 
+   <input type="checkbox">
+   The solution performs the <a href="https://wbcsd.github.io/data-exchange-protocol/v2/#api-auth">authentication flow described in the Technical Specification</a> <br> 
+   <input type="checkbox">
+   The solution’s endpoints follow the request/response syntax described above (in accordance with the <a href="https://wbcsd.github.io/data-exchange-protocol/v2/#api">Technical Specification</a>) <br> 
+   <input type="checkbox">
+   The solution implements the <a href="#error-responses">§ 3.3 Error Responses</a> described above (in accordance with the <a href="https://wbcsd.github.io/data-exchange-protocol/v2/#api-error-responses">Technical Specification</a>) <br> 
+   <input type="checkbox">
+   The solution <strong>either</strong> implements the <a href="#events">§ 3.2.1 Events</a> action <strong>or</strong> responds to authenticated <code>Events</code> calls with the <a data-link-type="dfn" href="#notimplemented" id="ref-for-notimplemented">NotImplemented</a> error code <br> 
+   <input type="checkbox">
+   The solution implements Product Lifecycle events and rules in accordance with the <a href="https://wbcsd.github.io/data-exchange-protocol/v2/#lifecycle">Technical Specifications</a> 
+   <h4 class="heading settled" data-level="4.3.2" id="optional"><span class="secno">4.3.2. </span><span class="content">Optional</span><a class="self-link" href="#optional"></a></h4>
+   <input type="checkbox">
+   The <code>ListFootprints</code> action [implements the <code>filter</code> option](https://wbcsd.github.io/data-exchange-protocol/v2/#filter) <br> 
+   <input type="checkbox">
+    The <code>ListFootprints</code> action implements the possibility of <a href="https://wbcsd.github.io/data-exchange-protocol/v2/#liststatuscode">getting partial results (HTTP code 202)</a> <br> 
+   <input type="checkbox">
+   The solution can be notified of updates to a <code>ProductFootprint</code> through the <code>Events</code> action, in accordance with the <a href="https://wbcsd.github.io/data-exchange-protocol/v2/#api-action-events-case-1">Technical Specifications</a> <br> 
+   <input type="checkbox">
+   The solution implements asynchronous request and retrieval of <code>ProductFootprint</code>s through the <code>Events</code> action, in accordance with the <a href="https://wbcsd.github.io/data-exchange-protocol/v2/#api-action-events-case-2">Technical Specificaitons</a> 
   </main>
 <script>
 (function() {
@@ -2514,4 +2864,207 @@ sending a <code>PF Update Event</code> (https://wbcsd.github.io/data-exchange-pr
   }
 
 })();
+</script>
+  <h2 class="no-num no-ref heading settled" id="index"><span class="content">Index</span><a class="self-link" href="#index"></a></h2>
+  <h3 class="no-num no-ref heading settled" id="index-defined-here"><span class="content">Terms defined by this specification</span><a class="self-link" href="#index-defined-here"></a></h3>
+  <ul class="index">
+   <li><a href="#accessdenied">AccessDenied</a><span>, in § 3.3</span>
+   <li><a href="#badrequest">BadRequest</a><span>, in § 3.3</span>
+   <li><a href="#data-model-extension">Data Model Extension</a><span>, in § 4.1</span>
+   <li><a href="#data-owner">Data owner</a><span>, in § 4.1</span>
+   <li><a href="#data-recipient">Data recipient</a><span>, in § 4.1</span>
+   <li><a href="#ghg">GHG</a><span>, in § 4.1</span>
+   <li><a href="#internalerror">InternalError</a><span>, in § 3.3</span>
+   <li><a href="#interoperable">interoperable</a><span>, in § 4.1</span>
+   <li><a href="#nosuchfootprint">NoSuchFootprint</a><span>, in § 3.3</span>
+   <li><a href="#notimplemented">NotImplemented</a><span>, in § 3.3</span>
+   <li><a href="#pact">PACT</a><span>, in § 4.1</span>
+   <li><a href="#pathfinder-framework①">Pathfinder Framework</a><span>, in § 4.1</span>
+   <li><a href="#pathfinder-network①">Pathfinder Network</a><span>, in § 4.1</span>
+   <li><a href="#pcf">PCF</a><span>, in § 4.1</span>
+   <li><a href="#pf-request-event">PF Request Event</a><span>, in § 3.2.1.1</span>
+   <li><a href="#pf-response-error-event">PF Response Error Event</a><span>, in § 3.2.1.1</span>
+   <li><a href="#pf-response-event">PF Response Event</a><span>, in § 3.2.1.1</span>
+   <li><a href="#pf-update-event">PF Update Event</a><span>, in § 3.2.1.1</span>
+   <li><a href="#sca">SCA</a><span>, in § 4.1</span>
+   <li><a href="#solution-provider">Solution Provider</a><span>, in § 4.1</span>
+   <li><a href="#tokenexpired">TokenExpired</a><span>, in § 3.3</span>
+   <li><a href="#un-geographic-region">UN geographic region</a><span>, in § 4.1</span>
+   <li><a href="#un-geographic-subregion">UN geographic subregion</a><span>, in § 4.1</span>
+  </ul>
+  <aside aria-labelledby="infopaneltitle-for-pf-update-event" class="dfn-panel" data-for="pf-update-event" id="infopanel-for-pf-update-event">
+   <span id="infopaneltitle-for-pf-update-event" style="display:none">Info about the 'PF Update Event' definition.</span><b><a href="#pf-update-event">#pf-update-event</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-pf-update-event">3.2.1. Events</a>
+    <li><a href="#ref-for-pf-update-event①">3.2.1.1. Request Syntax (HTTP/1.1)</a>
+   </ul>
+  </aside>
+  <aside aria-labelledby="infopaneltitle-for-pf-request-event" class="dfn-panel" data-for="pf-request-event" id="infopanel-for-pf-request-event">
+   <span id="infopaneltitle-for-pf-request-event" style="display:none">Info about the 'PF Request Event' definition.</span><b><a href="#pf-request-event">#pf-request-event</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-pf-request-event">3.2.1. Events</a>
+    <li><a href="#ref-for-pf-request-event①">3.2.1.1. Request Syntax (HTTP/1.1)</a>
+   </ul>
+  </aside>
+  <aside aria-labelledby="infopaneltitle-for-pf-response-event" class="dfn-panel" data-for="pf-response-event" id="infopanel-for-pf-response-event">
+   <span id="infopaneltitle-for-pf-response-event" style="display:none">Info about the 'PF Response Event' definition.</span><b><a href="#pf-response-event">#pf-response-event</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-pf-response-event">3.2.1. Events</a>
+    <li><a href="#ref-for-pf-response-event①">3.2.1.1. Request Syntax (HTTP/1.1)</a>
+   </ul>
+  </aside>
+  <aside aria-labelledby="infopaneltitle-for-pf-response-error-event" class="dfn-panel" data-for="pf-response-error-event" id="infopanel-for-pf-response-error-event">
+   <span id="infopaneltitle-for-pf-response-error-event" style="display:none">Info about the 'PF Response Error Event' definition.</span><b><a href="#pf-response-error-event">#pf-response-error-event</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-pf-response-error-event">3.2.1. Events</a>
+    <li><a href="#ref-for-pf-response-error-event①">3.2.1.1. Request Syntax (HTTP/1.1)</a>
+   </ul>
+  </aside>
+  <aside aria-labelledby="infopaneltitle-for-notimplemented" class="dfn-panel" data-for="notimplemented" id="infopanel-for-notimplemented">
+   <span id="infopaneltitle-for-notimplemented" style="display:none">Info about the 'NotImplemented' definition.</span><b><a href="#notimplemented">#notimplemented</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-notimplemented">4.3.1. Mandatory</a>
+   </ul>
+  </aside>
+  <aside aria-labelledby="infopaneltitle-for-data-recipient" class="dfn-panel" data-for="data-recipient" id="infopanel-for-data-recipient">
+   <span id="infopaneltitle-for-data-recipient" style="display:none">Info about the 'Data recipient' definition.</span><b><a href="#data-recipient">#data-recipient</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-data-recipient">3.2.1. Events</a> <a href="#ref-for-data-recipient①">(2)</a> <a href="#ref-for-data-recipient②">(3)</a> <a href="#ref-for-data-recipient③">(4)</a> <a href="#ref-for-data-recipient④">(5)</a>
+    <li><a href="#ref-for-data-recipient⑤">3.2.1.1. Request Syntax (HTTP/1.1)</a> <a href="#ref-for-data-recipient⑥">(2)</a>
+   </ul>
+  </aside>
+  <aside aria-labelledby="infopaneltitle-for-data-owner" class="dfn-panel" data-for="data-owner" id="infopanel-for-data-owner">
+   <span id="infopaneltitle-for-data-owner" style="display:none">Info about the 'Data owner' definition.</span><b><a href="#data-owner">#data-owner</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-data-owner">3.2.1. Events</a> <a href="#ref-for-data-owner①">(2)</a> <a href="#ref-for-data-owner②">(3)</a> <a href="#ref-for-data-owner③">(4)</a>
+    <li><a href="#ref-for-data-owner④">3.2.1.1. Request Syntax (HTTP/1.1)</a> <a href="#ref-for-data-owner⑤">(2)</a> <a href="#ref-for-data-owner⑥">(3)</a> <a href="#ref-for-data-owner⑦">(4)</a>
+   </ul>
+  </aside>
+  <aside aria-labelledby="infopaneltitle-for-pathfinder-framework①" class="dfn-panel" data-for="pathfinder-framework①" id="infopanel-for-pathfinder-framework①">
+   <span id="infopaneltitle-for-pathfinder-framework①" style="display:none">Info about the 'Pathfinder Framework' definition.</span><b><a href="#pathfinder-framework①">#pathfinder-framework①</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-pathfinder-framework①">4.1. Terminology</a>
+   </ul>
+  </aside>
+  <aside aria-labelledby="infopaneltitle-for-pcf" class="dfn-panel" data-for="pcf" id="infopanel-for-pcf">
+   <span id="infopaneltitle-for-pcf" style="display:none">Info about the 'PCF' definition.</span><b><a href="#pcf">#pcf</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-pcf">4.1. Terminology</a>
+   </ul>
+  </aside>
+  <aside aria-labelledby="infopaneltitle-for-sca" class="dfn-panel" data-for="sca" id="infopanel-for-sca">
+   <span id="infopaneltitle-for-sca" style="display:none">Info about the 'SCA' definition.</span><b><a href="#sca">#sca</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-sca">4.1. Terminology</a> <a href="#ref-for-sca①">(2)</a>
+   </ul>
+  </aside>
+<script>/* script-dfn-panel */
+"use strict";
+{
+    function queryAll(sel) {
+        return [].slice.call(document.querySelectorAll(sel));
+    }
+
+    // Add popup behavior to all dfns to show the corresponding dfn-panel.
+    var dfns = document.querySelectorAll('.dfn-paneled');
+    for (let dfn of dfns) { insertDfnPopupAction(dfn); }
+
+    document.body.addEventListener("click", (e) => {
+        // If not handled already, just hide all dfn panels.
+        hideAllDfnPanels();
+    });
+
+    function hideAllDfnPanels() {
+        // Turn off any currently "on" or "activated" panels.
+        queryAll(".dfn-panel.on, .dfn-panel.activated").forEach(el=>hideDfnPanel(el));
+    }
+
+    function showDfnPanel(dfnPanel, dfn) {
+        hideAllDfnPanels(); // Only display one at this time.
+        dfn.setAttribute("aria-expanded", "true");
+        dfnPanel.classList.add("on");
+        dfnPanel.style.left = "5px";
+        dfnPanel.style.top = "0px";
+        const panelRect = dfnPanel.getBoundingClientRect();
+        const panelWidth = panelRect.right - panelRect.left;
+        if (panelRect.right > document.body.scrollWidth) {
+            // Panel's overflowing the screen.
+            // Just drop it below the dfn and flip it rightward instead.
+            // This still wont' fix things if the screen is *really* wide,
+            // but fixing that's a lot harder without 'anchor()'.
+            dfnPanel.style.top = "1.5em";
+            dfnPanel.style.left = "auto";
+            dfnPanel.style.right = "0px";
+        }
+    }
+
+    function pinDfnPanel(dfnPanel) {
+        // Switch it to "activated" state, which pins it.
+        dfnPanel.classList.add("activated");
+        dfnPanel.style.left = null;
+        dfnPanel.style.top = null;
+    }
+
+    function hideDfnPanel(dfnPanel, dfn) {
+        if(!dfn) {
+            dfn = document.getElementById(dfnPanel.getAttribute("data-for"));
+        }
+        dfn.setAttribute("aria-expanded", "false")
+        dfnPanel.classList.remove("on");
+        dfnPanel.classList.remove("activated");
+    }
+
+    function toggleDfnPanel(dfnPanel, dfn) {
+        if(dfnPanel.classList.contains("on")) {
+            hideDfnPanel(dfnPanel, dfn);
+        } else {
+            showDfnPanel(dfnPanel, dfn);
+        }
+    }
+
+    function insertDfnPopupAction(dfn) {
+        // Find dfn panel
+        const dfnPanel = document.querySelector(`.dfn-panel[data-for='${dfn.id}']`);
+        if (dfnPanel) {
+            const panelWrapper = document.createElement('span');
+            panelWrapper.appendChild(dfnPanel);
+            panelWrapper.style.position = "relative";
+            panelWrapper.style.height = "0px";
+            dfn.insertAdjacentElement("afterend", panelWrapper);
+            dfn.setAttribute('role', 'button');
+            dfn.setAttribute('aria-expanded', 'false')
+            dfn.tabIndex = 0;
+            dfn.classList.add('has-dfn-panel');
+            dfn.addEventListener('click', (event) => {
+                showDfnPanel(dfnPanel, dfn);
+                event.stopPropagation();
+            });
+            dfn.addEventListener('keypress', (event) => {
+                const kc = event.keyCode;
+                // 32->Space, 13->Enter
+                if(kc == 32 || kc == 13) {
+                    toggleDfnPanel(dfnPanel, dfn);
+                    event.stopPropagation();
+                    event.preventDefault();
+                }
+            });
+
+            dfnPanel.addEventListener('click', (event) => {
+                pinDfnPanel(dfnPanel);
+                event.stopPropagation();
+            });
+
+            dfnPanel.addEventListener('keydown', (event) => {
+                if(event.keyCode == 27) { // Escape key
+                    hideDfnPanel(dfnPanel, dfn);
+                    event.stopPropagation();
+                    event.preventDefault();
+                }
+            })
+
+        } else {
+            console.log("Couldn't find .dfn-panel[data-for='" + dfn.id + "']");
+        }
+    }
+}
 </script>
