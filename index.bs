@@ -84,7 +84,7 @@ Bellow is a list of all endpoints exposed by this example:
 
 Authentication is made through a `POST` call to the `/2/auth/token` endpoint with id/client_id/username `hello` and secret/client_secret/password `pathfinder`.
 
-Details about the `Authenticate` action, the authenticate process, and the authentication protocol used can be found in section [[#authenticate]].
+Details about the `Authenticate` action, the authentication process, and the authentication protocol used can be found in section [[#authenticate]].
 
 <div class='example'>
 : Action
@@ -110,13 +110,9 @@ Details about the `Authenticate` action, the authenticate process, and the authe
     </pre>
     </div>
 
-If using Swagger, click the `Authorize` button on the top-right and then, in the modal, use `hello` as the `client_id` and `pathfinder` as the `client_secret`.
-If using Postman, use `hello` as the username and `pathfinder` as the password.
-
-This access token must be used in other calls to the API.
+This access token thus obtained must be used in other calls to the API.
 
 ## Fetching Data
-
 
 Fetching data from the example API can be made through two actions:
 
@@ -125,16 +121,13 @@ Fetching data from the example API can be made through two actions:
 : [[#getFootprint-example]]
 :: retrieves a single ProductFootprint given its unique ID.
 
-### `ListFootprints` Action ### {#listFootprints-example}
+### `ListFootprints` ### {#listFootprints-example}
 
-FILTER DOESN'T SEEM TO BE WORKING IN OUR EXAMPLE
+The `ListFootprints` action provides the authenticated user a list of the `ProductFootprint`s available to them, throught the `/2/footprints` endpoint.
 
-The `ListFootprints` action provides the authenticated user a list of the `ProductFootprints` available to them, throught the `/2/footprints` endpoint.
+A `GET` request to this endpoint can be made with the optional `limit` parameter, taking an integer, which restricts the number of the `ProductFootprint`s displayed to that integer.
 
-A `GET` request to this endpoint can be made wih two optional parameters: `limit`, which takes an integer, and `filter`, which takes a string.
-If left blank, the response will display all `ProductFootprints` available to the user.
-
-The response to a successful call will be a `JSON` object with one field: an array of `ProductFootprint` objects.
+Note: A second optional parameter `filter` is also envisaged but not yet implemented in this example. See [[#listFootprints]] for details.
 
 <div class='example'>
 : Action
@@ -177,13 +170,10 @@ The response to a successful call will be a `JSON` object with one field: an arr
     </p>
     </div>
 
-### `GetFootprint` Action ### {#getFootprint-example}
+### `GetFootprint` ### {#getFootprint-example}
 
-The `GetFootprint` action provides the authenticated user a specific `ProductFootprint`, identified by its unique `id`.
+The `GetFootprint` action provides the authenticated user a specific `ProductFootprint`, identified by its unique `id`, through a `GET` call made to the `/2/footprints/<footprint-id>` endpoint.
 Typically this is performed to get the latest version of that `ProductFootprint`.
-A `GET` call has to be made to the `/2/footprints/<footprint-id>` endpoint.
-
-The response to a successful call will be a `JSON` object with one field: a data object with one `ProductFootprint` object.
 
 <div class='example'>
 : Action
@@ -219,15 +209,22 @@ The response to a successful call will be a `JSON` object with one field: a data
 
 ## Sending an event ## {#events-example}
 
-In the `Events` action, the example API plays the role of `Data Recipient` rather than `Data Owner`.
-It is, therefore, fundamentally different from the previous actions.
-Through the `Events` action, the authenticated user (the `Data Owner` in this case) notifies the example API that some PCF has been updated.
 
-To execute this action, the authenticated user must make a `POST` call to the `/2/events` endpoint, sendig a [`PF Update Event`](https://wbcsd.github.io/data-exchange-protocol/v2/#pf-update-event) in its body.
+In the actions above ([[#listFootprints-example]] and [[#getFootprint-example]]), the authenticated user played the role of [=data recipient=] and the solution that of [=data owner=].
+The flow of information is the following: the data recipient asks the data owner for `ProductFootprint`(s) and the data owner sends them over.
 
-The syntax of `PF Update Event` and its fields can be found [here](https://wbcsd.github.io/data-exchange-protocol/v2/#api-action-events-case-1)
+The `Events` action allows for more complex interactions between data owner and data recipient:
+<ul>
+  <li> Notification of data recipients on `ProductFootprint` updates;
+  <li> Asynchronous request and retrieval of `ProductFootprints`.
+</ul>
+Of this, only the former is implemented in this example.
 
-The response to a successfull call to the `/2/events` endpoint will have the HTTP Status Code 200 and <strong>an empty body</strong>.
+The `/2/events` endpoint allows the example API to play the role of data recipient, which can be notified of an update to a `ProductFootprint`.
+
+To execute this action, the authenticated user (in this case, the data owner) must make a `POST` call to the `/2/events` endpoint, sendig a [`PF Update Event`](https://wbcsd.github.io/data-exchange-protocol/v2/#pf-update-event) in its body.
+
+For details about the syntax of the request and response see [[#events]].
 
 Note: This functionality is optional. See [[#optional-functionality]] for more details.
 <div class='example'>
