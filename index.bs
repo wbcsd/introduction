@@ -15,57 +15,65 @@ Boilerplate: omit conformance, omit copyright
 
 # Introduction
 
+This document aims to provide guidance to those developing PACT Conformant Solutions.
+It is not self-contained and does not replace the [Technical Specifications](https://wbcsd.github.io/data-exchange-protocol/v2).
+It can nevertheless be used as the main source for developers, as it links to the Technical Specifications whenever needed.
+
 ## Our goal
 
-TEMP:
-Net zero emissions before 2050.
-Scope 3 emissions' primary data, rather than estimates, etc.
-Need interoperability.
-
-## Pathfinder Framework
-
-TEMP:
-The Pathfinder Framework provides industry-agnostic methodological guidance for the calculation of product-level emissions data. It also defines which data elements are exchanged within value chains
-
-Guidance for the Accounting and Exchange of Product Life Cycle Emissions, building on existing standards and protocols, such as the GHG Protocol Product standard). See the Pathfinder Framework Version 1 for details.
-
-## Product Carbon Footprint (PCF)
-
-The carbon (equivalent) emissions relating to a product. Products can be any kind of item exchanged between entities, including “pieces”, metric or volumetric quantities of a product, etc.
-
-Within the context of the Pathfinder Framework Data Model, a PCF is represented as a `ProductFootprint` object.
-Details about `ProductFootprint`, including a description of all its fields, can be found [here](https://wbcsd.github.io/data-exchange-protocol/v2/#dt-pf).
-An example of `ProductFootprint` as it occurs in an OK Response payload of an API implementing the technical specifications can be found in the [[#example-payload]] section.
+The [Partnership for Carbon Transparency (PACT)](https://carbon-transparency.com) seeks to accelerate decarbonization through the creation of transparency on emissions in the value chain.
+For that end, we need an open and global network of interoperable solutions for the secure, peer-to-peer exchange of accurate, primary and verified product emissions data — across all industries and value chains.
+The [[#pathfinder-network]] aims at being precisely this network of interoperable solutions.
+In order to establish it and take it further, we propose the adoption of the[[#pathfinder-framework]] methodology.
+Following it, we shall be able to exchange [[#product-carbon-footprint]]s through entire suply and vlaue chains, hopefully reaching net zero emissions before 2050.
 
 ## Pathfinder Network
 
-TEMP:
-The Pathfinder Network is a data exchange infrastructure that enables organizations to connect across value chains and industries to share product carbon footprint data. The Network creates interoperability between technology solutions and industry-focused data exchange platforms, meaning organizations are flexible in their choice of provider. It can be seen as a sort of convener or facilitator. In the simplest of terms, we aim is to create the “internet for emissions data” – the common nexus for all organizations to connect seamlessly, exchange and derive insights from emissions data.
+The Pathfinder Network is a concept developed by [PACT](https://carbon-transparency.com) and powered by the [World Business Council for Sustainable Development (WBCSD)](https://www.wbcsd.org/).
+It refers to the data exchange infrastructure that enables organizations to connect across value chains and industries to share [=Product Carbon Footprint=] (PCF) data.
+The Network creates interoperability between technology solutions and industry-focused data exchange platforms, meaning organizations are flexible in their choice of provider.
+It can be seen as a sort of convener or facilitator.
+In the simplest of terms, through the Pathfinder Network, we aim to create the “internet for emissions data” — the common nexus for all organizations to connect seamlessly, exchange and derive insights from emissions data.
 
-The Pathfinder Network is a concept developed by PACT and powered by the World Business Council for Sustainable Development (WBCSD). PACT is working toward the vision of an open and global network of interoperable solutions for the secure peer-to-peer exchange of accurate, primary and verified product emissions data – across all industries and value chains.
-For further information, please refer to the PACT website www.carbon-transparency.com and the Pathfinder vision paper “Pathfinder Network: Enabling standardized emissions data exchange”.
+## Pathfinder Framework
 
-An information network of and for supply chain actors to securely exchange environmental data with each other, with an initial focus on PCF data.
+The [Pathfinder Framework](https://www.carbon-transparency.com/our-approach/pathfinder-framework) provides industry-agnostic methodological guidance for the calculation of product-level emissions data.
+The adoption of the methodology described in [Pathfinder Framework:  Guidance for the Accounting and Exchange of Product Life Cycle Emissions](https://www.carbon-transparency.com/media/srhhloun/pathfinder-framework.pdf) makes it possible to exchange [=Product Carbon Footprint=] data, hence being essential for the establishment and growth of the Pathfinder Network.
+The technical counterpart of this methodology is described in detail in the [Technical Specifications](https://wbcsd.github.io/data-exchange-protocol/v2), which will be refered to several times throughout this document.
+
+## Product Carbon Footprint (PCF) ## {#product-carbon-footprint}
+
+A [=Product Carbon Footprint=] is the carbon (equivalent) emissions relating to a product.
+Products can be any kind of item exchanged between entities, including “pieces”, metric or volumetric quantities of a product, etc.
+
+Within the context of the Pathfinder Framework, [=Product Carbon Footprint=]s are represented as `ProductFootprint` objects.
+Details about `ProductFootprint`, including a description of all its fields, can be found [here](https://wbcsd.github.io/data-exchange-protocol/v2/#dt-pf).
+An example of `ProductFootprint` as it occurs in an OK Response payload of a solution's API can be found in the [[#example-payload]] section.
 
 ## What do I need to implement to exchange PCFs through the Pathfinder Network?
 
-In order to exchange PCF data through the Pathfinder Network, you ought to provide a solution that abides to the Pathfinder technical specifications.
-You can either refer to the technical sepcifications, or follow the instructions below.
+In order to exchange [=Product Carbon Footprint=] (PCF) data through the Pathfinder Network, a solution must abide to the Pathfinder [Technical Specifications](https://wbcsd.github.io/data-exchange-protocol/v2).
+In a nutshell, this amounts to implementing an HTTP REST API, with three mandatory actions ([[#authenticate]], [[#listFootprints]], and [[#getFootprint]]) and one optional action ([[#events]]).
+Below (in section [[#example-api]]) you will find an example API which should give you a more concrete idea of what is required.
+You will also find detailed instructions on how to build your own solution's API (in section [[#overview]]), in constant reference to the Technical Specifications.
+In the appendix, you will also find a [[#checklist]] to make sure your solution meets the necessary requirements.
 
-# Example API - Plug and Play
+Once your solution is ready, do not forget to [submit it to the Online Catalog](https://pact-catalog.sine.dev) and test it in one of PACT's monthly connectathons.
 
-The following is an example implementation of an HTTP REST API conforming to the Pathfinder [Technical Specifications](https://wbcsd.github.io/data-exchange-protocol/v2/#action-authenticate).
+# Example API - Plug and Play # {#example-api}
+
+The following is an example implementation of an HTTP REST API conforming to the Pathfinder [Technical Specifications](https://wbcsd.github.io/data-exchange-protocol/v2/).
 
 A demo online version of this API is available at [https://api.pathfinder.sine.dev](https://api.pathfinder.sine.dev) and will be used in all examples below.
 If you want to run the example API locally, you can also do so, by cloning [this repository](https://github.com/wbcsd/pathfinder-use-case-001) and following the instructions [provided here](https://github.com/wbcsd/pathfinder-use-case-001/tree/main/endpoint)
 
 A Swager UI visualization is available [here](https://api.pathfinder.sine.dev/swagger-ui).
 
-Bellow is a list of all endpoints provided by this example:
+Bellow is a list of all endpoints exposed by this example:
 
 <ul>
     <li><code highlight='sh'>/2/auth/token</code> — implements [[#authenticate-example]]
-    <li><code highlight='sh'>/2/footprints</code> — implements [[#listFootprints-example]]
+    <li><code highlight='sh'>/2/footprints</code> — implements [[#listFootprints-example]] (but not yet the `filter` option)
     <li><code highlight='sh'>/2/footprints/&lt;footprint-id&gt;</code> — implements [[#getFootprint-example]]
     <li><code highlight='sh'>/2/events</code> — implements [[#events-example]]
     <li><code highlight='sh'>/openapi.json</code> — OpenAPI description file
@@ -74,11 +82,9 @@ Bellow is a list of all endpoints provided by this example:
 
 ## Authentication ## {#authenticate-example}
 
-Authentication is made through the `Authenticate` action, in accordance with the OAuth2 Client Credentials Grant ([RFC6749 4.4](https://datatracker.ietf.org/doc/html/rfc6749#section-4.4)).
+Authentication is made through a `POST` call to the `/2/auth/token` endpoint with id/client_id/username `hello` and secret/client_secret/password `pathfinder`.
 
-The API exposes the `/2/auth/token` endpoint, to which a `POST` call must be made, with the following credentials:
-
-The response to a successful call will be a `JSON` object with three fields: `access_token`, `token_type`, and `scope`.
+Details about the `Authenticate` action, the authenticate process, and the authentication protocol used can be found in section [[#authenticate]].
 
 <div class='example'>
 : Action
@@ -257,7 +263,7 @@ Note: This functionality is optional. See [[#optional-functionality]] for more d
 :: HTTP status code 200 with empty body
     </div>
 
-# Overview of the Technical Specification
+# Overview of the Technical Specification # {#overview}
 
 The [Technical Specification](https://wbcsd.github.io/data-exchange-protocol/v2/#pf-properties) specifies a data model for GHG emission data at product level based on the Pathfinder Framework Version 2, and a protocol for interoperable exchange of GHG emission data at product level.
 
@@ -400,8 +406,8 @@ In the context of this HTTP REST API, it can be a [=PF Update Event=], a [=PF Re
 
 :: <dfn>PF Update Event</dfn>
 :: Through a `PF Update Event`, the [=data owner=] notifies the [=data recipient=] know that a certain `ProductFootprint` was updated.
-A `PF Update Event` has the following syntax (see the [Technical Specifications](https://wbcsd.github.io/data-exchange-protocol/v2/#pf-update-event) for further details):
-<pre highlight=json>
+    A `PF Update Event` has the following syntax (see the [Technical Specifications](https://wbcsd.github.io/data-exchange-protocol/v2/#pf-update-event) for further details):
+    <pre highlight=json>
 {
   "type": "org.wbcsd.pathfinder.ProductFootprint.Published.v1",
   "specversion": "1.0",
@@ -416,8 +422,8 @@ A `PF Update Event` has the following syntax (see the [Technical Specifications]
 
 :: <dfn>PF Request Event</dfn>
 :: Through a `PF Request Event`, the [=data recipient=] asks the [=data owner=] to be sent a fragment of a `ProductFootprint`.
-A `PF Request Event` has the following syntax (see the [Technical Specifications](https://wbcsd.github.io/data-exchange-protocol/v2/#api-action-events-case-2-request) for further details):
-<pre highlight=json>
+    A `PF Request Event` has the following syntax (see the [Technical Specifications](https://wbcsd.github.io/data-exchange-protocol/v2/#api-action-events-case-2-request) for further details):
+    <pre highlight=json>
 {
   "type": "org.wbcsd.pathfinder.ProductFootprintRequest.Created.v1",
   "specversion": "1.0",
@@ -433,8 +439,8 @@ A `PF Request Event` has the following syntax (see the [Technical Specifications
 
 :: <dfn>PF Response Event</dfn>
 :: After having received a `PF Request Event`, if the request is fulfilled, the [=data owner=] should send a `PF Response Event` as an answer.
-A `PF Response Event` has the following syntax (see the [Technical Specifications](https://wbcsd.github.io/data-exchange-protocol/v2/#api-action-events-case-2-response) for further details):
-<pre highlight=json>
+    A `PF Response Event` has the following syntax (see the [Technical Specifications](https://wbcsd.github.io/data-exchange-protocol/v2/#api-action-events-case-2-response) for further details):
+    <pre highlight=json>
 {
   "type": "org.wbcsd.pathfinder.ProductFootprintRequest.Fulfilled.v1",
   "specversion": "1.0",
@@ -449,8 +455,8 @@ A `PF Response Event` has the following syntax (see the [Technical Specification
 
 :: <dfn>PF Response Error Event</dfn>
 :: After having received a `PF Request Event`, if the request is <strong>not</strong> fulfilled, the [=data owner=] should send a `PF Response Error Event` as an answer.
-A `PF Response Error Event` has the following syntax (see the [Technical Specifications](https://wbcsd.github.io/data-exchange-protocol/v2/#api-action-events-case-2-response-error) for further details):
-<pre highlight=json>
+    A `PF Response Error Event` has the following syntax (see the [Technical Specifications](https://wbcsd.github.io/data-exchange-protocol/v2/#api-action-events-case-2-response-error) for further details):
+    <pre highlight=json>
 {
   "type": "org.wbcsd.pathfinder.ProductFootprintRequest.Rejected.v1",
   "specversion": "1.0",
@@ -547,7 +553,7 @@ In case a call to the HTTP REST API is not successful, the response should be an
 : <dfn>Pathfinder Network</dfn>
 :: An information network of and for supply chain actors to securely exchange environmental data with each other, with an initial focus on PCF data.
 
-: Product Carbon Footprint (<dfn>PCF</dfn>)
+: <dfn>Product Carbon Footprint</dfn> (PCF)
 :: The carbon (equivalent) emissions relating to a product. Products can be any kind of item exchanged between entities, including “pieces”, metric or volumetric quantities of a product, etc. The <{ProductFootprint}> data model is a digital representation of a PCF in accordance with the [=Pathfinder Framework=].
 
 : Supply Chain Actor (<dfn>SCA</dfn>)
@@ -618,7 +624,7 @@ In case a call to the HTTP REST API is not successful, the response should be an
         </pre>
 
 
-## Implementation Checklist
+## Implementation Checklist ## {#checklist}
 
 This checklist is a recommendation from WBCSD to be used as a reference for the Bilateral Conformance Testing criteria.
 
@@ -645,7 +651,7 @@ This checklist is a recommendation from WBCSD to be used as a reference for the 
 <input type=checkbox>The solution implements Product Lifecycle events and rules in accordance with the [Technical Specifications](https://wbcsd.github.io/data-exchange-protocol/v2/#lifecycle)
 
 ### Optional
-<input type=checkbox>The `ListFootprints` action [implements the `filter` option](https://wbcsd.github.io/data-exchange-protocol/v2/#filter)
+<input type=checkbox>The `ListFootprints` action [implements the filter option](https://wbcsd.github.io/data-exchange-protocol/v2/#filter)
 </br>
 <input type=checkbox> The `ListFootprints` action implements the possibility of [getting partial results (HTTP code 202)](https://wbcsd.github.io/data-exchange-protocol/v2/#liststatuscode)
 </br>
