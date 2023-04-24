@@ -6,7 +6,7 @@ Status: LD
 URL: https://wbcsd.github.io/introduction/
 Editor:
 Mailing List: public-dev@pathfinder.sine.dev
-Repository: sine-fnd/intro
+Repository: wbcsd/introduction
 Abstract: To reach net zero emissions before 2050, we need all business to measure, account for and disclose carbon emissions as a first step to reducing them.
  The PACT (Partnership for Carbon Transparency) Initative is cross-value chain initiative to define and accelerate credible, verified primary emission data exchange.
 Markup Shorthands: markdown yes
@@ -15,21 +15,21 @@ Boilerplate: omit conformance, omit copyright
 
 # Introduction
 
-This document aims to provide guidance to those developing PACT Conformant Solutions.
+This document aims to provide guidance to those developing [PACT Conformant Solutions](https://pact-catalog.sine.dev/solutions).
 It is not self-contained and does not replace the [Technical Specifications](https://wbcsd.github.io/data-exchange-protocol/v2).
 It can nevertheless be used as the main source for developers, as it links to the Technical Specifications whenever needed.
 
 ## Our goal
 
 The [Partnership for Carbon Transparency (PACT)](https://carbon-transparency.com) seeks to accelerate decarbonization through the creation of transparency on emissions in the value chain.
-For that end, we need an open and global network of interoperable solutions for the secure, peer-to-peer exchange of accurate, primary and verified product emissions data — across all industries and value chains.
+For that end, we need an open and global network of [=interoperable=] solutions for the secure, peer-to-peer exchange of accurate, primary and verified product emissions data — across all industries and value chains.
 The [[#pathfinder-network]] aims at being precisely this network of interoperable solutions.
-In order to establish it and take it further, we propose the adoption of the[[#pathfinder-framework]] methodology.
+In order to establish it and take it further, we propose the adoption of the [[#pathfinder-framework]] methodology.
 Following it, we shall be able to exchange [[#product-carbon-footprint]]s through entire suply and vlaue chains, hopefully reaching net zero emissions before 2050.
 
 ## Pathfinder Network
 
-The Pathfinder Network is a concept developed by [PACT](https://carbon-transparency.com) and powered by the [World Business Council for Sustainable Development (WBCSD)](https://www.wbcsd.org/).
+The [=Pathfinder Network=] is a concept created by the [Partnershipt for Carbon Transparency](https://carbon-transparency.com) and powered by the [World Business Council for Sustainable Development (WBCSD)](https://www.wbcsd.org/).
 It refers to the data exchange infrastructure that enables organizations to connect across value chains and industries to share [=Product Carbon Footprint=] (PCF) data.
 The Network creates interoperability between technology solutions and industry-focused data exchange platforms, meaning organizations are flexible in their choice of provider.
 It can be seen as a sort of convener or facilitator.
@@ -37,8 +37,8 @@ In the simplest of terms, through the Pathfinder Network, we aim to create the �
 
 ## Pathfinder Framework
 
-The [Pathfinder Framework](https://www.carbon-transparency.com/our-approach/pathfinder-framework) provides industry-agnostic methodological guidance for the calculation of product-level emissions data.
-The adoption of the methodology described in [Pathfinder Framework:  Guidance for the Accounting and Exchange of Product Life Cycle Emissions](https://www.carbon-transparency.com/media/srhhloun/pathfinder-framework.pdf) makes it possible to exchange [=Product Carbon Footprint=] data, hence being essential for the establishment and growth of the Pathfinder Network.
+The [=Pathfinder Framework=] provides industry-agnostic methodological guidance for the calculation of product-level emissions data.
+The adoption of the methodology described in [Pathfinder Framework:  Guidance for the Accounting and Exchange of Product Life Cycle Emissions](https://www.carbon-transparency.com/media/srhhloun/pathfinder-framework.pdf) makes it possible to exchange [=Product Carbon Footprint=] data, hence being essential for the establishment and growth of the [=Pathfinder Network=].
 The technical counterpart of this methodology is described in detail in the [Technical Specifications](https://wbcsd.github.io/data-exchange-protocol/v2), which will be refered to several times throughout this document.
 
 ## Product Carbon Footprint (PCF) ## {#product-carbon-footprint}
@@ -48,14 +48,14 @@ Products can be any kind of item exchanged between entities, including “pieces
 
 Within the context of the Pathfinder Framework, [=Product Carbon Footprint=]s are represented as `ProductFootprint` objects.
 Details about `ProductFootprint`, including a description of all its fields, can be found [here](https://wbcsd.github.io/data-exchange-protocol/v2/#dt-pf).
-An example of `ProductFootprint` as it occurs in an OK Response payload of a solution's API can be found in the [[#example-payload]] section.
+An example of `ProductFootprint` can be found in the [[#productfootprint-example]] section.
 
 ## What do I need to implement to exchange PCFs through the Pathfinder Network?
 
-In order to exchange [=Product Carbon Footprint=] (PCF) data through the Pathfinder Network, a solution must abide to the Pathfinder [Technical Specifications](https://wbcsd.github.io/data-exchange-protocol/v2).
+In order to exchange [=Product Carbon Footprint=] (PCF) data through the Pathfinder Network, a solution must conform to the Pathfinder [Technical Specifications](https://wbcsd.github.io/data-exchange-protocol/v2).
 In a nutshell, this amounts to implementing an HTTP REST API, with three mandatory actions ([[#authenticate]], [[#listFootprints]], and [[#getFootprint]]) and one optional action ([[#events]]).
 Below (in section [[#example-api]]) you will find an example API which should give you a more concrete idea of what is required.
-You will also find detailed instructions on how to build your own solution's API (in section [[#overview]]), in constant reference to the Technical Specifications.
+You will also find detailed instructions on how to build your own solution's API (in section [[#overview]]), by repeatedly referring to the Technical Specifications.
 In the appendix, you will also find a [[#checklist]] to make sure your solution meets the necessary requirements.
 
 Once your solution is ready, do not forget to [submit it to the Online Catalog](https://pact-catalog.sine.dev) and test it in one of PACT's monthly connectathons.
@@ -64,10 +64,10 @@ Once your solution is ready, do not forget to [submit it to the Online Catalog](
 
 The following is an example implementation of an HTTP REST API conforming to the Pathfinder [Technical Specifications](https://wbcsd.github.io/data-exchange-protocol/v2/).
 
-A demo online version of this API is available at [https://api.pathfinder.sine.dev](https://api.pathfinder.sine.dev) and will be used in all examples below.
-If you want to run the example API locally, you can also do so, by cloning [this repository](https://github.com/wbcsd/pathfinder-use-case-001) and following the instructions [provided here](https://github.com/wbcsd/pathfinder-use-case-001/tree/main/endpoint)
+A demo version of this API is available at [https://api.pathfinder.sine.dev](https://api.pathfinder.sine.dev) and will be used in all examples below.
+If you want to run the example API locally, you can also do so, by cloning [this repository](https://github.com/wbcsd/pathfinder-use-case-001) and following the instructions [provided here](https://github.com/wbcsd/pathfinder-use-case-001/tree/main/endpoint).
 
-A Swager UI visualization is available [here](https://api.pathfinder.sine.dev/swagger-ui).
+A Swagger UI visualization is available [here](https://api.pathfinder.sine.dev/swagger-ui).
 
 Bellow is a list of all endpoints exposed by this example:
 
@@ -82,7 +82,7 @@ Bellow is a list of all endpoints exposed by this example:
 
 ## Authentication ## {#authenticate-example}
 
-Authentication is made through a `POST` call to the `/2/auth/token` endpoint with id/client_id/username `hello` and secret/client_secret/password `pathfinder`.
+Authentication is made through a `POST` request to the `/2/auth/token` endpoint with id (aka client_id / username) `hello` and secret (aka client_secret / password) `pathfinder`.
 
 Details about the `Authenticate` action, the authentication process, and the authentication protocol used can be found in section [[#authenticate]].
 
@@ -110,24 +110,24 @@ Details about the `Authenticate` action, the authentication process, and the aut
     </pre>
     </div>
 
-This access token thus obtained must be used in other calls to the API.
+This access token must be used in all other calls to the API.
 
 ## Fetching Data
 
-Fetching data from the example API can be made through two actions:
+Data can be fetched from the example API through two actions:
 
 : [[#listFootprints-example]]
 :: enumerates the `ProductFootprints` available to the authenticated user;
 : [[#getFootprint-example]]
-:: retrieves a single ProductFootprint given its unique ID.
+:: retrieves a single ProductFootprint given its unique id.
 
 ### `ListFootprints` ### {#listFootprints-example}
 
-The `ListFootprints` action provides the authenticated user a list of the `ProductFootprint`s available to them, throught the `/2/footprints` endpoint.
+The `ListFootprints` action returns a list of `ProductFootprint`s available to the authenticated user, through the `/2/footprints` endpoint.
 
-A `GET` request to this endpoint can be made with the optional `limit` parameter, taking an integer, which restricts the number of the `ProductFootprint`s displayed to that integer.
+A `GET` request to this endpoint can be made with the optional `limit` parameter, which restricts the number of the `ProductFootprint`s.
 
-Note: A second optional parameter `filter` is also envisaged but not yet implemented in this example. See [[#listFootprints]] for details.
+Note: An optional `filter` parameter is part of the PACT Technical Specifications but not implemented by the example API provided at https://api.pathfinder.sine.dev. See [[#listFootprints]] for details.
 
 <div class='example'>
 : Action
@@ -135,7 +135,7 @@ Note: A second optional parameter `filter` is also envisaged but not yet impleme
 : Endpoint
 :: `/2/footprints`
 : Options
-:: `limit=<integer>`</br>`filter=<string>` // not implemented
+:: `limit=<integer>`
 : HTTP request
 :: `GET`
 : Authorization
@@ -172,8 +172,8 @@ Note: A second optional parameter `filter` is also envisaged but not yet impleme
 
 ### `GetFootprint` ### {#getFootprint-example}
 
-The `GetFootprint` action provides the authenticated user a specific `ProductFootprint`, identified by its unique `id`, through a `GET` call made to the `/2/footprints/<footprint-id>` endpoint.
-Typically this is performed to get the latest version of that `ProductFootprint`.
+The `GetFootprint` action returns a specific `ProductFootprint`, identified by its unique `id`, through a `GET` request made to the `/2/footprints/<footprint-id>` endpoint.
+This can be used to retrieve the latest version of that `ProductFootprint`.
 
 <div class='example'>
 : Action
@@ -211,18 +211,18 @@ Typically this is performed to get the latest version of that `ProductFootprint`
 
 
 In the actions above ([[#listFootprints-example]] and [[#getFootprint-example]]), the authenticated user played the role of [=data recipient=] and the solution that of [=data owner=].
-The flow of information is the following: the data recipient asks the data owner for `ProductFootprint`(s) and the data owner sends them over.
+The flow of information in that case is the following: the data recipient asks the data owner for `ProductFootprint`(s) and the data owner returns them.
 
-The `Events` action allows for more complex interactions between data owner and data recipient:
+The `Events` action allows for more complex interactions between data owner and data recipient, namely:
 <ul>
-  <li> Notification of data recipients on `ProductFootprint` updates;
-  <li> Asynchronous request and retrieval of `ProductFootprints`.
+  <li> the notification of data recipients on `ProductFootprint` updates;
+  <li> the asynchronous request and retrieval of `ProductFootprints`.
 </ul>
-Of this, only the former is implemented in this example.
+Only the former is implemented in this example.
 
 The `/2/events` endpoint allows the example API to play the role of data recipient, which can be notified of an update to a `ProductFootprint`.
 
-To execute this action, the authenticated user (in this case, the data owner) must make a `POST` call to the `/2/events` endpoint, sendig a [`PF Update Event`](https://wbcsd.github.io/data-exchange-protocol/v2/#pf-update-event) in its body.
+To execute this action, the authenticated user (in this case, the data owner) must make a `POST` request to the `/2/events` endpoint, sending a [PF Update Event](https://wbcsd.github.io/data-exchange-protocol/v2/#pf-update-event) in its body.
 
 For details about the syntax of the request and response see [[#events]].
 
@@ -257,14 +257,14 @@ Note: This functionality is optional. See [[#optional-functionality]] for more d
         }'
     </pre>
 : Example response
-:: HTTP status code 200 with empty body
+:: HTTP status code OK 200 with empty body
     </div>
 
 # Overview of the Technical Specification # {#overview}
 
-The [Technical Specification](https://wbcsd.github.io/data-exchange-protocol/v2/#pf-properties) specifies a data model for GHG emission data at product level based on the Pathfinder Framework Version 2, and a protocol for interoperable exchange of GHG emission data at product level.
+The [Technical Specification](https://wbcsd.github.io/data-exchange-protocol/v2/#pf-properties) specifies a data model for [=GHG=] emission data at product level based on the [=Pathfinder Framework=] Version 2, and a protocol for [=interoperable=] exchange of GHG emission data at product level.
 
-To allow for interoperable PCF data exchange, solutions must expose an HTTP REST API, also defined in the technical specification.
+To allow for interoperable PCF data exchange, solutions must implement an HTTP REST API, also defined in the technical specification.
 
 The scope of the HTTP API is minimal by design and new features will be added in future versions of the specification.
 
@@ -286,11 +286,11 @@ Further details about the HTTP REST API can be found in [Section 6 (HTTP REST AP
 
 ### `Authenticate` ### {#authenticate}
 
-The HTTP REST API must allow users to authenticate before they are able to either fetch data (see [[#listFootprints]] and [[#getFootprint]]) or submit a events (see [[#events]]). (See the [authentication flow described in the Technical Specifications](https://wbcsd.github.io/data-exchange-protocol/v2/#api-auth).)
+The HTTP REST API requires users to authenticate themselves before they are able to either fetch data (see [[#listFootprints]] and [[#getFootprint]]) or submit a events (see [[#events]]). (See the [authentication flow described in the Technical Specifications](https://wbcsd.github.io/data-exchange-protocol/v2/#api-auth).)
 
 The `Authenticate` action is <strong>mandatory</strong> and must be implemented in accordance with [RFC6749, Section 4.4 (OAuth2 Client Credentials)](https://www.rfc-editor.org/rfc/rfc6749#section-4.4).
 
-In a nutshell, the user must send their credentials and, in case of a 200 (OK) response, get back back an object which includes the `access_token`. (see [RFC6749, Section 4.4.3](https://www.rfc-editor.org/rfc/rfc6749#section-4.4.3) and [RFC6749, Section 5.1](https://www.rfc-editor.org/rfc/rfc6749#section-5.1) for further details.)
+In a nutshell, the user must send their credentials and, in case of a 200 (OK) response, get back back an object which includes the `access_token`. (See [RFC6749, Section 4.4.3](https://www.rfc-editor.org/rfc/rfc6749#section-4.4.3) and [RFC6749, Section 5.1](https://www.rfc-editor.org/rfc/rfc6749#section-5.1) for further details.)
 
 #### Request Syntax (HTTP/1.1)
 
@@ -317,17 +317,19 @@ content-length: <a href="https://wbcsd.github.io/data-exchange-protocol/v2/#cont
 
 ### `ListFootprints` ### {#listFootprints}
 
-The `ListFootprints` action is <strong>mandatory</strong> and provides the authenticated user a list of `ProductFootprint`s available to them.
+The `ListFootprints` action is <strong>mandatory</strong> and provides the authenticated user with the list of `ProductFootprint`s available to them.
 
-This action must allow for two optional parameters:
+This action needs to support one optional parameter:
 : `limit`
 :: A positive integer limiting the number of results displayed
+
+An API can, but is not required to, aditionally support the following parameter:
 : `filter`
 :: A string to filter the results (details can be found [here](https://wbcsd.github.io/data-exchange-protocol/v2/#filter))
 
-Pagination of the results should follow the [Section 6.6.1 of the Technical Specification](https://wbcsd.github.io/data-exchange-protocol/v2/#api-action-list-pagination)
+Pagination of the results should follow the [Section 6.6.1 of the Technical Specification](https://wbcsd.github.io/data-exchange-protocol/v2/#api-action-list-pagination).
 
-#### Request Syntax (HTTP/1.1)
+#### Request Syntax (HTTP/1.1) #### {#listFootprints-request-syntax}
 
 <pre highlight=http>
 GET <a href="https://wbcsd.github.io/data-exchange-protocol/v2/#subpath">Subpath</a>/2/footprints?<a href="https://wbcsd.github.io/data-exchange-protocol/v2/#filter">Filter</a>&<a href="https://wbcsd.github.io/data-exchange-protocol/v2/#limit">Limit</a> HTTP/1.1
@@ -348,8 +350,8 @@ content-length: <a href="https://wbcsd.github.io/data-exchange-protocol/v2/#cont
 ### `GetFootprint` ### {#getFootprint}
 
 
-The `GetFootprint` action is <strong>mandatory</strong> and returns to the authenticated user a specific `ProductFootprint`, identified by its unique id.
-Typically this is performed to get the latest version of that `ProductFootprint`.
+The `GetFootprint` action is <strong>mandatory</strong> and returns a specific `ProductFootprint`, identified by its unique id.
+This can be used to retrieve the latest version of that `ProductFootprint`.
 
 #### Request Syntax (HTTP/1.1)
 
@@ -375,17 +377,14 @@ Note: Although the `Events` action is optional, if it is not yet implemented, th
 
 ### `Events` ### {#events}
 
-The `Events` action is <strong>optional</strong> and subdivides into two, depending on whether the solution implementing it is playing the role of [=data owner=] or [=data recipient=].
-These are differentiated by the body of the HTTP request:
+The `Events` action is <strong>optional</strong> and fulfills two purposes, depending on the body of the HTTP request:
 <ul>
-    <li> As [=data recipient=], the `Events` action allows the solution to be notified of an update to one or more `ProductFootprint` (see [here](https://wbcsd.github.io/data-exchange-protocol/v2/#lifecycle) when and why a `ProductFootprint` might be updated).
-    The body of the HTTP request is a [=PF Update Event=] in this case
-    <li> As [=data owner=], the `Events` action allows the solution to receive a request to send `ProductFootprint` data to that [=data recipient=]'s `Events` action endpoint.
+    <li>  The `Events` action either allows the solution to be notified of an update to one or more `ProductFootprint` (see [here](https://wbcsd.github.io/data-exchange-protocol/v2/#lifecycle) when and why a `ProductFootprint` might be updated).
+    The body of the HTTP request is a [=PF Update Event=] in this case;
+    <li> or, it allows the solution to receive a request to send `ProductFootprint` data to that [=data recipient=]'s `Events` action endpoint.
     In this case, there are two HTTP requests. One (from the [=data recipient=] to the [=data owner=]) with a [=PF Request Event=] as its body;
-    The other (from the [=data owner=] to the [=data recipient=]) with either a [=PF Response Event=] or a [=PF Response Error Event=] as its body
+    The other (from the [=data owner=] to the [=data recipient=]) with either a [=PF Response Event=] or a [=PF Response Error Event=] as its body.
 </ul>
-
-Requests to one or the other are distinguished by the request body.
 
 #### Request Syntax (HTTP/1.1)
 
@@ -402,7 +401,7 @@ An `EventBody` must be (i) a CloudEvents event, (ii) encoded as a JSON object, (
 In the context of this HTTP REST API, it can be a [=PF Update Event=], a [=PF Request Event=], a [=PF Response Event=], or a [=PF Response Error Event=]
 
 :: <dfn>PF Update Event</dfn>
-:: Through a `PF Update Event`, the [=data owner=] notifies the [=data recipient=] know that a certain `ProductFootprint` was updated.
+:: Through a `PF Update Event`, the [=data owner=] notifies the [=data recipient=] that a certain `ProductFootprint` was updated.
     A `PF Update Event` has the following syntax (see the [Technical Specifications](https://wbcsd.github.io/data-exchange-protocol/v2/#pf-update-event) for further details):
     <pre highlight=json>
 {
@@ -475,7 +474,7 @@ content-length: 0
 
 ## Error Responses
 
-In case a call to the HTTP REST API is not successful, the response should be an error of one of the following types
+In case a request to the HTTP REST API is not successful, the response should be an error of one of the following types
 (for further details see [Section 6.9 of the Technical Specification](https://wbcsd.github.io/data-exchange-protocol/v2/#api-error-responses)):
 
 <figure id="api-errors-table">
@@ -519,49 +518,28 @@ In case a call to the HTTP REST API is not successful, the response should be an
 
 ## Terminology
 
-: <dfn>Data Model Extension</dfn>
-::
-    A data model extension is a set of definitions that extends the data model of this document.
-
-    The encoding of a data model extension in the data model is specified in [[#dt-datamodelextension]].
-
-    See [[!DATA-MODEL-EXTENSIONS]] and [[!EXTENSIONS-GUIDANCE]] for further details.
-
 : <dfn>Data recipient</dfn>
-:: The [=SCA|Supply Chain Actor=] requesting and/or receiving [=PCF=] data from another [=SCA=].
+:: The [Supply Chain Actor (SCA)](https://wbcsd.github.io/data-exchange-protocol/v2/#sca) requesting and/or receiving [=Product Carbon Footprint=] data from another SCA.
 
 : <dfn>Data owner</dfn>
-:: The Supply Chain Actor (SCA) exchanging PCF data with another SCA.
+:: The [Supply Chain Actor (SCA)](https://wbcsd.github.io/data-exchange-protocol/v2/#sca) exchanging PCF data with another SCA.
 
 : <dfn>interoperable</dfn>
-:: The quality of being able to exchange data between [=host systems=] irrespective of the vendors of the host systems, without the need for translation or transformation of the data.
+:: The quality of being able to exchange data between solutions irrespective of the vendors of the host systems, without the need for translation or transformation of the data.
 
 : Greenhouse Gas (emissions) (<dfn>GHG</dfn>)
-:: Gaseous constituents of the atmosphere, both natural and anthropogenic, that absorb and emit radiation at specific wavelengths within the spectrum of infrared radiation emitted by the Earth’s surface, its atmosphere and clouds. GHGs include CDCO₂, Methane (CH4), Nitrous Oxide(N₂O), Hydrofluoro-Carbons (HFCs), Perfluorocarbons (PFCs) and Sulfur Hexafluoride (SF6).
-
-: Partnership for Carbon Transparency (<dfn>PACT</dfn>)
-:: A WBCSD-led group of companies and organizations working together to develop a global and open network for the secure peer-to-peer exchange of accurate, primary and verified product emissions data. See [www.carbon-transparency.com](www.carbon-transparency.com) for more information.
+:: Gaseous constituents of the atmosphere, both natural and anthropogenic, that absorb and emit radiation at specific wavelengths within the spectrum of infrared radiation emitted by the Earth's surface, its atmosphere and clouds. Green House Gases include CDCO₂, Methane (CH4), Nitrous Oxide(N₂O), Hydrofluoro-Carbons (HFCs), Perfluorocarbons (PFCs) and Sulfur Hexafluoride (SF6).
 
 : Pathfinder Framework Version 2.0 (<dfn>Pathfinder Framework</dfn>)
 :: Guidance for the Accounting and Exchange of Product Life Cycle Emissions,
     building on existing standards and protocols, such as the GHG Protocol
-    Product standard. See [[!PATHFINDER-FRAMEWORK]] for further details.
+    Product standard.
 
 : <dfn>Pathfinder Network</dfn>
-:: An information network of and for supply chain actors to securely exchange environmental data with each other, with an initial focus on PCF data.
+:: An information network of and for supply chain actors to securely exchange environmental data with each other, with an initial focus on [=Product Carbon Footprint=] data.
 
 : <dfn>Product Carbon Footprint</dfn> (PCF)
-:: The carbon (equivalent) emissions relating to a product. Products can be any kind of item exchanged between entities, including “pieces”, metric or volumetric quantities of a product, etc. The <{ProductFootprint}> data model is a digital representation of a PCF in accordance with the [=Pathfinder Framework=].
-
-: Supply Chain Actor (<dfn>SCA</dfn>)
-:: An entity intending on exchanging PCF data with another entity using the technical means specified in this document.
-
-: <dfn>Solution Provider</dfn>
-:: An entity providing technical solutions to SCAs by implementing and offering [=host systems=].
-
-: <dfn>UN geographic region</dfn>, <dfn>UN geographic subregion</dfn>
-:: See [https://unstats.un.org/unsd/methodology/m49/](https://unstats.un.org/unsd/methodology/m49/) for details.
-
+:: The carbon (equivalent) emissions relating to a product. Products can be any kind of item exchanged between entities, including “pieces”, metric or volumetric quantities of a product, etc. The `ProductFootprint` data model is a digital representation of a PCF in accordance with the [=Pathfinder Framework=].
 
 ## Payload Examples
 
@@ -626,7 +604,6 @@ In case a call to the HTTP REST API is not successful, the response should be an
 This checklist is a recommendation from WBCSD to be used as a reference for the Bilateral Conformance Testing criteria.
 
 ### Mandatory
-
 <input type=checkbox>The solution implements the [[#authenticate]] action
 </br>
 <input type=checkbox>The solution implements the [[#listFootprints]] action
@@ -635,7 +612,7 @@ This checklist is a recommendation from WBCSD to be used as a reference for the 
 </br>
 <input type=checkbox>The `ListFootprints` action implements mandatory server-side pagination, in accordance with the [Technical Specification](https://wbcsd.github.io/data-exchange-protocol/v2/#api-action-list-pagination)
 </br>
-<input type=checkbox>All actions are offered under HTTPS method
+<input type=checkbox>All endpoints use HTTPS
 </br>
 <input type=checkbox>The solution performs the [authentication flow described in the Technical Specification](https://wbcsd.github.io/data-exchange-protocol/v2/#api-auth)
 </br>
@@ -654,4 +631,4 @@ This checklist is a recommendation from WBCSD to be used as a reference for the 
 </br>
 <input type=checkbox>The solution can be notified of updates to a `ProductFootprint` through the `Events` action, in accordance with the [Technical Specifications](https://wbcsd.github.io/data-exchange-protocol/v2/#api-action-events-case-1)
 </br>
-<input type=checkbox>The solution implements asynchronous request and retrieval of `ProductFootprint`s through the `Events` action, in accordance with the [Technical Specificaitons](https://wbcsd.github.io/data-exchange-protocol/v2/#api-action-events-case-2)
+<input type=checkbox>The solution implements asynchronous requests / retrieval of `ProductFootprint`s through the `Events` action, in accordance with the [Technical Specificaitons](https://wbcsd.github.io/data-exchange-protocol/v2/#api-action-events-case-2)
