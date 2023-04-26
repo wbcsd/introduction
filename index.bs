@@ -13,21 +13,21 @@ Markup Shorthands: markdown yes
 Boilerplate: omit conformance, omit copyright
 </pre>
 
-# Introduction
+# Introduction # {#introduction}
 
 This document aims to provide guidance to those developing [PACT Conformant Solutions](https://pact-catalog.sine.dev/solutions).
 It is not self-contained and does not replace the [Technical Specifications](https://wbcsd.github.io/data-exchange-protocol/v2).
 It can nevertheless be used as the main source for developers, as it links to the Technical Specifications whenever needed.
 
-## Our goal
+## Our goal ## {#our-goal}
 
 The [Partnership for Carbon Transparency (PACT)](https://carbon-transparency.com) seeks to accelerate decarbonization through the creation of transparency on emissions in the value chain.
 For that end, we need an open and global network of [=interoperable=] solutions for the secure, peer-to-peer exchange of accurate, primary and verified product emissions data — across all industries and value chains.
-The [[#pathfinder-network]] aims at being precisely this network of interoperable solutions.
-In order to establish it and take it further, we propose the adoption of the [[#pathfinder-framework]] methodology.
-Following it, we shall be able to exchange [[#product-carbon-footprint]]s through entire suply and vlaue chains, hopefully reaching net zero emissions before 2050.
+The [[#pathfinder-network-intro]] aims at being precisely this network of interoperable solutions.
+In order to establish it and take it further, we propose the adoption of the [[#pathfinder-framework-intro]] methodology.
+Following it, we shall be able to exchange [[#product-carbon-footprint-intro]]s through entire suply and vlaue chains, hopefully reaching net zero emissions before 2050.
 
-## Pathfinder Network
+## Pathfinder Network ## {#pathfinder-network-intro}
 
 The [=Pathfinder Network=] is a concept created by the [Partnershipt for Carbon Transparency](https://carbon-transparency.com) and powered by the [World Business Council for Sustainable Development (WBCSD)](https://www.wbcsd.org/).
 It refers to the data exchange infrastructure that enables organizations to connect across value chains and industries to share [=Product Carbon Footprint=] (PCF) data.
@@ -35,13 +35,13 @@ The Network creates interoperability between technology solutions and industry-f
 It can be seen as a sort of convener or facilitator.
 In the simplest of terms, through the Pathfinder Network, we aim to create the “internet for emissions data” — the common nexus for all organizations to connect seamlessly, exchange and derive insights from emissions data.
 
-## Pathfinder Framework
+## Pathfinder Framework ## {#pathfinder-framework-intro}
 
 The [=Pathfinder Framework=] provides industry-agnostic methodological guidance for the calculation of product-level emissions data.
 The adoption of the methodology described in [Pathfinder Framework:  Guidance for the Accounting and Exchange of Product Life Cycle Emissions](https://www.carbon-transparency.com/media/srhhloun/pathfinder-framework.pdf) makes it possible to exchange [=Product Carbon Footprint=] data, hence being essential for the establishment and growth of the [=Pathfinder Network=].
 The technical counterpart of this methodology is described in detail in the [Technical Specifications](https://wbcsd.github.io/data-exchange-protocol/v2), which will be refered to several times throughout this document.
 
-## Product Carbon Footprint (PCF) ## {#product-carbon-footprint}
+## Product Carbon Footprint (PCF) ## {#product-carbon-footprint-intro}
 
 A [=Product Carbon Footprint=] is the carbon (equivalent) emissions relating to a product.
 Products can be any kind of item exchanged between entities, including “pieces”, metric or volumetric quantities of a product, etc.
@@ -50,7 +50,7 @@ Within the context of the Pathfinder Framework, [=Product Carbon Footprint=]s ar
 Details about `ProductFootprint`, including a description of all its fields, can be found [here](https://wbcsd.github.io/data-exchange-protocol/v2/#dt-pf).
 An example of `ProductFootprint` can be found in the [[#productfootprint-example]] section.
 
-## What do I need to implement to exchange PCFs through the Pathfinder Network?
+## What do I need to implement to exchange PCFs through the Pathfinder Network? ## {#what-do-I-need}
 
 In order to exchange [=Product Carbon Footprint=] (PCF) data through the Pathfinder Network, a solution must conform to the Pathfinder [Technical Specifications](https://wbcsd.github.io/data-exchange-protocol/v2).
 In a nutshell, this amounts to implementing an HTTP REST API, with three mandatory actions ([[#authenticate]], [[#listFootprints]], and [[#getFootprint]]) and one optional action ([[#events]]).
@@ -112,7 +112,7 @@ Details about the `Authenticate` action, the authentication process, and the aut
 
 This access token must be used in all other calls to the API.
 
-## Fetching Data
+## Fetching Data ## {#fetching-data}
 
 Data can be fetched from the example API through two actions:
 
@@ -292,7 +292,7 @@ The `Authenticate` action is <strong>mandatory</strong> and must be implemented 
 
 In a nutshell, the user must send their credentials and, in case of a 200 (OK) response, get back back an object which includes the `access_token`. (See [RFC6749, Section 4.4.3](https://www.rfc-editor.org/rfc/rfc6749#section-4.4.3) and [RFC6749, Section 5.1](https://www.rfc-editor.org/rfc/rfc6749#section-5.1) for further details.)
 
-#### Request Syntax (HTTP/1.1)
+#### Request Syntax (HTTP/1.1) #### {#authenticate-request-syntax}
 
 <pre highlight=http>
 POST <a href="https://wbcsd.github.io/data-exchange-protocol/v2/#authsubpath">AuthSubpath</a>/auth/token HTTP/1.1
@@ -305,7 +305,7 @@ content-length: <a href="https://wbcsd.github.io/data-exchange-protocol/v2/#cont
 <a href="https://wbcsd.github.io/data-exchange-protocol/v2/#authbody">AuthBody</a>
 </pre>
 
-#### Response Syntax
+#### Response Syntax #### {#authenticate-response-syntax}
 
 <pre highlight=http>
 HTTP/1.1 <a href="https://wbcsd.github.io/data-exchange-protocol/v2/#authstatuscode">AuthStatusCode</a> OK
@@ -337,7 +337,7 @@ host: <a href="https://wbcsd.github.io/data-exchange-protocol/v2/#hostname">Host
 authorization: Bearer <a href="https://wbcsd.github.io/data-exchange-protocol/v2/#bearertoken">BearerToken</a>
 </pre>
 
-#### Response Syntax
+#### Response Syntax #### {#listFootprints-response-syntax}
 
 <pre highlight=http>
 HTTP/1.1 <a href="https://wbcsd.github.io/data-exchange-protocol/v2/#liststatuscode">ListStatusCode</a> <a href="https://wbcsd.github.io/data-exchange-protocol/v2/#liststatustext">ListStatusText</a>
@@ -353,7 +353,7 @@ content-length: <a href="https://wbcsd.github.io/data-exchange-protocol/v2/#cont
 The `GetFootprint` action is <strong>mandatory</strong> and returns a specific `ProductFootprint`, identified by its unique id.
 This can be used to retrieve the latest version of that `ProductFootprint`.
 
-#### Request Syntax (HTTP/1.1)
+#### Request Syntax (HTTP/1.1) #### {#getFootprint-request-syntax}
 
 <pre highlight=http>
 GET <a href="https://wbcsd.github.io/data-exchange-protocol/v2/#subpath">Subpath</a>/2/footprints/<a href="https://wbcsd.github.io/data-exchange-protocol/v2/#getpfid">GetPfId</a> HTTP/1.1
@@ -361,7 +361,7 @@ host: <a href="https://wbcsd.github.io/data-exchange-protocol/v2/#hostname">Host
 authorization: Bearer <a href="https://wbcsd.github.io/data-exchange-protocol/v2/#bearertoken">BearerToken</a>
 </pre>
 
-#### Response Syntax
+#### Response Syntax #### {#getFootprint-response-syntax}
 
 <pre highlight=http>
 HTTP/1.1 <a href="https://wbcsd.github.io/data-exchange-protocol/v2/#getstatuscode">GetStatusCode</a> <a href="https://wbcsd.github.io/data-exchange-protocol/v2/#getstatustext">GetStatusText</a>
@@ -386,7 +386,7 @@ The `Events` action is <strong>optional</strong> and fulfills two purposes, depe
     The other (from the [=data owner=] to the [=data recipient=]) with either a [=PF Response Event=] or a [=PF Response Error Event=] as its body.
 </ul>
 
-#### Request Syntax (HTTP/1.1)
+#### Request Syntax (HTTP/1.1) #### {#events-request-syntax}
 
 <pre highlight=http>
 POST <a href="https://wbcsd.github.io/data-exchange-protocol/v2/#subpath">Subpath</a>/2/events HTTP/1.1
@@ -465,14 +465,14 @@ In the context of this HTTP REST API, it can be a [=PF Update Event=], a [=PF Re
 }
 </pre>
 
-#### Response Syntax
+#### Response Syntax #### {#events-response-syntax}
 
 <pre highlight=http>
 HTTP/1.1 200 OK
 content-length: 0
 </pre>
 
-## Error Responses
+## Error Responses ## {#error-responses}
 
 In case a request to the HTTP REST API is not successful, the response should be an error of one of the following types
 (for further details see [Section 6.9 of the Technical Specification](https://wbcsd.github.io/data-exchange-protocol/v2/#api-error-responses)):
@@ -486,15 +486,15 @@ In case a request to the HTTP REST API is not successful, the response should be
         <th>`HTTP Status Code`
     <tbody>
       <tr>
-        <td><dfn>AccessDenied</dfn>
+        <td><dfn noexport>AccessDenied</dfn>
         <td>Access denied
         <td>403
       <tr>
-        <td><dfn>BadRequest</dfn>
+        <td><dfn noexport>BadRequest</dfn>
         <td>Bad Request
         <td>400
       <tr>
-        <td><dfn>NoSuchFootprint</dfn>
+        <td><dfn noexport>NoSuchFootprint</dfn>
         <td>The specified footprint does not exist.
         <td>404
       <tr>
@@ -502,11 +502,11 @@ In case a request to the HTTP REST API is not successful, the response should be
         <td>The specified Action or header you provided implies functionality that is not implemented
         <td>400
       <tr>
-        <td><dfn>TokenExpired</dfn>
+        <td><dfn noexport>TokenExpired</dfn>
         <td>The specified access token has expired
         <td>401
       <tr>
-        <td><dfn>InternalError</dfn>
+        <td><dfn noexport>InternalError</dfn>
         <td>An internal or unexpected error has occurred
         <td>500
 
@@ -514,17 +514,17 @@ In case a request to the HTTP REST API is not successful, the response should be
   <figcaption>Listing of error codes and their related error response codes.</figcaption>
 </figure>
 
-# Appendix
+# Appendix # {#appendix}
 
-## Terminology
+## Terminology ## {#terminology}
 
-: <dfn>Data recipient</dfn>
+: <dfn noexport>Data recipient</dfn>
 :: The [Supply Chain Actor (SCA)](https://wbcsd.github.io/data-exchange-protocol/v2/#sca) requesting and/or receiving [=Product Carbon Footprint=] data from another SCA.
 
-: <dfn>Data owner</dfn>
+: <dfn noexport>Data owner</dfn>
 :: The [Supply Chain Actor (SCA)](https://wbcsd.github.io/data-exchange-protocol/v2/#sca) exchanging PCF data with another SCA.
 
-: <dfn>interoperable</dfn>
+: <dfn noexport>interoperable</dfn>
 :: The quality of being able to exchange data between solutions irrespective of the vendors of the host systems, without the need for translation or transformation of the data.
 
 : Greenhouse Gas (emissions) (<dfn>GHG</dfn>)
@@ -535,13 +535,13 @@ In case a request to the HTTP REST API is not successful, the response should be
     building on existing standards and protocols, such as the GHG Protocol
     Product standard.
 
-: <dfn>Pathfinder Network</dfn>
+: <dfn noexport>Pathfinder Network</dfn>
 :: An information network of and for supply chain actors to securely exchange environmental data with each other, with an initial focus on [=Product Carbon Footprint=] data.
 
-: <dfn>Product Carbon Footprint</dfn> (PCF)
+: <dfn noexport>Product Carbon Footprint</dfn> (PCF)
 :: The carbon (equivalent) emissions relating to a product. Products can be any kind of item exchanged between entities, including “pieces”, metric or volumetric quantities of a product, etc. The `ProductFootprint` data model is a digital representation of a PCF in accordance with the [=Pathfinder Framework=].
 
-## Payload Examples
+## Payload Examples ## {#payload-examples}
 
 ### `ProductFootprint` Example ### {#productfootprint-example}
 <pre highlight='json'>
@@ -603,7 +603,7 @@ In case a request to the HTTP REST API is not successful, the response should be
 
 This checklist is a recommendation from WBCSD to be used as a reference for the Bilateral Conformance Testing criteria.
 
-### Mandatory
+### Mandatory ### {#mandatory}
 <input type=checkbox>The solution implements the [[#authenticate]] action
 </br>
 <input type=checkbox>The solution implements the [[#listFootprints]] action
@@ -624,7 +624,7 @@ This checklist is a recommendation from WBCSD to be used as a reference for the 
 </br>
 <input type=checkbox>The solution implements Product Lifecycle events and rules in accordance with the [Technical Specifications](https://wbcsd.github.io/data-exchange-protocol/v2/#lifecycle)
 
-### Optional
+### Optional ### {#optional}
 <input type=checkbox>The `ListFootprints` action [implements the filter option](https://wbcsd.github.io/data-exchange-protocol/v2/#filter)
 </br>
 <input type=checkbox> The `ListFootprints` action implements the possibility of [getting partial results (HTTP code 202)](https://wbcsd.github.io/data-exchange-protocol/v2/#liststatuscode)
