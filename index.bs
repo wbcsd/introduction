@@ -3,10 +3,10 @@ Title: PACT Initiative Developer Documentation
 Shortname: pact-dev-docs
 Level: 1
 Status: LD
-URL: https://wbcsd.github.io/introduction/
+URL: https://sine-fdn.github.io/introduction/
 Editor:
 Mailing List: public-dev@pathfinder.sine.dev
-Repository: wbcsd/introduction
+Repository: sine-fdn/introduction
 Abstract: To reach net zero emissions before 2050, we need all business to measure, account for and disclose carbon emissions as a first step to reducing them.
  The PACT (Partnership for Carbon Transparency) Initative is cross-value chain initiative to define and accelerate credible, verified primary emission data exchange.
 Markup Shorthands: markdown yes
@@ -621,10 +621,10 @@ This checklist is a recommendation from WBCSD to be used as a reference for the 
 <input type=checkbox>The solution implements the [[#error-responses]] described above (in accordance with the [Technical Specification](https://wbcsd.github.io/data-exchange-protocol/v2/#api-error-responses))
 </br>
 <input type=checkbox>The solution <strong>either</strong> implements the [[#events]] action <strong>or</strong> responds to authenticated `Events` calls with the [=NotImplemented=] error code
-</br>
-<input type=checkbox>The solution implements Product Lifecycle events and rules in accordance with the [Technical Specifications](https://wbcsd.github.io/data-exchange-protocol/v2/#lifecycle)
 
 ### Optional ### {#optional}
+<input type=checkbox>The solution implements Product Lifecycle events and rules in accordance with the [Technical Specifications](https://wbcsd.github.io/data-exchange-protocol/v2/#lifecycle)
+</br>
 <input type=checkbox>The `ListFootprints` action [implements the filter option](https://wbcsd.github.io/data-exchange-protocol/v2/#filter)
 </br>
 <input type=checkbox> The `ListFootprints` action implements the possibility of [getting partial results (HTTP code 202)](https://wbcsd.github.io/data-exchange-protocol/v2/#liststatuscode)
