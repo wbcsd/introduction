@@ -8,7 +8,7 @@ Editor:
 Mailing List: public-dev@pathfinder.sine.dev
 Repository: sine-fdn/introduction
 Abstract: To reach net zero emissions before 2050, we need all business to measure, account for and disclose carbon emissions as a first step to reducing them.
- The PACT (Partnership for Carbon Transparency) Initative is cross-value chain initiative to define and accelerate credible, verified primary emission data exchange.
+ The PACT (Partnership for Carbon Transparency) Initiative is cross-value chain initiative to define and accelerate credible, verified primary emission data exchange.
 Markup Shorthands: markdown yes
 Boilerplate: omit conformance, omit copyright
 </pre>
@@ -21,15 +21,15 @@ It can nevertheless be used as the main source for developers, as it links to th
 
 ## Our goal ## {#our-goal}
 
-The [Partnership for Carbon Transparency (PACT)](https://carbon-transparency.com) seeks to accelerate decarbonization through the creation of transparency on emissions in the value chain.
+The [Partnership for Carbon Transparency (PACT)](https://carbon-transparency.com) seeks to accelerate decarbonisation through the creation of transparency on emissions in the value chain.
 For that end, we need an open and global network of [=interoperable=] solutions for the secure, peer-to-peer exchange of accurate, primary and verified product emissions data â€” across all industries and value chains.
 The [[#pathfinder-network-intro]] aims at being precisely this network of interoperable solutions.
 In order to establish it and take it further, we propose the adoption of the [[#pathfinder-framework-intro]] methodology.
-Following it, we shall be able to exchange [[#product-carbon-footprint-intro]]s through entire suply and vlaue chains, hopefully reaching net zero emissions before 2050.
+Following it, we shall be able to exchange [[#product-carbon-footprint-intro]]s through entire supply and value chains, hopefully reaching net zero emissions before 2050.
 
 ## Pathfinder Network ## {#pathfinder-network-intro}
 
-The [=Pathfinder Network=] is a concept created by the [Partnershipt for Carbon Transparency](https://carbon-transparency.com) and powered by the [World Business Council for Sustainable Development (WBCSD)](https://www.wbcsd.org/).
+The [=Pathfinder Network=] is a concept created by the [Partnership for Carbon Transparency](https://carbon-transparency.com) and powered by the [World Business Council for Sustainable Development (WBCSD)](https://www.wbcsd.org/).
 It refers to the data exchange infrastructure that enables organizations to connect across value chains and industries to share [=Product Carbon Footprint=] (PCF) data.
 The Network creates interoperability between technology solutions and industry-focused data exchange platforms, meaning organizations are flexible in their choice of provider.
 It can be seen as a sort of convener or facilitator.
@@ -39,7 +39,7 @@ In the simplest of terms, through the Pathfinder Network, we aim to create the â
 
 The [=Pathfinder Framework=] provides industry-agnostic methodological guidance for the calculation of product-level emissions data.
 The adoption of the methodology described in [Pathfinder Framework:  Guidance for the Accounting and Exchange of Product Life Cycle Emissions](https://www.carbon-transparency.com/media/srhhloun/pathfinder-framework.pdf) makes it possible to exchange [=Product Carbon Footprint=] data, hence being essential for the establishment and growth of the [=Pathfinder Network=].
-The technical counterpart of this methodology is described in detail in the [Technical Specifications](https://wbcsd.github.io/data-exchange-protocol/v2), which will be refered to several times throughout this document.
+The technical counterpart of this methodology is described in detail in the [Technical Specifications](https://wbcsd.github.io/data-exchange-protocol/v2), which will be referred to several times throughout this document.
 
 ## Product Carbon Footprint (PCF) ## {#product-carbon-footprint-intro}
 
@@ -323,7 +323,7 @@ This action needs to support one optional parameter:
 : `limit`
 :: A positive integer limiting the number of results displayed
 
-An API can, but is not required to, aditionally support the following parameter:
+An API can, but is not required to, additionally support the following parameter:
 : `filter`
 :: A string to filter the results (details can be found [here](https://wbcsd.github.io/data-exchange-protocol/v2/#filter))
 
@@ -631,4 +631,4 @@ This checklist is a recommendation from WBCSD to be used as a reference for the 
 </br>
 <input type=checkbox>The solution can be notified of updates to a `ProductFootprint` through the `Events` action, in accordance with the [Technical Specifications](https://wbcsd.github.io/data-exchange-protocol/v2/#api-action-events-case-1)
 </br>
-<input type=checkbox>The solution implements asynchronous requests / retrieval of `ProductFootprint`s through the `Events` action, in accordance with the [Technical Specificaitons](https://wbcsd.github.io/data-exchange-protocol/v2/#api-action-events-case-2)
+<input type=checkbox>The solution implements asynchronous requests / retrieval of `ProductFootprint`s through the `Events` action, in accordance with the [Technical Specifications](https://wbcsd.github.io/data-exchange-protocol/v2/#api-action-events-case-2)
