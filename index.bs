@@ -21,7 +21,7 @@ It can nevertheless be used as the main source for developers, as it links to th
 
 ## Our goal ## {#our-goal}
 
-The [Partnership for Carbon Transparency (PACT)](https://carbon-transparency.com) seeks to accelerate decarbonisation through the creation of transparency on emissions in the value chain.
+The [Partnership for Carbon Transparency (PACT)](https://carbon-transparency.com) seeks to accelerate decarbonization through the creation of transparency on emissions in the value chain.
 For that end, we need an open and global network of [=interoperable=] solutions for the secure, peer-to-peer exchange of accurate, primary and verified product emissions data — across all industries and value chains.
 The [[#pathfinder-network-intro]] aims at being precisely this network of interoperable solutions.
 In order to establish it and take it further, we propose the adoption of the [[#pathfinder-framework-intro]] methodology.
