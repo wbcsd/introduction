@@ -152,13 +152,15 @@ Note: An optional `filter` parameter is part of the PACT Technical Specification
         "data": [
             {
                 "id": "d9be4477-e351-45b3-acd9-e1da05e6f633",
-                "specVersion": "1.0.0","version":0,
+                "specVersion": "2.0.0",
+                "version":0,
                 "created": "2022-05-22T21:47:32Z",
                 ...
             },
             {
                 "id": "c3028ee9-d595-4779-a73a-290bfa7505d6",
-                "specVersion": "1.0.0","version":0,
+                "specVersion": "2.0.0",
+                "version":0,
                 "created": "2022-05-22T21:47:32Z",
                 ...
             }
@@ -195,7 +197,7 @@ This can be used to retrieve the latest version of that `ProductFootprint`.
 ::  <pre highlight='json'>{
         "data": {
             "id": "d9be4477-e351-45b3-acd9-e1da05e6f633",
-            "specVersion": "1.0.0",
+            "specVersion": "2.0.0",
             "version": 0,
             ...
         }
@@ -547,7 +549,7 @@ In case a request to the HTTP REST API is not successful, the response should be
 <pre highlight='json'>
         {
             "id": "d9be4477-e351-45b3-acd9-e1da05e6f633",
-            "specVersion": "1.0.0",
+            "specVersion": "2.0.0",
             "version": 0,
             "created": "2022-05-22T21:47:32Z",
             "companyName": "My Corp",
