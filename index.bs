@@ -152,13 +152,15 @@ Note: An optional `filter` parameter is part of the PACT Technical Specification
         "data": [
             {
                 "id": "d9be4477-e351-45b3-acd9-e1da05e6f633",
-                "specVersion": "1.0.0","version":0,
+                "specVersion": "1.0.0",
+                "version":0,
                 "created": "2022-05-22T21:47:32Z",
                 ...
             },
             {
                 "id": "c3028ee9-d595-4779-a73a-290bfa7505d6",
-                "specVersion": "1.0.0","version":0,
+                "specVersion": "1.0.0",
+                "version":0,
                 "created": "2022-05-22T21:47:32Z",
                 ...
             }
@@ -290,7 +292,17 @@ The HTTP REST API requires users to authenticate themselves before they are able
 
 The `Authenticate` action is <strong>mandatory</strong> and must be implemented in accordance with [RFC6749, Section 4.4 (OAuth2 Client Credentials)](https://www.rfc-editor.org/rfc/rfc6749#section-4.4).
 
-In a nutshell, the user must send their credentials and, in case of a 200 (OK) response, get back back an object which includes the `access_token`. (See [RFC6749, Section 4.4.3](https://www.rfc-editor.org/rfc/rfc6749#section-4.4.3) and [RFC6749, Section 5.1](https://www.rfc-editor.org/rfc/rfc6749#section-5.1) for further details.)
+As a first step, the solution provider must register users by exchanging credentials with them.
+These must include an id (aka client_id / username) and a secret (aka client_secret / username).
+The solution provider is free to manage credentials as they please.
+(As a suggestion, we propose that for the time being these are exchanged via e-mail, with the user sending the solution provider what they wish to use as their id and secret and the solution provider confirming them.)
+
+Once the user is in possession of their credentials, they must send them as `Basic Authentication` in the `Authorization` header.
+
+In case of a 200 (OK) response, they will get back back an object which includes the `access_token`.
+(See [RFC6749, Section 4.4.3](https://www.rfc-editor.org/rfc/rfc6749#section-4.4.3) and [RFC6749, Section 5.1](https://www.rfc-editor.org/rfc/rfc6749#section-5.1) for further details.)
+This token must be used in all further calls to the API, being sent as `Bearer` authentication in the `Authorization` header.
+
 
 #### Request Syntax (HTTP/1.1) #### {#authenticate-request-syntax}
 
@@ -539,7 +551,7 @@ In case a request to the HTTP REST API is not successful, the response should be
 :: An information network of and for supply chain actors to securely exchange environmental data with each other, with an initial focus on [=Product Carbon Footprint=] data.
 
 : <dfn noexport>Product Carbon Footprint</dfn> (PCF)
-:: The carbon (equivalent) emissions relating to a product. Products can be any kind of item exchanged between entities, including “pieces”, metric or volumetric quantities of a product, etc. The `ProductFootprint` data model is a digital representation of a PCF in accordance with the [=Pathfinder Framework=].
+:: The carbon (equivalent) emissions relating to a product. Products can be any kind of item exchanged between entities, including metric or volumetric quantities of a product, etc. The `ProductFootprint` data model is a digital representation of a PCF in accordance with the [=Pathfinder Framework=].
 
 ## Payload Examples ## {#payload-examples}
 
