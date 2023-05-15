@@ -3,10 +3,10 @@ Title: PACT Initiative Developer Documentation
 Shortname: pact-dev-docs
 Level: 1
 Status: LD
-URL: https://sine-fdn.github.io/introduction/
+URL: https://wbcsd.github.io/introduction/
 Editor:
 Mailing List: public-dev@pathfinder.sine.dev
-Repository: sine-fdn/introduction
+Repository: wbcsd/introduction
 Abstract: To reach net zero emissions before 2050, we need all business to measure, account for and disclose carbon emissions as a first step to reducing them.
  The PACT (Partnership for Carbon Transparency) Initiative is cross-value chain initiative to define and accelerate credible, verified primary emission data exchange.
 Markup Shorthands: markdown yes
