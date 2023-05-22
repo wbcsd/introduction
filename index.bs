@@ -246,7 +246,7 @@ Note: This functionality is optional. See [[#optional-functionality]] for more d
     -H 'Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImhlbGxvIn0.wZPjxQz1wI25fIe0Oz4w5Y2g8UD_dMz6Wd-Aegg8HMM' \
     -H 'Content-Type: application/json' \
     -d '{
-            "specversion": "1.0.0",
+            "specversion": "1.0",
             "id": "1234",
             "source":"http://localhost:3000",
             "time": "2023-04-12T14:27:58.535Z",
