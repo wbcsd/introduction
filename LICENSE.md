@@ -72,13 +72,17 @@ Your exercise of the Licensed Rights is expressly made subject to the following 
 a. **Attribution**.
 
 1. If You Share the Licensed Material, You must:
+
     A. retain the following if it is supplied by the Licensor with the Licensed Material:
-            i. identification of the creator(s) of the Licensed Material and any others designated to receive attribution, in any reasonable manner requested by the Licensor (including by pseudonym if designated);
-            ii. a copyright notice;
-            iii. a notice that refers to this Public License;
-            iv. a notice that refers to the disclaimer of warranties;
-            v. a URI or hyperlink to the Licensed Material to the extent reasonably practicable;
+
+        i. identification of the creator(s) of the Licensed Material and any others designated to receive attribution, in any reasonable manner requested by the Licensor (including by pseudonym if designated);
+        ii. a copyright notice;
+        iii. a notice that refers to this Public License;
+        iv. a notice that refers to the disclaimer of warranties;
+        v. a URI or hyperlink to the Licensed Material to the extent reasonably practicable;
+
     B. indicate if You modified the Licensed Material and retain an indication of any previous modifications; and
+
     C. indicate the Licensed Material is licensed under this Public License, and include the text of, or the URI or hyperlink to, this Public License.
     For the avoidance of doubt, You do not have permission under this Public License to Share Adapted Material.
 
@@ -111,7 +115,9 @@ c. The disclaimer of warranties and limitation of liability provided above shall
 a. This Public License applies for the term of the Copyright and Similar Rights licensed here. However, if You fail to comply with this Public License, then Your rights under this Public License terminate automatically.
 
 b. Where Your right to use the Licensed Material has terminated under Section 6(a), it reinstates:
+
     1. automatically as of the date the violation is cured, provided it is cured within 30 days of Your discovery of the violation; or
+
     2. upon express reinstatement by the Licensor.
 
 For the avoidance of doubt, this Section 6(b) does not affect any right the Licensor may have to seek remedies for Your violations of this Public License.
@@ -136,8 +142,7 @@ c. No term or condition of this Public License will be waived and no failure to 
 
 d. Nothing in this Public License constitutes or may be interpreted as a limitation upon, or waiver of, any privileges and immunities that apply to the Licensor or You, including from the legal processes of any jurisdiction or authority.
 
-
-
+***
 
 Creative Commons is not a party to its public licenses. Notwithstanding, Creative Commons may elect to apply one of its public licenses to material it publishes and in those instances will be considered the “Licensor.” The text of the Creative Commons public licenses is dedicated to the public domain under the CC0 Public Domain Dedication. Except for the limited purpose of indicating that material is shared under a Creative Commons public license or as otherwise permitted by the Creative Commons policies published at creativecommons.org/policies, Creative Commons does not authorize the use of the trademark “Creative Commons” or any other trademark or logo of Creative Commons without its prior written consent including, without limitation, in connection with any unauthorized modifications to any of its public licenses or any other arrangements, understandings, or agreements concerning use of licensed material. For the avoidance of doubt, this paragraph does not form part of the public licenses.
 
