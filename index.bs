@@ -13,6 +13,9 @@ Markup Shorthands: markdown yes
 Boilerplate: omit conformance, omit copyright
 </pre>
 
+Advisement: This document still follows version 2.0.1 of the Pathfinder Technical Specifications.
+Version 2.1.0 has meanwhile been released and will be reflected in this document in the near future.
+
 # Introduction # {#introduction}
 
 This document aims to provide guidance to those developing [PACT Conformant Solutions](https://pact-catalog.sine.dev/solutions).
@@ -650,5 +653,5 @@ Access the sample PACT Conformance Test Cases Template [here](https://github.com
 Please Note - This is a template created with the intention to guide you on what possible test cases you need to consider,
 but we also encourage you to add any other test cases you feel are necessary for your test coverage.
 
-## PACT Conformance Test - Sample Payloads
+## PACT Conformance Test - Sample Payloads ## {#sample-payloads}
 Access the sample payloads for the Pathfinder API endpoints [here](https://documenter.getpostman.com/view/27574443/2s93mASyuH).
