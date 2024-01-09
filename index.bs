@@ -13,9 +13,6 @@ Markup Shorthands: markdown yes
 Boilerplate: omit conformance, omit copyright
 </pre>
 
-Advisement: This document still follows version 2.0.1 of the Pathfinder Technical Specifications.
-Version 2.1.0 has meanwhile been released and will be reflected in this document in the near future.
-
 # Introduction # {#introduction}
 
 This document aims to provide guidance to those developing [PACT Conformant Solutions](https://pact-catalog.sine.dev/solutions).
@@ -55,11 +52,16 @@ An example of `ProductFootprint` can be found in the [[#productfootprint-example
 
 ## What do I need to implement to exchange PCFs through the Pathfinder Network? ## {#what-do-I-need}
 
-In order to exchange [=Product Carbon Footprint=] (PCF) data through the Pathfinder Network, a solution must conform to the Pathfinder [Technical Specifications](https://wbcsd.github.io/data-exchange-protocol/v2).
-In a nutshell, this amounts to implementing an HTTP REST API, with three mandatory actions ([[#authenticate]], [[#listFootprints]], and [[#getFootprint]]) and one optional action ([[#events]]).
-Below (in section [[#example-api]]) you will find an example API which should give you a more concrete idea of what is required.
-You will also find detailed instructions on how to build your own solution's API (in section [[#overview]]), by repeatedly referring to the Technical Specifications.
-In the appendix, you will also find a the references needed to make sure your solution meets the necessary requirements.
+In order to exchange [=Product Carbon Footprint=] (PCF) data through the Pathfinder Network, a
+solution must conform to the Pathfinder [Technical
+Specifications](https://wbcsd.github.io/data-exchange-protocol/v2). In a nutshell, this amounts to
+implementing an HTTP REST API, with three mandatory actions ([[#authenticate]], [[#listFootprints]],
+and [[#getFootprint]]) and one optional action ([[#events]]). Below (in section [[#example-api]])
+you will find an example API which should give you a more concrete idea of what is required. You
+will also find detailed instructions on how to build your own solution's API (in section
+[[#overview]]), by repeatedly referring to the Technical Specifications. In the appendix, you will
+also find references to documentation that will help you make sure your solution meets the necessary
+requirements.
 
 Once your solution is ready, do not forget to [submit it to the Online Catalog](https://pact-catalog.sine.dev) and test it in one of PACT's monthly connectathons.
 
@@ -86,15 +88,15 @@ Bellow is a list of all endpoints exposed by this example:
 ## Authentication ## {#authenticate-example}
 
 The authentication flow starts with a `GET` request to the
-`/2/.well-known/openid-configuration` endpoint, which returns the OpenId Provider Configuration
+`/.well-known/openid-configuration` endpoint, which returns the OpenId Provider Configuration
 Document. In that JSON document, the value of the `token_endpoint` field is the endpoint used to
-retrieve an `access_token` (i.e., the `AuthEndpoint`).
+retrieve an `access_token`, i.e., the `AuthEndpoint`.
 
 <div class='example'>
 : Authentication flow: `AuthEndpoint` discovery
 ::
 : Endpoint
-:: `/2/.well-known/openid-configuration`
+:: `/.well-known/openid-configuration`
 : HTTP request
 :: `GET`
 : Example request (cURL)
@@ -123,7 +125,7 @@ retrieve an `access_token` (i.e., the `AuthEndpoint`).
     </pre>
     </div>
 
-Authentication is made through a `POST` request to the `AuthEndpoint` `/2/auth/token` with id (aka client_id / username) `hello` and secret (aka client_secret / password) `pathfinder`.
+Authentication is made through a `POST` request to the `AuthEndpoint` `/auth/token` with id (aka client_id / username) `hello` and secret (aka client_secret / password) `pathfinder`.
 
 Details about the `Authenticate` action, the authentication process, and the authentication protocol used can be found in section [[#authenticate]].
 
@@ -131,7 +133,7 @@ Details about the `Authenticate` action, the authentication process, and the aut
 : Action
 :: `Authenticate`
 : Endpoint
-:: `/2/auth/token`
+:: `/auth/token`
 : HTTP request
 :: `POST`
 : Credentials
@@ -165,7 +167,7 @@ Data can be fetched from the example API through two actions:
 
 ### `ListFootprints` ### {#listFootprints-example}
 
-The `ListFootprints` action returns a list of `ProductFootprint`s available to the authenticated user, through the `/2/footprints` endpoint.
+The `ListFootprints` action returns a list of `ProductFootprint`s available to the authenticated user, through the `/footprints` endpoint.
 
 A `GET` request to this endpoint can be made with the optional `limit` parameter, which restricts the number of the `ProductFootprint`s.
 
@@ -175,7 +177,7 @@ Note: An optional `filter` parameter is part of the PACT Technical Specification
 : Action
 :: `ListFootprints`
 : Endpoint
-:: `/2/footprints`
+:: `/footprints`
 : Options
 :: `limit=<integer>`
 : HTTP request
@@ -216,14 +218,14 @@ Note: An optional `filter` parameter is part of the PACT Technical Specification
 
 ### `GetFootprint` ### {#getFootprint-example}
 
-The `GetFootprint` action returns a specific `ProductFootprint`, identified by its unique `id`, through a `GET` request made to the `/2/footprints/<footprint-id>` endpoint.
+The `GetFootprint` action returns a specific `ProductFootprint`, identified by its unique `id`, through a `GET` request made to the `/footprints/<footprint-id>` endpoint.
 This can be used to retrieve the latest version of that `ProductFootprint`.
 
 <div class='example'>
 : Action
 :: `GetFootprint`
 : Endpoint
-:: `/2/footprints/<footprint-id>`
+:: `/footprints/<footprint-id>`
 : HTTP request
 :: `GET`
 : Authorization
@@ -263,9 +265,9 @@ The `Events` action allows for more complex interactions between data owner and 
 </ul>
 Only the former is implemented in this example.
 
-The `/2/events` endpoint allows the example API to play the role of data recipient, which can be notified of an update to a `ProductFootprint`.
+The `/events` endpoint allows the example API to play the role of data recipient, which can be notified of an update to a `ProductFootprint`.
 
-To execute this action, the authenticated user (in this case, the data owner) must make a `POST` request to the `/2/events` endpoint, sending a [PF Update Event](https://wbcsd.github.io/data-exchange-protocol/v2/#pf-update-event) in its body.
+To execute this action, the authenticated user (in this case, the data owner) must make a `POST` request to the `/events` endpoint, sending a [PF Update Event](https://wbcsd.github.io/data-exchange-protocol/v2/#pf-update-event) in its body.
 
 For details about the syntax of the request and response see [[#events]].
 
@@ -274,7 +276,7 @@ Note: This functionality is optional. See [[#optional-functionality]] for more d
 : Action
 :: `Events`
 : Endpoint
-:: `/2/events`
+:: `/events`
 : HTTP request
 :: `POST`
 : Authorization
