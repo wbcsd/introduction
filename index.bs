@@ -348,16 +348,16 @@ In [v. 2.0.1](https://wbcsd.github.io/tr/2023/data-exchange-protocol-20231026/#a
 tokens had to be obtained through a `POST` request to the `/auth/token` endpoint.
 
 In [v.2.1.0](https://wbcsd.github.io/tr/2023/data-exchange-protocol-20231207/#api-auth), the
-endpoint to retrieve an access token can be decided by the solution provider (in accordance with RFC6749), provided that:
-  1. They still expose the `/auth/token` endpoint (even if it only returns an error);
-  2. They provide ab [OpenId Provider Configuration Document](https://openid.net/specs/openid-connect-discovery-1_0.html#ProviderConfig) with the `token_endpoint` field set to the endpoint they chose.
+endpoint to retrieve an access token can be chosen by the solution provider (in accordance with RFC6749), provided that:
+  1. They still expose the `/auth/token` endpoint (even if returning an error);
+  2. They provide an [OpenId Provider Configuration Document](https://openid.net/specs/openid-connect-discovery-1_0.html#ProviderConfig) with the `token_endpoint` field set to the endpoint they chose.
 
 If no OpenId Provider Configuration Document is provided or the `token_endpoint` field is not
 correctly set, the `AuthEndpoint` (i.e. the endpoint to retrieve an access token) is assumed to be
 `/auth/token`.
 
-Once the user knows the `AuthEndpoint` (and is in possession of their credentials), they must send
-them as `Basic Authentication` in the `Authorization` header.
+Once the user knows the `AuthEndpoint`, they must send their credentials as `Basic Authentication`
+in the `Authorization` header.
 
 In case of a 200 (OK) response, they will get back back an object which includes the `access_token`.
 (See [RFC6749, Section 4.4.3](https://www.rfc-editor.org/rfc/rfc6749#section-4.4.3) and [RFC6749, Section 5.1](https://www.rfc-editor.org/rfc/rfc6749#section-5.1) for further details.)
