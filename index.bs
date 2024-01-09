@@ -147,7 +147,7 @@ Details about the `Authenticate` action, the authentication process, and the aut
 : Example response
 ::  <pre highlight='json'>
     {
-        "access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJ1c2VybmFtZSI6ImhlbGxvIn0.XRFv0ngN5r7mIjKdu9z661hitCCfrTbQTXg5sVsTp2S7YiF7J2eZgRZrvv2N0YZVAvtvrEhlwOFwWap1c0jyn2NOCRrhbGK7A_IENLd9Mo8vESVdMf7zcOmY0JqsmWscUdkr1u8oLv-x6mM95kKpOMfOJI_R5-Fpc8Gbx4IOQ5m9ffEbdxTlrxKls-8JZ0Y1cA3CDno51AH0M1Tif8FMs0AfF8CRY8kA2FWWNPdUbWNwP7trXYMzPqCVKb0UXJQs_nVAjJn_TA1ucmgidPFGdGQT6e0qF2xsqWjdIaCX0XhHoAf94oDN9wulur2CmpD-BVo9WhOvSSyhBMFhN0BHhiPS4PDVmH9iqVsvZPaTCd_5nnm_GLNm-tIXknsWwszi7iq1Neg-LfnvKbxGomWW0XqY3P-LxwYIspIDZuR9vktz7ZQKtgg1LW-6VLh6_KfjgH4vu8_FQjI4xS4tt2nZIFEFE3_HeC_M5Hi8oZ_NgS2HbGL2cFYneiy8CDvs3yxQ",
+        "access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJ1c2VybmFtZSI6ImhlbGxvIn0.hUDxqoQR0e4b5emxYl1M0nUMuy1w_VjrB0G3s2ul-oqzNEJnUbgkI9tzo1iGFkMkipSoEZyyOpmUd0IE-kswdaRNmTebn5aGxeARLh3OoknHWyRizU7ZNf4f1ow3Z0wpWfXHH6vxP1IyMTjuk5E1oFqpf2vBteHMrUg0KiZf2rRuJGBQQqYKa7Dj0vlLH0LH2yPEq0Od9EgETyPfaz_LgO8jMQN6PKwrCa2h79Y-BtOym_rlFsGyvmungCdYcXFMiwCS3fg5bHX8iK_ygx3InSS_GcSlp7HYp9OyEwV61j3QOMOeAY4n-ToxTWnommHfu20XczY0nNfqcmoJ4eXOxw",
         "token_type": "bearer",
         "scope": null
     }
