@@ -678,7 +678,7 @@ Access the sample payloads for the Pathfinder API endpoints
 
 Details about Bilateral Conformance Testing can be found [here](https://wbcsd.github.io/pact-conformance-testing/).
 
-A checklist for Conformance testing is available [here](https://wbcsd.github.io/pact-conformance-testing/checklist/).
+A checklist for Conformance testing is available [here](https://wbcsd.github.io/pact-conformance-testing/checklist).
 
 Access the sample PACT Conformance Test Cases Template [here](https://github.com/wbcsd/pact-conformance-testing/blob/main/PACT%20Conformance%20Testing%20-%20Test%20Cases.md).
 Please Note - This is a template created with the intention to guide you on what possible test cases you need to consider,
