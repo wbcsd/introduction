@@ -1,6 +1,7 @@
 <pre class='metadata'>
 Title: PACT Initiative Developer Documentation
 Shortname: pact-dev-docs
+Text Macro: TOKEN eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJ1c2VybmFtZSI6ImhlbGxvIn0.LjkSj80b9jb3tGae-kPqhQr95JvQCy1lHGD5CpFjminq4gQuJpPPBxSyg2ceW-R3BIMZVG5-mUMJjRaM2zm_vY5qTr0fYl2D1GMcDWPCGil7LxcYOhdxvZFppGuPBCoRy4pEg2cg-LaRyZKaP-h-7_eyYoLWZkCWNZ1nCbXiCWXoYYylJEi2OJqccaAfJ4mrzNp7OY4ayoe5-UgREb_K-k-8GZaA_CJQMx-WgHGIaxBeiXEBQ9NlD8q6BW8rvnsMlQeShrV5cP1X9LJAErszwfUFXis90X7ePbnv0rfY8np8RJuG8-eS73jDo-Dhbqf4fYhBYCBLUfzuXu0beGFhHA
 Level: 1
 Status: LD
 URL: https://wbcsd.github.io/introduction/
@@ -147,7 +148,7 @@ Details about the `Authenticate` action, the authentication process, and the aut
 : Example response
 ::  <pre highlight='json'>
     {
-        "access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJ1c2VybmFtZSI6ImhlbGxvIn0.hUDxqoQR0e4b5emxYl1M0nUMuy1w_VjrB0G3s2ul-oqzNEJnUbgkI9tzo1iGFkMkipSoEZyyOpmUd0IE-kswdaRNmTebn5aGxeARLh3OoknHWyRizU7ZNf4f1ow3Z0wpWfXHH6vxP1IyMTjuk5E1oFqpf2vBteHMrUg0KiZf2rRuJGBQQqYKa7Dj0vlLH0LH2yPEq0Od9EgETyPfaz_LgO8jMQN6PKwrCa2h79Y-BtOym_rlFsGyvmungCdYcXFMiwCS3fg5bHX8iK_ygx3InSS_GcSlp7HYp9OyEwV61j3QOMOeAY4n-ToxTWnommHfu20XczY0nNfqcmoJ4eXOxw",
+        "access_token": "[TOKEN]",
         "token_type": "bearer",
         "scope": null
     }
@@ -189,7 +190,7 @@ Note: An optional `filter` parameter is part of the PACT Technical Specification
     curl -X 'GET' \
     'https://api.pathfinder.sine.dev/2/footprints?limit=2' \
     -H 'accept: application/json' \
-    -H 'Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJ1c2VybmFtZSI6ImhlbGxvIn0.hUDxqoQR0e4b5emxYl1M0nUMuy1w_VjrB0G3s2ul-oqzNEJnUbgkI9tzo1iGFkMkipSoEZyyOpmUd0IE-kswdaRNmTebn5aGxeARLh3OoknHWyRizU7ZNf4f1ow3Z0wpWfXHH6vxP1IyMTjuk5E1oFqpf2vBteHMrUg0KiZf2rRuJGBQQqYKa7Dj0vlLH0LH2yPEq0Od9EgETyPfaz_LgO8jMQN6PKwrCa2h79Y-BtOym_rlFsGyvmungCdYcXFMiwCS3fg5bHX8iK_ygx3InSS_GcSlp7HYp9OyEwV61j3QOMOeAY4n-ToxTWnommHfu20XczY0nNfqcmoJ4eXOxw'
+    -H 'Authorization: Bearer [TOKEN]'
     </pre>
 : Example response
 :: <pre highlight='json'>{
@@ -235,7 +236,7 @@ This can be used to retrieve the latest version of that `ProductFootprint`.
     curl -X 'GET' \
     'https://api.pathfinder.sine.dev/2/footprints/d9be4477-e351-45b3-acd9-e1da05e6f633' \
     -H 'accept: application/json' \
-    -H 'Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJ1c2VybmFtZSI6ImhlbGxvIn0.hUDxqoQR0e4b5emxYl1M0nUMuy1w_VjrB0G3s2ul-oqzNEJnUbgkI9tzo1iGFkMkipSoEZyyOpmUd0IE-kswdaRNmTebn5aGxeARLh3OoknHWyRizU7ZNf4f1ow3Z0wpWfXHH6vxP1IyMTjuk5E1oFqpf2vBteHMrUg0KiZf2rRuJGBQQqYKa7Dj0vlLH0LH2yPEq0Od9EgETyPfaz_LgO8jMQN6PKwrCa2h79Y-BtOym_rlFsGyvmungCdYcXFMiwCS3fg5bHX8iK_ygx3InSS_GcSlp7HYp9OyEwV61j3QOMOeAY4n-ToxTWnommHfu20XczY0nNfqcmoJ4eXOxw'
+    -H 'Authorization: Bearer [TOKEN]'
     </pre>
 : Example response
 ::  <pre highlight='json'>{
@@ -286,7 +287,7 @@ Note: This functionality is optional. See [[#optional-functionality]] for more d
     curl -X 'POST' \
     'https://api.pathfinder.sine.dev/2/events' \
     -H 'accept: */*' \
-    -H 'Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJ1c2VybmFtZSI6ImhlbGxvIn0.hUDxqoQR0e4b5emxYl1M0nUMuy1w_VjrB0G3s2ul-oqzNEJnUbgkI9tzo1iGFkMkipSoEZyyOpmUd0IE-kswdaRNmTebn5aGxeARLh3OoknHWyRizU7ZNf4f1ow3Z0wpWfXHH6vxP1IyMTjuk5E1oFqpf2vBteHMrUg0KiZf2rRuJGBQQqYKa7Dj0vlLH0LH2yPEq0Od9EgETyPfaz_LgO8jMQN6PKwrCa2h79Y-BtOym_rlFsGyvmungCdYcXFMiwCS3fg5bHX8iK_ygx3InSS_GcSlp7HYp9OyEwV61j3QOMOeAY4n-ToxTWnommHfu20XczY0nNfqcmoJ4eXOxw' \
+    -H 'Authorization: Bearer [TOKEN]' \
     -H 'Content-Type: application/json' \
     -d '{
             "specversion": "1.0",
