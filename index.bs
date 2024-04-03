@@ -63,7 +63,9 @@ will also find detailed instructions on how to build your own solution's API (in
 also find references to documentation that will help you make sure your solution meets the necessary
 requirements.
 
-Once your solution is ready, do not forget to [submit it to the Online Catalog](https://pact-catalog.sine.dev) and test it in one of PACT's monthly connectathons.
+Once your solution is ready, please join our regular Connect Hub to finish testing with partners and
+[become a PACT Conformant
+solution](https://wbcsd.sharepoint.com/:b:/s/ClimateEnergy/ETnM4IVN6lZOm6R2pktfB4MB3tZpdAD__rIMY1aWb4hdeQ?e=UYSJ4C).
 
 # Example API - Plug and Play # {#example-api}
 
@@ -615,9 +617,6 @@ In case a request to the HTTP REST API is not successful, the response should be
 
 ## Payload Examples ## {#payload-examples}
 
-Access the sample payloads for the Pathfinder API endpoints
-[here](https://documenter.getpostman.com/view/27574443/2s93mASyuH).
-
 ### `ProductFootprint` Example ### {#productfootprint-example}
 <pre highlight='json'>
         {
@@ -676,10 +675,7 @@ Access the sample payloads for the Pathfinder API endpoints
 
 ## PACT Conformance Testing ## {#conformance-testing}
 
-Details about Bilateral Conformance Testing can be found [here](https://wbcsd.github.io/pact-conformance-testing/).
+Details about Bilateral Conformance Testing can be found [here](https://wbcsd.sharepoint.com/:b:/s/ClimateEnergy/ETnM4IVN6lZOm6R2pktfB4MB3tZpdAD__rIMY1aWb4hdeQ?e=O1CF9N).
 
 A checklist for Conformance testing is available [here](https://wbcsd.github.io/pact-conformance-testing/checklist).
 
-Access the sample PACT Conformance Test Cases Template [here](https://github.com/wbcsd/pact-conformance-testing/blob/main/PACT%20Conformance%20Testing%20-%20Test%20Cases.md).
-Please Note - This is a template created with the intention to guide you on what possible test cases you need to consider,
-but we also encourage you to add any other test cases you feel are necessary for your test coverage.
