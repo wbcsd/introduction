@@ -5,8 +5,10 @@ Text Macro: TOKEN eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJ1c2VybmFtZSI6ImhlbGxvI
 Level: 1
 Status: LD
 URL: https://wbcsd.github.io/introduction/
-Editor:
-Mailing List: public-dev@pathfinder.sine.dev
+Editor: Beth Hadley (WBCSD), https://www.wbcsd.org, hadley@wbcsd.org
+Former Editor: Martin Pompéry (SINE Foundation), https://sine.foundation, martin@sine.foundation
+Former Editor: Raimundo Henriques (SINE Foundation), https://sine.foundation, raimundo@sine.foundation
+Mailing List: pact@wbcsd.org
 Repository: wbcsd/introduction
 Abstract: To reach net zero emissions before 2050, we need all business to measure, account for and disclose carbon emissions as a first step to reducing them.
  The PACT (Partnership for Carbon Transparency) Initiative is cross-value chain initiative to define and accelerate credible, verified primary emission data exchange.
