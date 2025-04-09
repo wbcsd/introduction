@@ -1,3 +1,6 @@
+> [!CAUTION]
+> This repository has been archived as of April 2025. The documentation in this repository is no longer relevant.
+
 # PACT Initiative Developer Documentation
 
 This repository contains documentation target at developers who are working to develop a **PACT Conformant Solution**.
