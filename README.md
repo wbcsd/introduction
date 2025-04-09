@@ -1,5 +1,5 @@
 > [!CAUTION]
-> This repository has been archived as of April 2025. The documentation in this repository is no longer relevant.
+> This repository has been archived as of April 2025. The documentation in this repository is no longer relevant. Please refer to https://github.com/wbcsd/data-exchange-protocol
 
 # PACT Initiative Developer Documentation
 
